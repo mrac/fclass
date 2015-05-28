@@ -1,8 +1,8 @@
-## firstclass
+### firstclass
 JavaScript utility library
 
 ===
-### Build
+#### Build
 
 To install dev tools run:
 
