@@ -16,7 +16,7 @@ gulp.task('tdd', ['tsc'], function (done) {
 });
 
 gulp.task('tsc', function () {
-  var tsResult = gulp.src('*.ts')
+  var tsResult = gulp.src('src/*.ts')
     .pipe(ts({}));
   return tsResult.js.pipe(gulp.dest('js'));
 });
