@@ -1,0 +1,2 @@
+# firstclass
+JavaScript utility library
