@@ -8,8 +8,8 @@ module.exports = function(config) {
       'karma-jasmine'
     ],
     files: [
-      'firstclass.js',
-      'test/*-spec.js'
+      'js/*.js',
+      'test/*.js'
     ]
   });
 };

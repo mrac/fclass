@@ -4,7 +4,8 @@
   "description": "JavaScript utility library",
   "main": "firstclass.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,11 @@
   "homepage": "https://github.com/zalando/firstclass",
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-typescript": "^2.7.5",
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.33",
     "karma-chrome-launcher": "^0.1.12",
-    "karma-jasmine": "^0.3.5"
+    "karma-jasmine": "^0.3.5",
+    "typescript": "^1.5.0-beta"
   }
 }
