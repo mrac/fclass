@@ -1,5 +1,7 @@
 ### firstclass
-JavaScript utility library
+
+JavaScript utility library that gives support for manipulating
+arrays and objects by leveraging the functional approach of ECMAScript 5 methods.
 
 ===
 #### Build
