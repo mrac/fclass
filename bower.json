@@ -1,0 +1,22 @@
+{
+  "name": "firstclass",
+  "version": "0.0.1",
+  "homepage": "https://github.com/zalando/firstclass",
+  "authors": [
+    "Michal Raczkowski <michal.raczkowski@gmail.com>"
+  ],
+  "description": "JavaScript utility library",
+  "main": "js/firstclass.js",
+  "keywords": [
+    "JavaScript",
+    "utility",
+    "library"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+  ]
+}

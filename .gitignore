@@ -2,4 +2,4 @@
 *.log
 *.map
 node_modules
-js
+bower_components
