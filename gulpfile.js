@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var karma = require('karma').server;
 var ts = require('gulp-typescript');
+var typedoc = require("gulp-typedoc");
 
 gulp.task('test', ['tsc'], function() {
   karma.start({
@@ -21,4 +22,15 @@ gulp.task('tsc', function () {
   return tsResult.js.pipe(gulp.dest('js'));
 });
 
-gulp.task('default', ['test']);
+gulp.task("typedoc", function() {
+  return gulp.src(["src/**/*.ts"])
+    .pipe(typedoc({
+      module: "commonjs",
+      target: "es5",
+      out: "docs/",
+      name: "firstclass",
+      includeDeclarations: true
+    }));
+});
+
+gulp.task('default', ['typedoc', 'test']);
