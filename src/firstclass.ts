@@ -30,15 +30,28 @@ type Function1d = (element: any, index: number, array: Array<any>) => any;
   };
 
   this.object = function (key: string, value?: any): Function1d {
-    if(typeof value !== 'undefined') {
-	  return function (e) {
-		return e[key] === value ? e : null;
+    if(key) {
+      if(typeof value !== 'undefined') {
+	    return function (e) {
+		  return e[key] === value ? e : null;
+        };
+      } else {
+        return function (e) {
+          return key in e ? e : null;
+        };
       };
     } else {
-      return function (e) {
-        return key in e ? e : null;
-      };
-    };
+      if(typeof value !== 'undefined') {
+        return function (e) {
+          var key;
+          var found = Object.keys(e).some(function (k) {
+            key = k;
+            return e[k] === value;
+          });
+          return found ? e : null;
+        };
+      }
+    }
   };
 
 }.call(this));
