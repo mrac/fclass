@@ -15,6 +15,11 @@ To build/test run:
 ```npm start```
 
 ===
+#### Documentation
+
+http://zalando.github.io/firstclass
+
+===
 #### License
 
 
