@@ -186,37 +186,56 @@ var fc;
     fc.call1 = call1;
     function objectCalc(fn, merge) {
         return function (a, b) {
-            var o = {};
-            Object.keys(a).forEach(function (k) {
-                if (merge && !(k in b)) {
-                    o[k] = a[k];
-                }
-                else {
-                    o[k] = fn(a[k], b[k]);
-                }
-            });
-            Object.keys(b).forEach(function (k) {
-                if (!(k in o)) {
-                    if (merge && !(k in a)) {
-                        o[k] = b[k];
+            var obj = {};
+            function addProp(a, b, x, y) {
+                Object.keys(x).forEach(function (k) {
+                    if (merge === true) {
+                        obj[k] = (k in y) ? fn(a[k], b[k]) : x[k];
+                    }
+                    else if (merge === false) {
+                        if (k in y) {
+                            obj[k] = fn(a[k], b[k]);
+                        }
                     }
                     else {
-                        o[k] = fn(a[k], b[k]);
+                        obj[k] = fn(a[k], b[k]);
                     }
-                }
-            });
-            return o;
+                });
+            }
+            addProp(a, b, a, b);
+            addProp(a, b, b, a);
+            return obj;
         };
     }
     fc.objectCalc = objectCalc;
     ;
     function arrayCalc(fn, merge) {
         return function (a, b) {
-            var long = a.length > b.length ? a : b;
+            var long, short;
             var shortLen = a.length > b.length ? b.length : a.length;
-            return long.map(function (e, i) {
-                return (!merge || i < shortLen) ? fn(a[i], b[i]) : long[i];
-            });
+            if (a.length > b.length) {
+                long = a;
+                short = b;
+            }
+            else {
+                long = b;
+                short = a;
+            }
+            if (merge === true) {
+                return long.map(function (e, i) {
+                    return (i < shortLen) ? fn(a[i], b[i]) : long[i];
+                });
+            }
+            else if (merge === false) {
+                return short.map(function (e, i) {
+                    return fn(a[i], b[i]);
+                });
+            }
+            else {
+                return long.map(function (e, i) {
+                    return fn(a[i], b[i]);
+                });
+            }
         };
     }
     fc.arrayCalc = arrayCalc;

@@ -445,6 +445,12 @@ describe('fc .', function() {
 	    expect(fc.objectCalc(fc.add(), true)(obj1, obj2)).toEqual({ a: 80, b: -35, c: 2, d: 10 });
 	    expect(fc.objectCalc(fc.subtract(), true)(obj1, obj2)).toEqual({ a: -60, b: 45, c: 2, d: 10 });
 	    
+		// if argument merge=false, non-existing properties are omitted in the target object
+	    obj1 = { a: 10, b: 5, c: 2 };
+	    obj2 = { a: 70, b: -40, d: 10 };
+	    expect(fc.objectCalc(fc.add(), false)(obj1, obj2)).toEqual({ a: 80, b: -35 });
+	    expect(fc.objectCalc(fc.subtract(), false)(obj1, obj2)).toEqual({ a: -60, b: 45 });
+
 	    // default behavior with reduce
 	    var arr = [{a: 10, b: 5}, {a: 1, b: -3}, {a: 2, b: 100}];
 	    expect(arr.reduce(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
@@ -454,6 +460,11 @@ describe('fc .', function() {
 	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
 	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
+
+	    // merge=false with reduce
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
+	    expect(arr.reduce(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
 
 	  });
 	
@@ -475,11 +486,16 @@ describe('fc .', function() {
 	    arr2 = ['01', '02', '03', '04'];
 	    expect(fc.arrayCalc(fc.add())(arr1, arr2)).toEqual(['one01', 'two02', 'three03', 'undefined04']);
 	    
-		// if argument merge=true, non-existing values are just added to the target object
+		// if argument merge=true, non-existing values are just added to the target array
+		arr1 = ['one', 'two', 'three'];
+		arr2 = ['01', '02', '03', '04'];
+		expect(fc.arrayCalc(fc.add(), true)(arr1, arr2)).toEqual(['one01', 'two02', 'three03', '04']);
+
+		// if argument merge=false, non-existing values are omitted in the target array
 	    arr1 = ['one', 'two', 'three'];
 	    arr2 = ['01', '02', '03', '04'];
-	    expect(fc.arrayCalc(fc.add(), true)(arr1, arr2)).toEqual(['one01', 'two02', 'three03', '04']);
-	    
+	    expect(fc.arrayCalc(fc.add(), false)(arr1, arr2)).toEqual(['one01', 'two02', 'three03']);
+
 	    // default behavior with reduce
 	    var arr = [[1,2,3], [5,6,7], [8,9,10]];
 	    expect(arr.reduce(fc.arrayCalc(fc.add()))).toEqual([14, 17, 20]);
@@ -489,6 +505,11 @@ describe('fc .', function() {
 	    var arr = [[1,2,3,4], [5,6,7], [8,9,10]];
 	    expect(arr.reduce(fc.arrayCalc(fc.add(), true))).toEqual([14, 17, 20, 4]);
 	    expect(arr.reduceRight(fc.arrayCalc(fc.add(), true))).toEqual([14, 17, 20, 4]);
+
+	    // merge=false with reduce
+	    var arr = [[1,2,3,4], [5,6,7], [8,9,10]];
+	    expect(arr.reduce(fc.arrayCalc(fc.add(), false))).toEqual([14, 17, 20]);
+	    expect(arr.reduceRight(fc.arrayCalc(fc.add(), false))).toEqual([14, 17, 20]);
 
 	  });
 	
