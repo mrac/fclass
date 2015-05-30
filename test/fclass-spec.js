@@ -226,6 +226,10 @@ describe('fc .', function() {
 		expect(arr.map(fc.object('a', 10))).toEqual([{a: 10, b: 5}, null, {a: 10, b: 7}, null, null]);
 		// filter() will filter objects by existing key-value pairs
 		expect(arr.filter(fc.object('a', 10))).toEqual([{a: 10, b: 5}, {a: 10, b: 7}]);
+		// find() will find object by existing keys-value pairs
+		expect(arr.find(fc.value('a', 10))).toEqual({a: 10, b: 5});
+		// findIndex() will find index by existing keys-value pairs
+		expect(arr.findIndex(fc.value('a', 10))).toEqual(0);
 		
 		// map() will map objects by existing key-value pairs (falsy key/value doesn't matter)
 		expect(arr.map(fc.object('', 0))).toEqual([null, null, null, null, {'': 0}]);
@@ -276,6 +280,10 @@ describe('fc .', function() {
 		expect(arr.map(fc.predicate({a: 10}))).toEqual([{a: 10, b: 5}, null, {a: 10, b: 7}, null, null]);
 		// filter() will filter objects by a predicate
 		expect(arr.filter(fc.predicate({a: 10}))).toEqual([{a: 10, b: 5}, {a: 10, b: 7}]);
+		// find() will find object by existing keys-value pairs
+		expect(arr.find(fc.predicate({a: 10}))).toEqual({a: 10, b: 5});
+		// findIndex() will find index by existing keys-value pairs
+		expect(arr.findIndex(fc.predicate({a: 10}))).toEqual(0);
 		
 	  });
 	  
@@ -667,17 +675,17 @@ describe('fc .', function() {
 	
 		it('should return maximum of 2 values', function() {
 		
-			// Imidiate values
+			// Math.max on numbers
 			//   for calculation functions that do operations on infinite number of arguments
 			//   it is better to use calc():	
 			expect(fc.calc([2, 10, -4, 2], Math.max)).toEqual(10);
 			//   instead of reduce():
 			expect([2, 10, -4, 2].reduce(fc.call2(Math.max))).toEqual(10);
 		
-			// Object properties
+			// Math.max on object properties
 			var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
 			expect(fc.calc(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
-
+			
 		});
 		
 	});

@@ -213,7 +213,6 @@ module fc {
   export function objectCalc(fn: Function2d, merge?: any): Function2d {
     return function (a,b) {
       var obj = {};
-      
       function addProp(a, b, x, y) {
         Object.keys(x).forEach(function (k) {
           if(Array.isArray(merge)) {

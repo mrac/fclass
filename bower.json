@@ -21,6 +21,8 @@
   ],
   "dependencies": {
     "es5-shim": "~4.1.3",
-    "json3": "~3.3.2"
+    "json3": "~3.3.2",
+    "Array.prototype.findIndex": "es-shims/Array.prototype.findIndex#~1.0.0",
+    "array.prototype.find": "es-shims/Array.prototype.find#~1.0.0"
   }
 }

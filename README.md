@@ -20,13 +20,19 @@ To build/test run:
 http://zalando.github.io/fclass
 
 ===
-#### Legacy browsers
+#### Polyfills
 
 For legacy JavaScript engines *es5-shim* and *json3* are used to support ECMAScript 5 and JSON.
 
 https://github.com/es-shims/es5-shim
 
 https://github.com/bestiejs/json3
+
+Two other shims are used to support *findIndex* and *find* Array.prototype methods of ECMAScript 6.
+
+https://github.com/es-shims/Array.prototype.findIndex
+
+https://github.com/es-shims/Array.prototype.find
 
 ===
 #### License
