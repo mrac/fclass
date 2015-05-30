@@ -318,32 +318,32 @@ describe('fc .', function() {
 	});
 
 
-	describe('stringCompare()()', function() {
+	describe('compareString()()', function() {
 	
 	  it('should compare strings', function() {
-		expect(fc.stringCompare()('10','2')).toEqual(-1);
-		expect(fc.stringCompare()('2','10')).toEqual(1);
-		expect(fc.stringCompare()('10','10')).toEqual(0);
+		expect(fc.compareString()('10','2')).toEqual(-1);
+		expect(fc.compareString()('2','10')).toEqual(1);
+		expect(fc.compareString()('10','10')).toEqual(0);
 
 		// numbers also will be compared as strings
-		expect(fc.stringCompare()(10,2)).toEqual(-1);
-		expect(fc.stringCompare()(2,10)).toEqual(1);
-		expect(fc.stringCompare()(10,10)).toEqual(0);
+		expect(fc.compareString()(10,2)).toEqual(-1);
+		expect(fc.compareString()(2,10)).toEqual(1);
+		expect(fc.compareString()(10,10)).toEqual(0);
 		
 		// can be used for reducing (although I cannot image a good case :)
-		expect(['1', '0', '-1'].reduce(fc.stringCompare())).toEqual(1);
-		expect(['1', '0', '-1'].reduce(fc.stringCompare(true))).toEqual(0);
-		expect(['1', '0', '-1'].reduceRight(fc.stringCompare())).toEqual(-1);
-		expect(['1', '0', '-1'].reduceRight(fc.stringCompare(true))).toEqual(0);
+		expect(['1', '0', '-1'].reduce(fc.compareString())).toEqual(1);
+		expect(['1', '0', '-1'].reduce(fc.compareString(true))).toEqual(0);
+		expect(['1', '0', '-1'].reduceRight(fc.compareString())).toEqual(-1);
+		expect(['1', '0', '-1'].reduceRight(fc.compareString(true))).toEqual(0);
 
 		// can be used as a sorting method for strings
-		expect(['50', '5', '1', '11', '3'].sort(fc.stringCompare())).toEqual(['1', '11', '3', '5', '50']);
-		expect(['50', '5', '1', '11', '3'].sort(fc.stringCompare(true))).toEqual(['50', '5', '3', '11', '1']);
+		expect(['50', '5', '1', '11', '3'].sort(fc.compareString())).toEqual(['1', '11', '3', '5', '50']);
+		expect(['50', '5', '1', '11', '3'].sort(fc.compareString(true))).toEqual(['50', '5', '3', '11', '1']);
 		
 		// numbers also will be sorted as strings
 		// this is default behaviour of sort() method without any argument
-		expect([50,5,1,11,3].sort(fc.stringCompare())).toEqual([1,11,3,5,50]);
-		expect([50,5,1,11,3].sort(fc.stringCompare(true))).toEqual([50,5,3,11,1]);
+		expect([50,5,1,11,3].sort(fc.compareString())).toEqual([1,11,3,5,50]);
+		expect([50,5,1,11,3].sort(fc.compareString(true))).toEqual([50,5,3,11,1]);
 
 	  });
 

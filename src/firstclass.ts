@@ -124,7 +124,7 @@ module fc {
   }
     
   
-  export function stringCompare(negative?: boolean): Function2d {
+  export function compareString(negative?: boolean): Function2d {
     if(negative) {
       return function (a, b) {
         a += "";

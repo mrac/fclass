@@ -118,7 +118,7 @@ var fc;
         };
     }
     fc.subtract = subtract;
-    function stringCompare(negative) {
+    function compareString(negative) {
         if (negative) {
             return function (a, b) {
                 a += "";
@@ -134,7 +134,7 @@ var fc;
             };
         }
     }
-    fc.stringCompare = stringCompare;
+    fc.compareString = compareString;
     function compare(negative) {
         if (negative) {
             return function (a, b) {
