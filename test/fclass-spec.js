@@ -563,6 +563,12 @@ describe('fc .', function() {
 		it('should clone data', function() {
 			
 			var source, target;
+
+			// primitive types
+			expect(fc.clone()(1)).toEqual(1);
+			expect(fc.clone()('a')).toEqual('a');
+			expect(fc.clone()(true)).toEqual(true);
+			expect(fc.clone()(null)).toEqual(null);
 			
 			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
 			target = fc.clone()(source);
@@ -609,11 +615,17 @@ describe('fc .', function() {
 			expect(mapped[2][1] === source[2][1]).toEqual(true);
 			
 		});
-			
+		
 		it('should deeply clone data', function() {
 			
 			var source, target;
 			
+			// primitive types
+			expect(fc.clone(true)(1)).toEqual(1);
+			expect(fc.clone(true)('a')).toEqual('a');
+			expect(fc.clone(true)(true)).toEqual(true);
+			expect(fc.clone(true)(null)).toEqual(null);
+
 			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
 			target = fc.clone(true)(source);
 			expect(target).toEqual(source);
@@ -660,6 +672,43 @@ describe('fc .', function() {
 						
 		});
 		
+	});
+	
+	
+	describe('equal()()', function() {
+	
+		it('should test equality', function() {
+        	
+        	var a, b;
+        	
+        	expect(fc.equal()(1,1)).toEqual(true);
+        	expect(fc.equal()(1,3)).toEqual(false);
+        	
+        	a = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+        	b = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+			expect(fc.equal()(a,b)).toEqual(false);
+        				
+			a = {x: 10};
+			b = [a, a];
+			expect(fc.equal()(b[0], b[1])).toEqual(true);
+		});
+
+		it('should deeply test equality', function() {
+        	
+        	var a, b;
+        	
+        	expect(fc.equal(true)(1,1)).toEqual(true);
+        	expect(fc.equal(true)(1,3)).toEqual(false);
+        	
+        	a = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+        	b = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+			expect(fc.equal(true)(a,b)).toEqual(true);
+        	
+        	a = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+        	b = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'blackX']}];
+			expect(fc.equal(true)(a,b)).toEqual(false);
+		});
+	  
 	});
 	
 	

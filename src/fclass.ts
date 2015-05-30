@@ -265,7 +265,11 @@ module fc {
   export function clone(deep?: boolean): Function1d {
     if(deep) {
       return function (source) {
-        return JSON.parse(JSON.stringify(source));
+        if(source && (typeof source === 'object')) {
+          return JSON.parse(JSON.stringify(source));
+        } else {
+          return source;
+        }
       };
     } else {
       return function (source) {
@@ -289,6 +293,23 @@ module fc {
     }
   }
   
+ 
+  export function equal(deep?: boolean): Function2d {
+    if(deep) {
+      return function (a,b) {
+        if(a && b && (typeof a === 'object') && (typeof b === 'object')) {
+          return JSON.stringify(a) === JSON.stringify(b);
+        } else {
+          return a === b;
+        }
+      };
+    } else {
+      return function (a,b) {
+        return a === b;
+      };
+    }
+  }
+
   
   export function calc(array: Array<any>, calc: FunctionI, fn?: Function1d): any {
     var values, calculated, index;

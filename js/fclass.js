@@ -273,7 +273,12 @@ var fc;
     function clone(deep) {
         if (deep) {
             return function (source) {
-                return JSON.parse(JSON.stringify(source));
+                if (source && (typeof source === 'object')) {
+                    return JSON.parse(JSON.stringify(source));
+                }
+                else {
+                    return source;
+                }
             };
         }
         else {
@@ -300,6 +305,24 @@ var fc;
         }
     }
     fc.clone = clone;
+    function equal(deep) {
+        if (deep) {
+            return function (a, b) {
+                if (a && b && (typeof a === 'object') && (typeof b === 'object')) {
+                    return JSON.stringify(a) === JSON.stringify(b);
+                }
+                else {
+                    return a === b;
+                }
+            };
+        }
+        else {
+            return function (a, b) {
+                return a === b;
+            };
+        }
+    }
+    fc.equal = equal;
     function calc(array, calc, fn) {
         var values, calculated, index;
         if (typeof fn === 'function') {
