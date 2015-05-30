@@ -494,19 +494,19 @@ describe('fc .', function() {
 	    expect(arr.reduceRight(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
 	    
 	    // merge=true, with reduce
-	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
-	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
-	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3, c: 'y'}, {a: 2, b: 100, w: null}];
+	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'xy', w: null});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'yx', w: null});
 
 	    // merge=false, with reduce
-	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3, c: 'y'}, {a: 2, b: 100, w: null}];
 	    expect(arr.reduce(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
 
 	    // merge is array of keys, with reduce
-	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
-	    expect(arr.reduce(fc.objectCalc(fc.add(), ['a']))).toEqual({a: 13});
-	    expect(arr.reduceRight(fc.objectCalc(fc.add(), ['a']))).toEqual({a: 13});
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3, c: 'y'}, {a: 2, b: 100, w: null}];
+	    expect(arr.reduce(fc.objectCalc(fc.add(), ['a', 'c']))).toEqual({a: 13, c: 'xy'});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add(), ['a', 'c']))).toEqual({a: 13, c: 'yx'});
 
 	  });
 	

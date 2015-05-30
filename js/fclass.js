@@ -226,8 +226,8 @@ var fc;
             function addProp(a, b, x, y) {
                 Object.keys(x).forEach(function (k) {
                     if (Array.isArray(merge)) {
-                        if ((k in y) && (merge.indexOf(k) !== -1)) {
-                            obj[k] = fn(a[k], b[k]);
+                        if (merge.indexOf(k) !== -1) {
+                            obj[k] = (k in y) ? fn(a[k], b[k]) : x[k];
                         }
                     }
                     else if (merge === true) {
@@ -310,11 +310,11 @@ var fc;
     }
     fc.clone = clone;
     function calc(array, calc, fn) {
-        var values, max, index;
+        var values, calculated, index;
         if (typeof fn === 'function') {
             values = array.map(fn);
-            max = calc.apply(null, values);
-            index = values.indexOf(max);
+            calculated = calc.apply(null, values);
+            index = values.indexOf(calculated);
             return array[index];
         }
         else {
