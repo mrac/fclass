@@ -295,11 +295,11 @@ module fc {
   
   
   export function calc(array: Array<any>, calc: Function, fn?: Function1d): any {
-    var values, max, index;
+    var values, calculated, index;
     if(typeof fn === 'function') {
       values = array.map(fn);
-      max = calc.apply(null, values);
-      index = values.indexOf(max);
+      calculated = calc.apply(null, values);
+      index = values.indexOf(calculated);
       return array[index];
     } else {
       return calc.apply(null, array);
