@@ -514,6 +514,80 @@ describe('fc .', function() {
 	  });
 	
 	});
+	
+	
+	describe('clone()', function() {
+	
+		it('should clone data', function() {
+			
+			var source, target;
+			
+			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+			target = fc.clone(source);
+			expect(target).toEqual(source);
+			
+			expect(target === source).toEqual(false);
+
+			expect(target[0] === source[0]).toEqual(true);
+			expect(target[1] === source[1]).toEqual(true);
+			expect(target[2] === source[2]).toEqual(true);
+			expect(target[3] === source[3]).toEqual(true);
+			expect(target[4] === source[4]).toEqual(true);
+			expect(target[5] === source[5]).toEqual(true);
+
+			expect(target[4][0] === source[4][0]).toEqual(true);
+			expect(target[4][1] === source[4][1]).toEqual(true);
+			expect(target[4][2] === source[4][2]).toEqual(true);
+
+			expect(target[5].a === source[5].a).toEqual(true);
+			expect(target[5].b === source[5].b).toEqual(true);
+
+			expect(target[4][2].x === source[4][2].x).toEqual(true);
+			expect(target[4][2].y === source[4][2].y).toEqual(true);
+
+			expect(target[5].b[0] === source[5].b[0]).toEqual(true);
+			expect(target[5].b[1] === source[5].b[1]).toEqual(true);
+			
+		});
+		
+	});
+
+
+	describe('cloneDeep()', function() {
+	
+		it('should deeply clone data', function() {
+			
+			var source, target;
+			
+			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
+			target = fc.cloneDeep(source);
+			expect(target).toEqual(source);
+			
+			expect(target === source).toEqual(false);
+			
+			expect(target[0] === source[0]).toEqual(true);
+			expect(target[1] === source[1]).toEqual(true);
+			expect(target[2] === source[2]).toEqual(true);
+			expect(target[3] === source[3]).toEqual(true);
+			expect(target[4] === source[4]).toEqual(false);
+			expect(target[5] === source[5]).toEqual(false);
+
+			expect(target[4][0] === source[4][0]).toEqual(true);
+			expect(target[4][1] === source[4][1]).toEqual(true);
+			expect(target[4][2] === source[4][2]).toEqual(false);
+
+			expect(target[5].a === source[5].a).toEqual(true);
+			expect(target[5].b === source[5].b).toEqual(false);
+
+			expect(target[4][2].x === source[4][2].x).toEqual(true);
+			expect(target[4][2].y === source[4][2].y).toEqual(true);
+
+			expect(target[5].b[0] === source[5].b[0]).toEqual(true);
+			expect(target[5].b[1] === source[5].b[1]).toEqual(true);
+						
+		});
+		
+	});
 
 
 

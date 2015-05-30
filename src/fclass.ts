@@ -232,6 +232,31 @@ module fc {
       }
     };
   };
+  
+  
+  export function clone(source: any): any {
+    var target;
+    if(source && (typeof source === 'object')) {
+      if(Array.isArray(source)) {
+        target = source.slice();
+      } else {
+        target = {};
+        for (var k in source) {
+          if (source.hasOwnProperty(k)) {
+            target[k] = source[k];
+          }
+        }
+      }
+    } else {
+      target = source;
+    }
+    return target;
+  }
+
+
+  export function cloneDeep(source: any): any {
+    return JSON.parse(JSON.stringify(source));
+  }
 
   
 }

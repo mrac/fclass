@@ -240,4 +240,29 @@ var fc;
     }
     fc.arrayCalc = arrayCalc;
     ;
+    function clone(source) {
+        var target;
+        if (source && (typeof source === 'object')) {
+            if (Array.isArray(source)) {
+                target = source.slice();
+            }
+            else {
+                target = {};
+                for (var k in source) {
+                    if (source.hasOwnProperty(k)) {
+                        target[k] = source[k];
+                    }
+                }
+            }
+        }
+        else {
+            target = source;
+        }
+        return target;
+    }
+    fc.clone = clone;
+    function cloneDeep(source) {
+        return JSON.parse(JSON.stringify(source));
+    }
+    fc.cloneDeep = cloneDeep;
 })(fc || (fc = {}));
