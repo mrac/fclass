@@ -383,32 +383,32 @@ describe('fc .', function() {
 	
 	  it('should run prototype methods as 2-argument functions', function() {
 	  
-	    // only 2 first arguments are taken into account
-	    expect(fc.call2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+		// only 2 first arguments are taken into account
+		expect(fc.call2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
 
 		// only 2 first arguments are taken, together with additional fixed arguments
-	    expect(fc.call2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
+		expect(fc.call2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
 	    
-	    // String.prototype.localCompare
+		// String.prototype.localCompare
 		expect(['a', 'd', 'b', 'c'].sort(fc.call2(String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
 
 		// Array.prototype.concat
 		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call2(Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
 
 	  });
-    });
+	});
 
     
-    describe('call1()()', function() {
+	describe('call1()()', function() {
     
 	  it('should run prototype methods as 1-argument functions', function() {
 	  
 	    // only first argument is taken into account
 	    expect(fc.call1(Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
-	    
-	    // only first argument is taken into account, together with additional fixed arguments
-	    expect(fc.call1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
-	    
+		
+		// only first argument is taken into account, together with additional fixed arguments
+		expect(fc.call1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
+		
 		// Array.prototype.sort
 		var arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
 		arr.forEach(fc.call1(Array.prototype.sort, fc.compare(true)));
