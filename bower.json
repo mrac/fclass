@@ -1,12 +1,12 @@
 {
-  "name": "firstclass",
+  "name": "fclass",
   "version": "0.0.1",
-  "homepage": "https://github.com/zalando/firstclass",
+  "homepage": "https://github.com/zalando/fclass",
   "authors": [
-    "Michal Raczkowski <michal.raczkowski@gmail.com>"
+    "Michal Raczkowski <michal.raczkowski@zalando.de>"
   ],
   "description": "JavaScript utility library",
-  "main": "js/firstclass.js",
+  "main": "js/fclass.js",
   "keywords": [
     "JavaScript",
     "utility",

@@ -1,15 +1,15 @@
 {
-  "name": "firstclass",
+  "name": "fclass",
   "version": "0.0.1",
   "description": "JavaScript utility library",
-  "main": "js/firstclass.js",
+  "main": "js/fclass.js",
   "scripts": {
     "start": "gulp",
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalando/firstclass.git"
+    "url": "https://github.com/zalando/fclass.git"
   },
   "keywords": [
     "JavaScript",
@@ -19,9 +19,9 @@
   "author": "Michal Raczkowski",
   "license": "",
   "bugs": {
-    "url": "https://github.com/zalando/firstclass/issues"
+    "url": "https://github.com/zalando/fclass/issues"
   },
-  "homepage": "https://github.com/zalando/firstclass",
+  "homepage": "https://github.com/zalando/fclass",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-typedoc": "^1.1.0",

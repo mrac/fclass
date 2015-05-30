@@ -1,4 +1,4 @@
-### firstclass
+### fclass
 
 JavaScript utility library that gives support for manipulating JSON data
 by leveraging the functional approach of ECMAScript 5 methods.
@@ -17,7 +17,7 @@ To build/test run:
 ===
 #### Documentation
 
-http://zalando.github.io/firstclass
+http://zalando.github.io/fclass
 
 ===
 #### Legacy browsers

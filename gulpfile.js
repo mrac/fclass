@@ -28,7 +28,7 @@ gulp.task("typedoc", function() {
       module: "commonjs",
       target: "es5",
       out: "docs/",
-      name: "firstclass",
+      name: "fclass",
       includeDeclarations: true
     }));
 });
