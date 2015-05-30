@@ -379,25 +379,44 @@ describe('fc .', function() {
 	});
 	
 	
-	describe('call()()', function() {
+	describe('call2()()', function() {
 	
-	  it('should run prototype methods', function() {
+	  it('should run prototype methods as 2-argument functions', function() {
 	  
 	    // only 2 first arguments are taken into account
-	    String.prototype.concat
-	    expect(fc.call(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+	    expect(fc.call2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+
+		// only 2 first arguments are taken, together with additional fixed arguments
+	    expect(fc.call2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
 	    
 	    // String.prototype.localCompare
-		expect(['a', 'd', 'b', 'c'].sort(fc.call("".localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+		expect(['a', 'd', 'b', 'c'].sort(fc.call2(String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
 
 		// Array.prototype.concat
-		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call([].concat))).toEqual([1,2,3,4,5,6,7,8,9]);
+		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call2(Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
 
+	  });
+    });
+
+    
+    describe('call1()()', function() {
+    
+	  it('should run prototype methods as 1-argument functions', function() {
+	  
+	    // only first argument is taken into account
+	    expect(fc.call1(Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
+	    
+	    // only first argument is taken into account, together with additional fixed arguments
+	    expect(fc.call1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
+	    
 		// Array.prototype.sort
-		var arr = [['a', 'c', 'b'], ['01', '03', '02'], ['X', 'Z', 'Y']];
-		arr.forEach(fc.call([].sort));
-		expect(arr).toEqual([['a', 'b', 'c'], ['01', '02', '03'], ['X', 'Y', 'Z']]);
+		var arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
+		arr.forEach(fc.call1(Array.prototype.sort, fc.compare(true)));
+		expect(arr).toEqual([[78, 12, 7], [300, 31, 1], [28, 6, 3]]);
 		
+		// Array.prototype.join
+		var arr = [['2015', '01', '30'], ['2014', '06', '17'], ['2008', '12', '21']];
+		expect(arr.map(fc.call1(Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
 	  });
 
 	});
@@ -408,13 +427,13 @@ describe('fc .', function() {
 	  it('should invoke operations on object properties', function() {
 	    var obj1, obj2;
 	    
-	    // object of the same type
+	    // objects with the same keys
 	    obj1 = { a: 10, b: 5 };
 	    obj2 = { a: 70, b: -40 };
 	    expect(fc.objectCalc(fc.add())(obj1, obj2)).toEqual({ a: 80, b: -35 });
 	    expect(fc.objectCalc(fc.subtract())(obj1, obj2)).toEqual({ a: -60, b: 45 });
 
-		// non-existing properties are calculated by default as undefined
+		// non-existing properties by default are calculated as undefined
 	    obj1 = { a: 10, b: 5, c: 2 };
 	    obj2 = { a: 70, b: -40, d: 10 };
 	    expect(fc.objectCalc(fc.add())(obj1, obj2)).toEqual({ a: 80, b: -35, c: NaN, d: NaN });
@@ -435,6 +454,41 @@ describe('fc .', function() {
 	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
 	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
+
+	  });
+	
+	});
+
+
+	describe('arrayCalc()()', function() {
+	
+	  it('should invoke operations on array items', function() {
+	    var arr1, arr2;
+	    
+	    // arrays of the same length
+	    arr1 = ['one', 'two', 'three'];
+	    arr2 = ['01', '02', '03'];
+	    expect(fc.arrayCalc(fc.add())(arr1, arr2)).toEqual(['one01', 'two02', 'three03']);
+
+		// non-existing values are calculated by default as undefined
+	    arr1 = ['one', 'two', 'three'];
+	    arr2 = ['01', '02', '03', '04'];
+	    expect(fc.arrayCalc(fc.add())(arr1, arr2)).toEqual(['one01', 'two02', 'three03', 'undefined04']);
+	    
+		// if argument merge=true, non-existing values are just added to the target object
+	    arr1 = ['one', 'two', 'three'];
+	    arr2 = ['01', '02', '03', '04'];
+	    expect(fc.arrayCalc(fc.add(), true)(arr1, arr2)).toEqual(['one01', 'two02', 'three03', '04']);
+	    
+	    // default behavior with reduce
+	    var arr = [[1,2,3], [5,6,7], [8,9,10]];
+	    expect(arr.reduce(fc.arrayCalc(fc.add()))).toEqual([14, 17, 20]);
+	    expect(arr.reduceRight(fc.arrayCalc(fc.add()))).toEqual([14, 17, 20]);
+	    
+	    // merge=true with reduce
+	    var arr = [[1,2,3,4], [5,6,7], [8,9,10]];
+	    expect(arr.reduce(fc.arrayCalc(fc.add(), true))).toEqual([14, 17, 20, 4]);
+	    expect(arr.reduceRight(fc.arrayCalc(fc.add(), true))).toEqual([14, 17, 20, 4]);
 
 	  });
 	

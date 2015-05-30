@@ -148,12 +148,42 @@ var fc;
         }
     }
     fc.compare = compare;
-    function call(fn) {
-        return function (a, b) {
-            return fn.call(a, b);
-        };
+    function call2(fn) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var params = Array.prototype.slice.call(arguments, 1);
+        if (params.length) {
+            return function (a, b) {
+                return fn.apply(a, [b].concat(params));
+            };
+        }
+        else {
+            return function (a, b) {
+                return fn.call(a, b);
+            };
+        }
     }
-    fc.call = call;
+    fc.call2 = call2;
+    function call1(fn) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var params = Array.prototype.slice.call(arguments, 1);
+        if (params.length) {
+            return function (a) {
+                return fn.apply(a, params);
+            };
+        }
+        else {
+            return function (a) {
+                return fn.call(a);
+            };
+        }
+    }
+    fc.call1 = call1;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var o = {};
@@ -179,5 +209,16 @@ var fc;
         };
     }
     fc.objectCalc = objectCalc;
+    ;
+    function arrayCalc(fn, merge) {
+        return function (a, b) {
+            var long = a.length > b.length ? a : b;
+            var shortLen = a.length > b.length ? b.length : a.length;
+            return long.map(function (e, i) {
+                return (!merge || i < shortLen) ? fn(a[i], b[i]) : long[i];
+            });
+        };
+    }
+    fc.arrayCalc = arrayCalc;
     ;
 })(fc || (fc = {}));

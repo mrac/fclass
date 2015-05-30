@@ -154,13 +154,34 @@ module fc {
   }
     
   
-  export function call(fn: Function): Function2d {
-    return function (a, b) {
-      return fn.call(a, b);
-    };
+  export function call2(fn: Function, ...args: any[]): Function2d {
+    var params = Array.prototype.slice.call(arguments, 1);
+    if(params.length) {
+      return function (a, b) {
+        return fn.apply(a, [b].concat(params));
+      };
+    } else {
+      return function (a, b) {
+        return fn.call(a, b);
+      };
+    }
   }
   
   
+  export function call1(fn: Function, ...args: any[]): Function1d {
+    var params = Array.prototype.slice.call(arguments, 1);
+    if(params.length) {
+      return function (a) {
+        return fn.apply(a, params);
+      };
+    } else {
+      return function (a) {
+        return fn.call(a);
+      };
+    }
+  }
+
+
   export function objectCalc(fn: Function2d, merge?: boolean): Function2d {
     return function (a,b) {
       var o = {};
@@ -184,5 +205,16 @@ module fc {
     };
   };
   
+  
+  export function arrayCalc(fn: Function2d, merge?: boolean): Function2d {
+    return function (a,b) {
+      var long = a.length > b.length ? a : b;
+      var shortLen = a.length > b.length ? b.length : a.length;
+      return long.map(function (e, i) {
+        return (!merge || i<shortLen) ? fn(a[i], b[i]) : long[i];
+      });
+    };
+  };
 
+  
 }
