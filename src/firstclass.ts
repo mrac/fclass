@@ -122,7 +122,7 @@ module fc {
       return negative ? b-a : a-b;
     };
   }
-  
+    
   
   export function stringCompare(negative?: boolean): Function2d {
     if(negative) {
@@ -151,6 +151,13 @@ module fc {
         return a>b ? 1 : (a<b ? -1 : 0);
       };
     }
+  }
+    
+  
+  export function call(fn: Function): Function2d {
+    return function (a, b) {
+      return fn.call(a, b);
+    };
   }
   
 

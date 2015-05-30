@@ -148,4 +148,10 @@ var fc;
         }
     }
     fc.compare = compare;
+    function call(fn) {
+        return function (a, b) {
+            return fn.call(a, b);
+        };
+    }
+    fc.call = call;
 })(fc || (fc = {}));

@@ -377,6 +377,17 @@ describe('fc .', function() {
 	  });
 
 	});
+	
+	
+	describe('call()()', function() {
+	
+	  it('should run prototype methods', function() {
+		expect(['a', 'd', 'b', 'c'].sort(fc.call("".localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call([].concat))).toEqual([1,2,3,4,5,6,7,8,9]);
+	  });
+
+	});
+
 
 
 });
