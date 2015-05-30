@@ -154,4 +154,30 @@ var fc;
         };
     }
     fc.call = call;
+    function objectCalc(fn, merge) {
+        return function (a, b) {
+            var o = {};
+            Object.keys(a).forEach(function (k) {
+                if (merge && !(k in b)) {
+                    o[k] = a[k];
+                }
+                else {
+                    o[k] = fn(a[k], b[k]);
+                }
+            });
+            Object.keys(b).forEach(function (k) {
+                if (!(k in o)) {
+                    if (merge && !(k in a)) {
+                        o[k] = b[k];
+                    }
+                    else {
+                        o[k] = fn(a[k], b[k]);
+                    }
+                }
+            });
+            return o;
+        };
+    }
+    fc.objectCalc = objectCalc;
+    ;
 })(fc || (fc = {}));

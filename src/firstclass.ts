@@ -1,9 +1,9 @@
 
 module fc {
 
-  type Function1d = (element: any, index: number, array: Array<any>) => any;
+  type Function1d = (element: any, index?: number, array?: Array<any>) => any;
 
-  type Function2d = (a: any, b: any, index: number, array: Array<any>) => any;
+  type Function2d = (a: any, b: any, index?: number, array?: Array<any>) => any;
 
 
   export function identity(): Function1d {
@@ -159,6 +159,30 @@ module fc {
       return fn.call(a, b);
     };
   }
+  
+  
+  export function objectCalc(fn: Function2d, merge?: boolean): Function2d {
+    return function (a,b) {
+      var o = {};
+      Object.keys(a).forEach(function (k) {
+        if(merge && !(k in b)) {
+          o[k] = a[k];
+        } else {
+          o[k] = fn(a[k], b[k]);
+        }
+      });
+      Object.keys(b).forEach(function (k) {
+        if(!(k in o)) {
+          if(merge && !(k in a)) {
+            o[k] = b[k];
+          } else {
+            o[k] = fn(a[k], b[k]);
+          }
+        }
+      });
+      return o;
+    };
+  };
   
 
 }

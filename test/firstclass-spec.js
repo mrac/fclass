@@ -384,8 +384,47 @@ describe('fc .', function() {
 	  it('should run prototype methods', function() {
 		expect(['a', 'd', 'b', 'c'].sort(fc.call("".localeCompare))).toEqual(['a', 'b', 'c', 'd']);
 		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call([].concat))).toEqual([1,2,3,4,5,6,7,8,9]);
+		expect([['a', 'c', 'b'], ['01', '03', '02'], ['X', 'Z', 'Y']].map(fc.call([].sort))).toEqual([['a', 'b', 'c'], ['01', '02', '03'], ['X', 'Y', 'Z']]);
 	  });
 
+	});
+	
+	
+	describe('objectCalc()()', function() {
+	
+	  it('should invoke operations on object properties', function() {
+	    var obj1, obj2;
+	    
+	    // object of the same type
+	    obj1 = { a: 10, b: 5 };
+	    obj2 = { a: 70, b: -40 };
+	    expect(fc.objectCalc(fc.add())(obj1, obj2)).toEqual({ a: 80, b: -35 });
+	    expect(fc.objectCalc(fc.subtract())(obj1, obj2)).toEqual({ a: -60, b: 45 });
+
+		// non-existing properties are calculated by default as undefined
+	    obj1 = { a: 10, b: 5, c: 2 };
+	    obj2 = { a: 70, b: -40, d: 10 };
+	    expect(fc.objectCalc(fc.add())(obj1, obj2)).toEqual({ a: 80, b: -35, c: NaN, d: NaN });
+	    expect(fc.objectCalc(fc.subtract())(obj1, obj2)).toEqual({ a: -60, b: 45, c: NaN, d: NaN });
+	    
+		// if argument merge=true, non-existing properties are just added to the target object
+	    obj1 = { a: 10, b: 5, c: 2 };
+	    obj2 = { a: 70, b: -40, d: 10 };
+	    expect(fc.objectCalc(fc.add(), true)(obj1, obj2)).toEqual({ a: 80, b: -35, c: 2, d: 10 });
+	    expect(fc.objectCalc(fc.subtract(), true)(obj1, obj2)).toEqual({ a: -60, b: 45, c: 2, d: 10 });
+	    
+	    // default behavior with reduce
+	    var arr = [{a: 10, b: 5}, {a: 1, b: -3}, {a: 2, b: 100}];
+	    expect(arr.reduce(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
+	    
+	    // merge=true with reduce
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
+	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
+
+	  });
+	
 	});
 
 
