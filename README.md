@@ -25,6 +25,7 @@ http://zalando.github.io/firstclass
 For legacy JavaScript engines *es5-shim* and *json3* are used to support ECMAScript 5 and JSON.
 
 https://github.com/es-shims/es5-shim
+
 https://github.com/bestiejs/json3
 
 ===
