@@ -156,6 +156,42 @@ var fc;
         var params = Array.prototype.slice.call(arguments, 1);
         if (params.length) {
             return function (a, b) {
+                return fn.apply(null, [a, b].concat(params));
+            };
+        }
+        else {
+            return function (a, b) {
+                return fn.call(null, a, b);
+            };
+        }
+    }
+    fc.call2 = call2;
+    function call1(fn) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var params = Array.prototype.slice.call(arguments, 1);
+        if (params.length) {
+            return function (a) {
+                return fn.apply(null, [a].concat(params));
+            };
+        }
+        else {
+            return function (a) {
+                return fn.call(null, a);
+            };
+        }
+    }
+    fc.call1 = call1;
+    function pcall2(fn) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var params = Array.prototype.slice.call(arguments, 1);
+        if (params.length) {
+            return function (a, b) {
                 return fn.apply(a, [b].concat(params));
             };
         }
@@ -165,8 +201,8 @@ var fc;
             };
         }
     }
-    fc.call2 = call2;
-    function call1(fn) {
+    fc.pcall2 = pcall2;
+    function pcall1(fn) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -183,13 +219,18 @@ var fc;
             };
         }
     }
-    fc.call1 = call1;
+    fc.pcall1 = pcall1;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var obj = {};
             function addProp(a, b, x, y) {
                 Object.keys(x).forEach(function (k) {
-                    if (merge === true) {
+                    if (Array.isArray(merge)) {
+                        if ((k in y) && (merge.indexOf(k) !== -1)) {
+                            obj[k] = fn(a[k], b[k]);
+                        }
+                    }
+                    else if (merge === true) {
                         obj[k] = (k in y) ? fn(a[k], b[k]) : x[k];
                     }
                     else if (merge === false) {
@@ -268,4 +309,17 @@ var fc;
         }
     }
     fc.clone = clone;
+    function calc(array, calc, fn) {
+        var values, max, index;
+        if (typeof fn === 'function') {
+            values = array.map(fn);
+            max = calc.apply(null, values);
+            index = values.indexOf(max);
+            return array[index];
+        }
+        else {
+            return calc.apply(null, array);
+        }
+    }
+    fc.calc = calc;
 })(fc || (fc = {}));

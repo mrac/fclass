@@ -122,7 +122,7 @@ module fc {
       return negative ? b-a : a-b;
     };
   }
-    
+  
   
   export function compareString(negative?: boolean): Function2d {
     if(negative) {
@@ -152,9 +152,37 @@ module fc {
       };
     }
   }
-    
+  
   
   export function call2(fn: Function, ...args: any[]): Function2d {
+    var params = Array.prototype.slice.call(arguments, 1);
+    if(params.length) {
+      return function (a, b) {
+        return fn.apply(null, [a, b].concat(params));
+      };
+    } else {
+      return function (a, b) {
+        return fn.call(null, a, b);
+      };
+    }
+  }
+
+
+  export function call1(fn: Function, ...args: any[]): Function1d {
+    var params = Array.prototype.slice.call(arguments, 1);
+    if(params.length) {
+      return function (a) {
+        return fn.apply(null, [a].concat(params));
+      };
+    } else {
+      return function (a) {
+        return fn.call(null, a);
+      };
+    }
+  }
+
+
+  export function pcall2(fn: Function, ...args: any[]): Function2d {
     var params = Array.prototype.slice.call(arguments, 1);
     if(params.length) {
       return function (a, b) {
@@ -168,7 +196,7 @@ module fc {
   }
   
   
-  export function call1(fn: Function, ...args: any[]): Function1d {
+  export function pcall1(fn: Function, ...args: any[]): Function1d {
     var params = Array.prototype.slice.call(arguments, 1);
     if(params.length) {
       return function (a) {
@@ -182,13 +210,17 @@ module fc {
   }
 
 
-  export function objectCalc(fn: Function2d, merge?: boolean): Function2d {
+  export function objectCalc(fn: Function2d, merge?: any): Function2d {
     return function (a,b) {
       var obj = {};
       
       function addProp(a, b, x, y) {
         Object.keys(x).forEach(function (k) {
-          if(merge === true) {
+          if(Array.isArray(merge)) {
+            if((k in y) && (merge.indexOf(k) !== -1)) {
+            	obj[k] = fn(a[k], b[k]);
+            }
+          } else if(merge === true) {
             obj[k] = (k in y) ? fn(a[k], b[k]) : x[k];
           } else if(merge === false) {
             if(k in y) {
@@ -258,6 +290,19 @@ module fc {
         }
         return target;
       }
+    }
+  }
+  
+  
+  export function calc(array: Array<any>, calc: Function, fn?: Function1d): any {
+    var values, max, index;
+    if(typeof fn === 'function') {
+      values = array.map(fn);
+      max = calc.apply(null, values);
+      index = values.indexOf(max);
+      return array[index];
+    } else {
+      return calc.apply(null, array);
     }
   }
   

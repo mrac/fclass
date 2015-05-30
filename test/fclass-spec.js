@@ -381,42 +381,73 @@ describe('fc .', function() {
 	
 	describe('call2()()', function() {
 	
+	  it('should run functions as 2-argument functions', function() {
+	  
+		// only 2 first arguments are taken into account
+		expect(fc.call2(Math.max)(1,2,3,4)).toEqual(2);
+
+		// only 2 first arguments are taken, together with additional fixed arguments
+		expect(fc.call2(Math.max, 10)(1,2,3,4)).toEqual(10);
+	    
+		// Math.max
+		expect([1, 4, 10, 12, 3].reduce(fc.call2(Math.max))).toEqual(12);
+
+	  });
+	});
+	
+	
+	describe('call1()()', function() {
+    
+	  it('should run functions as 1-argument functions', function() {
+	  
+	    // only first argument is taken into account (extra fixed argument provided)
+	    expect(fc.call1(Math.pow, 10)(2,4)).toEqual(1024);
+		
+		// Math.pow (extra fixed argument provided)
+		expect([1, 2, 3, 4, 5, 6].map(fc.call1(Math.pow, 2))).toEqual([1, 4, 9, 16, 25, 36]);
+	  });
+
+	});
+	
+	
+	describe('pcall2()()', function() {
+	
 	  it('should run prototype methods as 2-argument functions', function() {
 	  
 		// only 2 first arguments are taken into account
-		expect(fc.call2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+		expect(fc.pcall2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
 
 		// only 2 first arguments are taken, together with additional fixed arguments
-		expect(fc.call2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
+		expect(fc.pcall2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
 	    
 		// String.prototype.localCompare
-		expect(['a', 'd', 'b', 'c'].sort(fc.call2(String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+		expect(['a', 'd', 'b', 'c'].sort(fc.pcall2(String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
 
 		// Array.prototype.concat
-		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call2(Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
+		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.pcall2(Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
 
 	  });
 	});
 
     
-	describe('call1()()', function() {
+	describe('pcall1()()', function() {
     
 	  it('should run prototype methods as 1-argument functions', function() {
 	  
 	    // only first argument is taken into account
-	    expect(fc.call1(Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
+	    expect(fc.pcall1(Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
 		
 		// only first argument is taken into account, together with additional fixed arguments
-		expect(fc.call1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
+		expect(fc.pcall1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
 		
 		// Array.prototype.sort
 		var arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
-		arr.forEach(fc.call1(Array.prototype.sort, fc.compare(true)));
+		arr.forEach(fc.pcall1(Array.prototype.sort, fc.compare(true)));
 		expect(arr).toEqual([[78, 12, 7], [300, 31, 1], [28, 6, 3]]);
 		
 		// Array.prototype.join
 		var arr = [['2015', '01', '30'], ['2014', '06', '17'], ['2008', '12', '21']];
-		expect(arr.map(fc.call1(Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
+		expect(arr.map(fc.pcall1(Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
 	  });
 
 	});
@@ -451,20 +482,31 @@ describe('fc .', function() {
 	    expect(fc.objectCalc(fc.add(), false)(obj1, obj2)).toEqual({ a: 80, b: -35 });
 	    expect(fc.objectCalc(fc.subtract(), false)(obj1, obj2)).toEqual({ a: -60, b: 45 });
 
-	    // default behavior with reduce
+		// if argument merge is array of keys, non-existing or filtered-out properties are omitted in the target object
+	    obj1 = { a: 10, b: 5, c: 2 };
+	    obj2 = { a: 70, b: -40, d: 10 };
+	    expect(fc.objectCalc(fc.add(), ['a'])(obj1, obj2)).toEqual({ a: 80 });
+	    expect(fc.objectCalc(fc.subtract(), ['a'])(obj1, obj2)).toEqual({ a: -60 });
+
+	    // default behavior, with reduce
 	    var arr = [{a: 10, b: 5}, {a: 1, b: -3}, {a: 2, b: 100}];
 	    expect(arr.reduce(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add()))).toEqual({a: 13, b: 102});
 	    
-	    // merge=true with reduce
+	    // merge=true, with reduce
 	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
 	    expect(arr.reduce(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add(), true))).toEqual({a: 13, b: 102, c: 'x', w: null});
 
-	    // merge=false with reduce
+	    // merge=false, with reduce
 	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
 	    expect(arr.reduce(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
 	    expect(arr.reduceRight(fc.objectCalc(fc.add(), false))).toEqual({a: 13, b: 102});
+
+	    // merge is array of keys, with reduce
+	    var arr = [{a: 10, b: 5, c: 'x'}, {a: 1, b: -3}, {a: 2, b: 100, w: null}];
+	    expect(arr.reduce(fc.objectCalc(fc.add(), ['a']))).toEqual({a: 13});
+	    expect(arr.reduceRight(fc.objectCalc(fc.add(), ['a']))).toEqual({a: 13});
 
 	  });
 	
@@ -616,6 +658,26 @@ describe('fc .', function() {
 			expect(mapped[2][0] === source[2][0]).toEqual(false);
 			expect(mapped[2][1] === source[2][1]).toEqual(false);
 						
+		});
+		
+	});
+	
+	
+	describe('calc()()', function() {
+	
+		it('should return maximum of 2 values', function() {
+		
+			// Imidiate values
+			//   for calculation functions that do operations on infinite number of arguments
+			//   it is better to use calc():	
+			expect(fc.calc([2, 10, -4, 2], Math.max)).toEqual(10);
+			//   instead of reduce():
+			expect([2, 10, -4, 2].reduce(fc.call2(Math.max))).toEqual(10);
+		
+			// Object properties
+			var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
+			expect(fc.calc(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
+
 		});
 		
 	});

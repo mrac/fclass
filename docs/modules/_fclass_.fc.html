@@ -86,6 +86,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#add" class="tsd-kind-icon">add</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#arraycalc" class="tsd-kind-icon">array<wbr>Calc</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#calc" class="tsd-kind-icon">calc</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#call1" class="tsd-kind-icon">call1</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#call2" class="tsd-kind-icon">call2</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#clone" class="tsd-kind-icon">clone</a></li>
@@ -96,6 +97,8 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#key" class="tsd-kind-icon">key</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#object" class="tsd-kind-icon">object</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#objectcalc" class="tsd-kind-icon">object<wbr>Calc</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#pcall1" class="tsd-kind-icon">pcall1</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#pcall2" class="tsd-kind-icon">pcall2</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#predicate" class="tsd-kind-icon">predicate</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#subtract" class="tsd-kind-icon">subtract</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#value" class="tsd-kind-icon">value</a></li>
@@ -219,7 +222,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L209">fclass.ts:209</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L241">fclass.ts:241</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -232,6 +235,35 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="calc" class="tsd-anchor"></a>
+					<h3>calc</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">calc<span class="tsd-signature-symbol">(</span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, calc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, fn<span class="tsd-signature-symbol">?: </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L297">fclass.ts:297</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>array: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>calc: <span class="tsd-signature-type">Function</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fn: <a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -297,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L237">fclass.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L269">fclass.ts:269</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -446,7 +478,59 @@
 					<a name="objectcalc" class="tsd-anchor"></a>
 					<h3>object<wbr>Calc</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">object<wbr>Calc<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a>, merge<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></li>
+						<li class="tsd-signature tsd-kind-icon">object<wbr>Calc<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a>, merge<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L213">fclass.ts:213</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> merge: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="pcall1" class="tsd-anchor"></a>
+					<h3>pcall1</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">pcall1<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L199">fclass.ts:199</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="pcall2" class="tsd-anchor"></a>
+					<h3>pcall2</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">pcall2<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -458,10 +542,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h5>
+									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> merge: <span class="tsd-signature-type">boolean</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
@@ -565,6 +649,9 @@
 						<a href="_fclass_.fc.html#arraycalc" class="tsd-kind-icon">array<wbr>Calc</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_fclass_.fc.html#calc" class="tsd-kind-icon">calc</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_fclass_.fc.html#call1" class="tsd-kind-icon">call1</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
@@ -593,6 +680,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_fclass_.fc.html#objectcalc" class="tsd-kind-icon">object<wbr>Calc</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_fclass_.fc.html#pcall1" class="tsd-kind-icon">pcall1</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_fclass_.fc.html#pcall2" class="tsd-kind-icon">pcall2</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_fclass_.fc.html#predicate" class="tsd-kind-icon">predicate</a>
