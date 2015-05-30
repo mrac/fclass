@@ -1,7 +1,7 @@
 ### firstclass
 
-JavaScript utility library that gives support for manipulating
-arrays and objects by leveraging the functional approach of ECMAScript 5 methods.
+JavaScript utility library that gives support for manipulating JSON data
+by leveraging the functional approach of ECMAScript 5 methods.
 
 ===
 #### Build
@@ -22,9 +22,10 @@ http://zalando.github.io/firstclass
 ===
 #### Legacy browsers
 
-For legacy JavaScript engines es5-shim is used to support ECMAScript 5 methods.
+For legacy JavaScript engines *es5-shim* and *json3* are used to support ECMAScript 5 and JSON.
 
 https://github.com/es-shims/es5-shim
+https://github.com/bestiejs/json3
 
 ===
 #### License
