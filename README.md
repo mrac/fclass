@@ -20,6 +20,13 @@ To build/test run:
 http://zalando.github.io/firstclass
 
 ===
+#### Legacy browsers
+
+For legacy JavaScript engines es5-shim is used to support ECMAScript 5 methods.
+
+https://github.com/es-shims/es5-shim
+
+===
 #### License
 
 
