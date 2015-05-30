@@ -5,6 +5,8 @@ module fc {
 
   type Function2d = (a: any, b: any, index?: number, array?: Array<any>) => any;
 
+  type FunctionI = (...args: any[]) => any;
+
 
   export function identity(): Function1d {
     return function (e) {
@@ -155,11 +157,10 @@ module fc {
   
   
   export function call(dimension: number, fn: Function, ...args: any[]): Function2d {
-    var params = Array.prototype.slice.call(arguments, 2);
     if(dimension === 1) {
-      if(params.length) {
+      if(args.length) {
         return function (a) {
-          return fn.apply(null, [a].concat(params));
+          return fn.apply(null, [a].concat(args));
         };
       } else {
         return function (a) {
@@ -167,9 +168,9 @@ module fc {
         };
       }
     } else if(dimension === 2) {
-      if(params.length) {
+      if(args.length) {
         return function (a, b) {
-          return fn.apply(null, [a, b].concat(params));
+          return fn.apply(null, [a, b].concat(args));
         };
       } else {
         return function (a, b) {
@@ -289,7 +290,7 @@ module fc {
   }
   
   
-  export function calc(array: Array<any>, calc: Function, fn?: Function1d): any {
+  export function calc(array: Array<any>, calc: FunctionI, fn?: Function1d): any {
     var values, calculated, index;
     if(typeof fn === 'function') {
       values = array.map(fn);

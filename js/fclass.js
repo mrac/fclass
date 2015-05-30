@@ -153,11 +153,10 @@ var fc;
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        var params = Array.prototype.slice.call(arguments, 2);
         if (dimension === 1) {
-            if (params.length) {
+            if (args.length) {
                 return function (a) {
-                    return fn.apply(null, [a].concat(params));
+                    return fn.apply(null, [a].concat(args));
                 };
             }
             else {
@@ -167,9 +166,9 @@ var fc;
             }
         }
         else if (dimension === 2) {
-            if (params.length) {
+            if (args.length) {
                 return function (a, b) {
-                    return fn.apply(null, [a, b].concat(params));
+                    return fn.apply(null, [a, b].concat(args));
                 };
             }
             else {
