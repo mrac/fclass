@@ -203,7 +203,7 @@ module fc {
       addProp(a, b, b, a);
       return obj;
     };
-  };
+  }
   
   
   export function arrayCalc(fn: Function2d, merge?: boolean): Function2d {
@@ -231,32 +231,35 @@ module fc {
         });
       }
     };
-  };
+  }
   
   
-  export function clone(source: any): any {
-    var target;
-    if(source && (typeof source === 'object')) {
-      if(Array.isArray(source)) {
-        target = source.slice();
-      } else {
-        target = {};
-        for (var k in source) {
-          if (source.hasOwnProperty(k)) {
-            target[k] = source[k];
-          }
-        }
-      }
+  export function clone(deep?: boolean): Function1d {
+    if(deep) {
+      return function (source) {
+        return JSON.parse(JSON.stringify(source));
+      };
     } else {
-      target = source;
+      return function (source) {
+        var target;
+        if(source && (typeof source === 'object')) {
+          if(Array.isArray(source)) {
+            target = source.slice();
+          } else {
+            target = {};
+            for (var k in source) {
+              if (source.hasOwnProperty(k)) {
+                target[k] = source[k];
+              }
+            }
+          }
+        } else {
+          target = source;
+        }
+        return target;
+      }
     }
-    return target;
   }
-
-
-  export function cloneDeep(source: any): any {
-    return JSON.parse(JSON.stringify(source));
-  }
-
+  
   
 }

@@ -516,14 +516,14 @@ describe('fc .', function() {
 	});
 	
 	
-	describe('clone()', function() {
+	describe('clone()()', function() {
 	
 		it('should clone data', function() {
 			
 			var source, target;
 			
 			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
-			target = fc.clone(source);
+			target = fc.clone()(source);
 			expect(target).toEqual(source);
 			
 			expect(target === source).toEqual(false);
@@ -548,19 +548,32 @@ describe('fc .', function() {
 			expect(target[5].b[0] === source[5].b[0]).toEqual(true);
 			expect(target[5].b[1] === source[5].b[1]).toEqual(true);
 			
+			var source = [ [{a: 1}, {a: 5}], [{a: 1}, {a: -10}], [{a: 100}, {a: 0}] ];
+			var mapped = source.map(fc.clone());
+
+			expect(mapped).toEqual(source);
+			
+			// should be cloned
+			expect(mapped[0] === source[0]).toEqual(false);
+			expect(mapped[1] === source[1]).toEqual(false);
+			expect(mapped[2] === source[2]).toEqual(false);
+
+			// should be one
+			expect(mapped[0][0] === source[0][0]).toEqual(true);
+			expect(mapped[0][1] === source[0][1]).toEqual(true);
+			expect(mapped[1][0] === source[1][0]).toEqual(true);
+			expect(mapped[1][1] === source[1][1]).toEqual(true);
+			expect(mapped[2][0] === source[2][0]).toEqual(true);
+			expect(mapped[2][1] === source[2][1]).toEqual(true);
+			
 		});
-		
-	});
-
-
-	describe('cloneDeep()', function() {
-	
+			
 		it('should deeply clone data', function() {
 			
 			var source, target;
 			
 			source = [false, 1, 'abc', null, [1, 2, {x: 10, y: 'one'}], {a: 5, b: ['white', 'black']}];
-			target = fc.cloneDeep(source);
+			target = fc.clone(true)(source);
 			expect(target).toEqual(source);
 			
 			expect(target === source).toEqual(false);
@@ -584,6 +597,24 @@ describe('fc .', function() {
 
 			expect(target[5].b[0] === source[5].b[0]).toEqual(true);
 			expect(target[5].b[1] === source[5].b[1]).toEqual(true);
+			
+			var source = [ [{a: 1}, {a: 5}], [{a: 1}, {a: -10}], [{a: 100}, {a: 0}] ];
+			var mapped = source.map(fc.clone(true));
+
+			expect(mapped).toEqual(source);
+			
+			// should be cloned
+			expect(mapped[0] === source[0]).toEqual(false);
+			expect(mapped[1] === source[1]).toEqual(false);
+			expect(mapped[2] === source[2]).toEqual(false);
+
+			// should also be cloned
+			expect(mapped[0][0] === source[0][0]).toEqual(false);
+			expect(mapped[0][1] === source[0][1]).toEqual(false);
+			expect(mapped[1][0] === source[1][0]).toEqual(false);
+			expect(mapped[1][1] === source[1][1]).toEqual(false);
+			expect(mapped[2][0] === source[2][0]).toEqual(false);
+			expect(mapped[2][1] === source[2][1]).toEqual(false);
 						
 		});
 		
