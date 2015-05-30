@@ -154,58 +154,54 @@ module fc {
   }
   
   
-  export function call2(fn: Function, ...args: any[]): Function2d {
-    var params = Array.prototype.slice.call(arguments, 1);
-    if(params.length) {
-      return function (a, b) {
-        return fn.apply(null, [a, b].concat(params));
-      };
-    } else {
-      return function (a, b) {
-        return fn.call(null, a, b);
-      };
+  export function call(dimension: number, fn: Function, ...args: any[]): Function2d {
+    var params = Array.prototype.slice.call(arguments, 2);
+    if(dimension === 1) {
+      if(params.length) {
+        return function (a) {
+          return fn.apply(null, [a].concat(params));
+        };
+      } else {
+        return function (a) {
+          return fn.call(null, a);
+        };
+      }
+    } else if(dimension === 2) {
+      if(params.length) {
+        return function (a, b) {
+          return fn.apply(null, [a, b].concat(params));
+        };
+      } else {
+        return function (a, b) {
+          return fn.call(null, a, b);
+        };
+      }
     }
   }
 
 
-  export function call1(fn: Function, ...args: any[]): Function1d {
-    var params = Array.prototype.slice.call(arguments, 1);
-    if(params.length) {
-      return function (a) {
-        return fn.apply(null, [a].concat(params));
-      };
-    } else {
-      return function (a) {
-        return fn.call(null, a);
-      };
-    }
-  }
-
-
-  export function pcall2(fn: Function, ...args: any[]): Function2d {
-    var params = Array.prototype.slice.call(arguments, 1);
-    if(params.length) {
-      return function (a, b) {
-        return fn.apply(a, [b].concat(params));
-      };
-    } else {
-      return function (a, b) {
-        return fn.call(a, b);
-      };
-    }
-  }
-  
-  
-  export function pcall1(fn: Function, ...args: any[]): Function1d {
-    var params = Array.prototype.slice.call(arguments, 1);
-    if(params.length) {
-      return function (a) {
-        return fn.apply(a, params);
-      };
-    } else {
-      return function (a) {
-        return fn.call(a);
-      };
+  export function callp(dimension: number, fn: Function, ...args: any[]): Function2d {
+    var params = Array.prototype.slice.call(arguments, 2);
+    if(dimension === 1) {
+      if(params.length) {
+        return function (a) {
+          return fn.apply(a, params);
+        };
+      } else {
+        return function (a) {
+          return fn.call(a);
+        };
+      }
+    } else if(dimension === 2) {
+      if(params.length) {
+        return function (a, b) {
+          return fn.apply(a, [b].concat(params));
+        };
+      } else {
+        return function (a, b) {
+          return fn.call(a, b);
+        };
+      }
     }
   }
 

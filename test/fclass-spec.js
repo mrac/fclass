@@ -387,75 +387,67 @@ describe('fc .', function() {
 	});
 	
 	
-	describe('call2()()', function() {
+	describe('call()()', function() {
 	
 	  it('should run functions as 2-argument functions', function() {
 	  
 		// only 2 first arguments are taken into account
-		expect(fc.call2(Math.max)(1,2,3,4)).toEqual(2);
+		expect(fc.call(2, Math.max)(1,2,3,4)).toEqual(2);
 
 		// only 2 first arguments are taken, together with additional fixed arguments
-		expect(fc.call2(Math.max, 10)(1,2,3,4)).toEqual(10);
+		expect(fc.call(2, Math.max, 10)(1,2,3,4)).toEqual(10);
 	    
 		// Math.max
-		expect([1, 4, 10, 12, 3].reduce(fc.call2(Math.max))).toEqual(12);
+		expect([1, 4, 10, 12, 3].reduce(fc.call(2, Math.max))).toEqual(12);
 
 	  });
-	});
-	
-	
-	describe('call1()()', function() {
     
 	  it('should run functions as 1-argument functions', function() {
 	  
 	    // only first argument is taken into account (extra fixed argument provided)
-	    expect(fc.call1(Math.pow, 10)(2,4)).toEqual(1024);
+	    expect(fc.call(1, Math.pow, 10)(2,4)).toEqual(1024);
 		
 		// Math.pow (extra fixed argument provided)
-		expect([1, 2, 3, 4, 5, 6].map(fc.call1(Math.pow, 2))).toEqual([1, 4, 9, 16, 25, 36]);
+		expect([1, 2, 3, 4, 5, 6].map(fc.call(1, Math.pow, 2))).toEqual([1, 4, 9, 16, 25, 36]);
 	  });
 
 	});
 	
 	
-	describe('pcall2()()', function() {
+	describe('callp()()', function() {
 	
 	  it('should run prototype methods as 2-argument functions', function() {
 	  
 		// only 2 first arguments are taken into account
-		expect(fc.pcall2(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+		expect(fc.callp(2, String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
 
 		// only 2 first arguments are taken, together with additional fixed arguments
-		expect(fc.pcall2(String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
+		expect(fc.callp(2, String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
 	    
 		// String.prototype.localCompare
-		expect(['a', 'd', 'b', 'c'].sort(fc.pcall2(String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+		expect(['a', 'd', 'b', 'c'].sort(fc.callp(2, String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
 
 		// Array.prototype.concat
-		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.pcall2(Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
+		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.callp(2, Array.prototype.concat))).toEqual([1,2,3,4,5,6,7,8,9]);
 
 	  });
-	});
-
-    
-	describe('pcall1()()', function() {
     
 	  it('should run prototype methods as 1-argument functions', function() {
 	  
 	    // only first argument is taken into account
-	    expect(fc.pcall1(Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
+	    expect(fc.callp(1, Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
 		
 		// only first argument is taken into account, together with additional fixed arguments
-		expect(fc.pcall1(Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
+		expect(fc.callp(1, Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
 		
 		// Array.prototype.sort
 		var arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
-		arr.forEach(fc.pcall1(Array.prototype.sort, fc.compare(true)));
+		arr.forEach(fc.callp(1, Array.prototype.sort, fc.compare(true)));
 		expect(arr).toEqual([[78, 12, 7], [300, 31, 1], [28, 6, 3]]);
 		
 		// Array.prototype.join
 		var arr = [['2015', '01', '30'], ['2014', '06', '17'], ['2008', '12', '21']];
-		expect(arr.map(fc.pcall1(Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
+		expect(arr.map(fc.callp(1, Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
 	  });
 
 	});
@@ -680,7 +672,7 @@ describe('fc .', function() {
 			//   it is better to use calc():	
 			expect(fc.calc([2, 10, -4, 2], Math.max)).toEqual(10);
 			//   instead of reduce():
-			expect([2, 10, -4, 2].reduce(fc.call2(Math.max))).toEqual(10);
+			expect([2, 10, -4, 2].reduce(fc.call(2, Math.max))).toEqual(10);
 		
 			// Math.max on object properties
 			var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];

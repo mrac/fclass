@@ -148,78 +148,70 @@ var fc;
         }
     }
     fc.compare = compare;
-    function call2(fn) {
+    function call(dimension, fn) {
         var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            args[_i - 2] = arguments[_i];
         }
-        var params = Array.prototype.slice.call(arguments, 1);
-        if (params.length) {
-            return function (a, b) {
-                return fn.apply(null, [a, b].concat(params));
-            };
+        var params = Array.prototype.slice.call(arguments, 2);
+        if (dimension === 1) {
+            if (params.length) {
+                return function (a) {
+                    return fn.apply(null, [a].concat(params));
+                };
+            }
+            else {
+                return function (a) {
+                    return fn.call(null, a);
+                };
+            }
         }
-        else {
-            return function (a, b) {
-                return fn.call(null, a, b);
-            };
+        else if (dimension === 2) {
+            if (params.length) {
+                return function (a, b) {
+                    return fn.apply(null, [a, b].concat(params));
+                };
+            }
+            else {
+                return function (a, b) {
+                    return fn.call(null, a, b);
+                };
+            }
         }
     }
-    fc.call2 = call2;
-    function call1(fn) {
+    fc.call = call;
+    function callp(dimension, fn) {
         var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            args[_i - 2] = arguments[_i];
         }
-        var params = Array.prototype.slice.call(arguments, 1);
-        if (params.length) {
-            return function (a) {
-                return fn.apply(null, [a].concat(params));
-            };
+        var params = Array.prototype.slice.call(arguments, 2);
+        if (dimension === 1) {
+            if (params.length) {
+                return function (a) {
+                    return fn.apply(a, params);
+                };
+            }
+            else {
+                return function (a) {
+                    return fn.call(a);
+                };
+            }
         }
-        else {
-            return function (a) {
-                return fn.call(null, a);
-            };
+        else if (dimension === 2) {
+            if (params.length) {
+                return function (a, b) {
+                    return fn.apply(a, [b].concat(params));
+                };
+            }
+            else {
+                return function (a, b) {
+                    return fn.call(a, b);
+                };
+            }
         }
     }
-    fc.call1 = call1;
-    function pcall2(fn) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var params = Array.prototype.slice.call(arguments, 1);
-        if (params.length) {
-            return function (a, b) {
-                return fn.apply(a, [b].concat(params));
-            };
-        }
-        else {
-            return function (a, b) {
-                return fn.call(a, b);
-            };
-        }
-    }
-    fc.pcall2 = pcall2;
-    function pcall1(fn) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var params = Array.prototype.slice.call(arguments, 1);
-        if (params.length) {
-            return function (a) {
-                return fn.apply(a, params);
-            };
-        }
-        else {
-            return function (a) {
-                return fn.call(a);
-            };
-        }
-    }
-    fc.pcall1 = pcall1;
+    fc.callp = callp;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var obj = {};
