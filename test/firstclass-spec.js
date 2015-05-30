@@ -382,9 +382,22 @@ describe('fc .', function() {
 	describe('call()()', function() {
 	
 	  it('should run prototype methods', function() {
+	  
+	    // only 2 first arguments are taken into account
+	    String.prototype.concat
+	    expect(fc.call(String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+	    
+	    // String.prototype.localCompare
 		expect(['a', 'd', 'b', 'c'].sort(fc.call("".localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+
+		// Array.prototype.concat
 		expect([[1,2,3], [4,5,6], [7,8,9]].reduce(fc.call([].concat))).toEqual([1,2,3,4,5,6,7,8,9]);
-		expect([['a', 'c', 'b'], ['01', '03', '02'], ['X', 'Z', 'Y']].map(fc.call([].sort))).toEqual([['a', 'b', 'c'], ['01', '02', '03'], ['X', 'Y', 'Z']]);
+
+		// Array.prototype.sort
+		var arr = [['a', 'c', 'b'], ['01', '03', '02'], ['X', 'Z', 'Y']];
+		arr.forEach(fc.call([].sort));
+		expect(arr).toEqual([['a', 'b', 'c'], ['01', '02', '03'], ['X', 'Y', 'Z']]);
+		
 	  });
 
 	});
