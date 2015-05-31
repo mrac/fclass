@@ -28,7 +28,7 @@ var fc;
         else {
             if (typeof value !== 'undefined') {
                 return function (e) {
-                    var key;
+                    var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
                         return e[k] === value;
@@ -55,7 +55,7 @@ var fc;
         else {
             if (typeof value !== 'undefined') {
                 return function (e) {
-                    var key;
+                    var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
                         return e[k] === value;
@@ -78,7 +78,6 @@ var fc;
                     return key in e ? e : null;
                 };
             }
-            ;
         }
         else {
             if (typeof value !== 'undefined') {
