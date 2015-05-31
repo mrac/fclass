@@ -827,11 +827,11 @@ describe('fc .', function () {
     });
 
 
-    describe('combine()', function () {
+    describe('combine12()', function () {
 
-        it('should combine function-2d with function-1d', function () {
+        it('should combine function-1d with function-2d', function () {
 
-            var compareA = fc.combine(fc.compare(), fc.value('a'));
+            var compareA = fc.combine12(fc.value('a'), fc.compare());
             expect(compareA({a: 1, b: 'a'}, {a: -3, b: 'b'})).toEqual(1);
             expect(compareA({a: -4, b: 'a'}, {a: -3, b: 'b'})).toEqual(-1);
             expect(compareA({a: -3, b: 'a'}, {a: -3, b: 'b'})).toEqual(0);
@@ -840,6 +840,36 @@ describe('fc .', function () {
             var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {a: 7, b: 0}];
             arr.sort(compareA);
             expect(arr).toEqual([{a: 2, b: -10}, {a: 7, b: 0}, {a: 10, b: 4}]);
+
+        });
+
+    });
+
+
+    describe('combine11()', function () {
+
+        it('should combine function-1d with function-1d', function () {
+
+            var notA = fc.combine11(fc.value('a'), fc.not());
+            expect(notA({a: 1, b: 'a'})).toEqual(false);
+            expect(notA({x: 1, y: 5})).toEqual(true);
+
+            // used with map()
+            var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {x: 7, y: 0}];
+            expect(arr.map(notA)).toEqual([false, false, true]);
+
+        });
+
+    });
+
+
+    describe('combine21()', function () {
+
+        it('should combine function-2d with function-1d', function () {
+
+            var sum100 = fc.combine21(fc.add(), fc.identity(100));
+            expect(sum100(50,50)).toEqual(true);
+            expect(sum100(50,40)).toEqual(false);
 
         });
 

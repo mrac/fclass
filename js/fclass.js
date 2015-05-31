@@ -355,14 +355,24 @@ var fc;
         }
     }
     fc.equal = equal;
-    function combine(fn2, fn1) {
+    function combine12(fn1, fn2) {
         return function (a, b) {
-            var ac = fn1(a);
-            var bc = fn1(b);
-            return fn2(ac, bc);
+            return fn2(fn1(a), fn1(b));
         };
     }
-    fc.combine = combine;
+    fc.combine12 = combine12;
+    function combine11(fn1, fn2) {
+        return function (a) {
+            return fn2(fn1(a));
+        };
+    }
+    fc.combine11 = combine11;
+    function combine21(fn1, fn2) {
+        return function (a, b) {
+            return fn2(fn1(a, b));
+        };
+    }
+    fc.combine21 = combine21;
     function findValue(array, calc, fn) {
         var values, found, index;
         if (fn) {

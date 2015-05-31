@@ -345,11 +345,23 @@ module fc {
     }
 
 
-    export function combine(fn2:Function2d, fn1:Function1d):Function2d {
+    export function combine12(fn1:Function1d, fn2:Function2d):Function2d {
         return function (a, b) {
-            var ac = fn1(a);
-            var bc = fn1(b);
-            return fn2(ac, bc);
+            return fn2(fn1(a), fn1(b));
+        };
+    }
+
+
+    export function combine11(fn1:Function1d, fn2:Function1d):Function1d {
+        return function (a) {
+            return fn2(fn1(a));
+        };
+    }
+
+
+    export function combine21(fn1:Function2d, fn2:Function1d):Function2d {
+        return function (a, b) {
+            return fn2(fn1(a, b));
         };
     }
 
