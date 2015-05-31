@@ -29,6 +29,35 @@ describe('fc .', function () {
     });
 
 
+    describe('not()()', function () {
+
+        it('should test if item is falsy', function () {
+            expect(fc.not()(4)).toEqual(false);
+            expect(fc.not()('a')).toEqual(false);
+            expect(fc.not()(true)).toEqual(false);
+            expect(fc.not()(null)).toEqual(true);
+            expect(fc.not()({a: 10})).toEqual(false);
+            expect(fc.not()(undefined)).toEqual(true);
+
+            expect(fc.not(true)(4)).toEqual(false);
+            expect(fc.not(true)('a')).toEqual(false);
+            expect(fc.not(true)(true)).toEqual(false);
+            expect(fc.not(true)(null)).toEqual(true);
+            expect(fc.not(true)({a: 10})).toEqual(false);
+            expect(fc.not(true)(undefined)).toEqual(true);
+        });
+
+        it('should test if item is thruthy', function () {
+            expect(fc.not(false)(4)).toEqual(true);
+            expect(fc.not(false)('a')).toEqual(true);
+            expect(fc.not(false)(true)).toEqual(true);
+            expect(fc.not(false)(null)).toEqual(false);
+            expect(fc.not(false)({a: 10})).toEqual(true);
+            expect(fc.not(false)(undefined)).toEqual(false);
+        });
+    });
+
+
     describe('index()()', function () {
 
         it('should return the index', function () {

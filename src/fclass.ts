@@ -22,6 +22,19 @@ module fc {
     }
 
 
+    export function not(equalTo?:any):Function1d {
+        if (arguments.length >= 1) {
+            return function (e) {
+                return (!e) === equalTo;
+            };
+        } else {
+            return function (e) {
+                return !e;
+            };
+        }
+    }
+
+
     export function index(equalTo?:number):Function1d {
         if (arguments.length >= 1) {
             return function (e, i) {

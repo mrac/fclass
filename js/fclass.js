@@ -14,6 +14,19 @@ var fc;
         }
     }
     fc.identity = identity;
+    function not(equalTo) {
+        if (arguments.length >= 1) {
+            return function (e) {
+                return (!e) === equalTo;
+            };
+        }
+        else {
+            return function (e) {
+                return !e;
+            };
+        }
+    }
+    fc.not = not;
     function index(equalTo) {
         if (arguments.length >= 1) {
             return function (e, i) {
