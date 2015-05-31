@@ -337,3 +337,5 @@ var fc;
     }
     fc.calc = calc;
 })(fc || (fc = {}));
+
+//# sourceMappingURL=fclass.js.map

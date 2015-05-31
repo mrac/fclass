@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 *.log
-*.map
 node_modules
 bower_components
+src/*.js
+src/*.map

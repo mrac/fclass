@@ -24,6 +24,7 @@
   "homepage": "https://github.com/zalando/fclass",
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-typedoc": "^1.1.0",
     "gulp-typescript": "^2.7.5",
     "jasmine-core": "^2.3.4",
