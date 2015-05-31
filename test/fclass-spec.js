@@ -84,6 +84,9 @@ describe('fc .', function () {
 
             var arr = [{a: 10, b: 5}, {a: 7, b: 0}, {a: 10, b: 7}, {w: 10, '': 3}, {'': 0}];
 
+            expect(fc.value(0)(arr)).toEqual(arr[0]);
+            expect(fc.value(1)(arr)).toEqual(arr[1]);
+
             // map() will map values by existing keys
             expect(arr.map(fc.value('a'))).toEqual([10, 7, 10, null, null]);
             // filter() will filter objects by existing keys

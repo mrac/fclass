@@ -48,8 +48,8 @@ module fc {
     }
 
 
-    export function key(key:string, equalTo?:any):Function1d {
-        if (typeof key === 'string') {
+    export function key(key:any, equalTo?:any):Function1d {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? key : null;
@@ -74,8 +74,8 @@ module fc {
     }
 
 
-    export function value(key:string, equalTo?:any):Function1d {
-        if (typeof key === 'string') {
+    export function value(key:any, equalTo?:any):Function1d {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? e[key] : null;
@@ -100,8 +100,8 @@ module fc {
     }
 
 
-    export function object(key:string, equalTo?:any):Function1d {
-        if (typeof key === 'string') {
+    export function object(key:any, equalTo?:any):Function1d {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? e : null;

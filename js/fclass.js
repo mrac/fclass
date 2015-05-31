@@ -41,7 +41,7 @@ var fc;
     }
     fc.index = index;
     function key(key, equalTo) {
-        if (typeof key === 'string') {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? key : null;
@@ -68,7 +68,7 @@ var fc;
     }
     fc.key = key;
     function value(key, equalTo) {
-        if (typeof key === 'string') {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? e[key] : null;
@@ -95,7 +95,7 @@ var fc;
     }
     fc.value = value;
     function object(key, equalTo) {
-        if (typeof key === 'string') {
+        if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     return e[key] === equalTo ? e : null;
