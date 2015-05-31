@@ -349,13 +349,13 @@ describe('fc', function () {
             expect(fc.method('toFixed')(456.332)).toEqual('456');
             expect(fc.method('toFixed', 2)(456.332)).toEqual('456.33');
 
-            var arr = [{a: 10, b: 5}, [1,2,3], 108, true, 'text'];
+            var arr = [{a: 10, b: 5}, [1, 2, 3], 108, true, 'text'];
 
             // used with map()
             expect(arr.map(fc.method('toString'))).toEqual(['[object Object]', '1,2,3', '108', 'true', 'text']);
 
             // used with filter()
-            expect(arr.filter(fc.method('hasOwnProperty', 'length'))).toEqual([[1,2,3], 'text']);
+            expect(arr.filter(fc.method('hasOwnProperty', 'length'))).toEqual([[1, 2, 3], 'text']);
 
         });
 
@@ -871,8 +871,8 @@ describe('fc', function () {
         it('should combine function-2d with function-1d', function () {
 
             var sum100 = fc.combine21(fc.add(), fc.identity(100));
-            expect(sum100(50,50)).toEqual(true);
-            expect(sum100(50,40)).toEqual(false);
+            expect(sum100(50, 50)).toEqual(true);
+            expect(sum100(50, 40)).toEqual(false);
 
         });
 
@@ -907,6 +907,30 @@ describe('fc', function () {
             // using Math.max on object properties
             var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
             expect(fc.findValue(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
+
+        });
+
+    });
+
+
+    describe('arrayToObject()', function () {
+
+        it('should convert array to object', function () {
+
+            var arr = ['one', 'two', 'three'];
+
+            expect(fc.arrayToObject(arr)).toEqual({0: 'one', 1: 'two', 2: 'three'});
+            expect(fc.arrayToObject(arr, function(e) { return e; })).toEqual({'one': 'one', 'two': 'two', 'three': 'three'});
+            expect(fc.arrayToObject(arr, function(e, i) { return i; })).toEqual({0: 'one', 1: 'two', 2: 'three'});
+            expect(fc.arrayToObject(arr, function(e, i) { return 'v' + i; })).toEqual({'v0': 'one', 'v1': 'two', 'v2': 'three'});
+
+            // by default properties will be overwritten
+            expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor)).toEqual({1: 1.1, 3: 3.99});
+
+            // we can achieve grouping by passing reduce-function
+            var concat = fc.callp(2, [].concat);
+            expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor, concat, [])).toEqual({1: [1.1], 3: [Math.PI, 3.99]});
+            expect(fc.arrayToObject(['one', 'two', 'three'], fc.value('length'), concat, [])).toEqual({3: ['one', 'two'], 5: ['three']});
 
         });
 

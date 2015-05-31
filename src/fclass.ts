@@ -56,7 +56,7 @@ module fc {
                 };
             } else {
                 return function (e) {
-                    return key in e ? key : null;
+                    return key in Object(e) ? key : null;
                 };
             }
         } else {
@@ -82,7 +82,7 @@ module fc {
                 };
             } else {
                 return function (e) {
-                    return key in e ? e[key] : null;
+                    return key in Object(e) ? e[key] : null;
                 };
             }
         } else {
@@ -108,7 +108,7 @@ module fc {
                 };
             } else {
                 return function (e) {
-                    return key in e ? e : null;
+                    return key in Object(e) ? e : null;
                 };
             }
         } else {
@@ -385,6 +385,29 @@ module fc {
                 return (index !== -1) ? array[index] : undefined;
             }
         }
+    }
+
+
+    export function arrayToObject(array:any[], keyFn?:Function1d, reduceFn?:Function2d, reduceInitialValue?:any):Object {
+        var obj = {};
+        var argsLen = arguments.length;
+        array.forEach(function (e, i, arr) {
+            var key = keyFn ? keyFn(e, i, arr) : i;
+            if (key || (key === 0) || (key === '')) {
+                if(reduceFn) {
+                    if(key in obj) {
+                        obj[key] = reduceFn(obj[key], e);
+                    } else {
+                        if(argsLen >= 4) {
+                            obj[key] = reduceFn(reduceInitialValue, e);
+                        }
+                    }
+                } else {
+                    obj[key] = e;
+                }
+            }
+        });
+        return obj;
     }
 
 

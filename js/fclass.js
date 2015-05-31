@@ -49,7 +49,7 @@ var fc;
             }
             else {
                 return function (e) {
-                    return key in e ? key : null;
+                    return key in Object(e) ? key : null;
                 };
             }
         }
@@ -76,7 +76,7 @@ var fc;
             }
             else {
                 return function (e) {
-                    return key in e ? e[key] : null;
+                    return key in Object(e) ? e[key] : null;
                 };
             }
         }
@@ -103,7 +103,7 @@ var fc;
             }
             else {
                 return function (e) {
-                    return key in e ? e : null;
+                    return key in Object(e) ? e : null;
                 };
             }
         }
@@ -397,6 +397,30 @@ var fc;
         }
     }
     fc.findValue = findValue;
+    function arrayToObject(array, keyFn, reduceFn, reduceInitialValue) {
+        var obj = {};
+        var argsLen = arguments.length;
+        array.forEach(function (e, i, arr) {
+            var key = keyFn ? keyFn(e, i, arr) : i;
+            if (key || (key === 0) || (key === '')) {
+                if (reduceFn) {
+                    if (key in obj) {
+                        obj[key] = reduceFn(obj[key], e);
+                    }
+                    else {
+                        if (argsLen >= 4) {
+                            obj[key] = reduceFn(reduceInitialValue, e);
+                        }
+                    }
+                }
+                else {
+                    obj[key] = e;
+                }
+            }
+        });
+        return obj;
+    }
+    fc.arrayToObject = arrayToObject;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map
