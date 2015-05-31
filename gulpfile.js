@@ -4,18 +4,26 @@ var typescript = require('gulp-typescript');
 var typedoc = require("gulp-typedoc");
 var sourcemaps = require('gulp-sourcemaps');
 
+var karmaConfig = '/karma.conf.js';
+
+
+gulp.task('default', ['typedoc', 'test']);
+
+
 gulp.task('test', ['tsc'], function () {
     karma.start({
-        configFile: __dirname + '/test/karma.conf.js',
+        configFile: __dirname + karmaConfig,
         singleRun: true
     });
 });
 
+
 gulp.task('tdd', ['tsc'], function (done) {
     karma.start({
-        configFile: __dirname + '/test/karma.conf.js'
+        configFile: __dirname + karmaConfig
     }, done);
 });
+
 
 gulp.task('tsc', function () {
     var tsResult = gulp.src('src/**/*.ts')
@@ -30,6 +38,7 @@ gulp.task('tsc', function () {
         .pipe(gulp.dest('js'));
 });
 
+
 gulp.task("typedoc", function () {
     return gulp.src(["src/**/*.ts"])
         .pipe(typedoc({
@@ -41,4 +50,3 @@ gulp.task("typedoc", function () {
         }));
 });
 
-gulp.task('default', ['typedoc', 'test']);
