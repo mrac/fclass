@@ -1,0 +1,1 @@
+{"version":3,"sources":["es6.ts"],"names":[],"mappings":"AAGC","file":"es6.js","sourcesContent":["interface Array<T> {\n    find(predicate:(value:T, index:number, obj:Array<T>) => boolean, thisArg?:any): T;\n    findIndex(predicate:(value:T, index:number, obj:Array<T>) => boolean, thisArg?:any): number;\n}\n"],"sourceRoot":"/source/"}

@@ -758,21 +758,35 @@ describe('fc .', function () {
     });
 
 
-    describe('calc()()', function () {
+    describe('findValue()()', function () {
 
         it('should return maximum of 2 values', function () {
 
-            // Math.max on numbers
-            //   for calculation functions that do operations on infinite number of arguments
-            //   it is better to use calc():
-            expect(fc.calc([2, 10, -4, 2], Math.max)).toEqual(10);
-            //   instead of reduce():
+            var find, identity;
+
+            // default behavior
+            expect(fc.findValue([0, '', null])).toEqual(undefined);
+            expect(fc.findValue([0, '', null, 1, 'a'])).toEqual(1);
+
+            // default behavior is the same as using [].find() and identity:
+            find = fc.callp(0, Array.prototype.find);
+            identity = fc.identity();
+            expect(fc.findValue([0, '', null]), find, identity).toEqual(undefined);
+            expect(fc.findValue([0, '', null, 1, 'a']), find, identity).toEqual(1);
+
+            // here is how we would use [].find:
+            expect([0, '', null].find(identity)).toEqual(undefined);
+            expect([0, '', null, 1, 'a'].find(identity)).toEqual(1);
+
+            // using Math.max as finding function
+            expect(fc.findValue([2, 10, -4, 2], Math.max)).toEqual(10);
+            // is much better than using reduce():
             expect([2, 10, -4, 2].reduce(fc.call(2, Math.max))).toEqual(10);
 
-            // Math.max on object properties
+            // using Math.max on object properties
             var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
-            expect(fc.calc(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
-            
+            expect(fc.findValue(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
+
         });
 
     });

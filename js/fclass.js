@@ -1,3 +1,4 @@
+/// <reference path="es6.ts" />
 var fc;
 (function (fc) {
     function identity() {
@@ -317,19 +318,30 @@ var fc;
         }
     }
     fc.equal = equal;
-    function calc(array, calc, fn) {
-        var values, calculated, index;
-        if (typeof fn === 'function') {
-            values = array.map(fn);
-            calculated = calc.apply(null, values);
-            index = values.indexOf(calculated);
-            return array[index];
+    function findValue(array, calc, fn) {
+        var values, found, index;
+        if (fn) {
+            if (calc) {
+                values = array.map(fn);
+                found = calc.apply(null, values);
+                index = values.indexOf(found);
+            }
+            else {
+                index = array.findIndex(fn);
+            }
+            return (index !== -1) ? array[index] : undefined;
         }
         else {
-            return calc.apply(null, array);
+            if (calc) {
+                return calc.apply(null, array);
+            }
+            else {
+                index = array.findIndex(fc.identity());
+                return (index !== -1) ? array[index] : undefined;
+            }
         }
     }
-    fc.calc = calc;
+    fc.findValue = findValue;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map

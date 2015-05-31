@@ -1,3 +1,5 @@
+/// <reference path="es6.ts" />
+
 module fc {
 
     type Function1d = (element:any, index?:number, array?:Array<any>) => any;
@@ -311,15 +313,24 @@ module fc {
     }
 
 
-    export function calc(array:any[], calc:FunctionI, fn?:Function1d):any {
-        var values, calculated, index;
-        if (typeof fn === 'function') {
-            values = array.map(fn);
-            calculated = calc.apply(null, values);
-            index = values.indexOf(calculated);
-            return array[index];
+    export function findValue(array:any[], calc?:FunctionI, fn?:Function1d):any {
+        var values, found, index;
+        if (fn) {
+            if(calc) {
+                values = array.map(fn);
+                found = calc.apply(null, values);
+                index = values.indexOf(found);
+            } else {
+                index = array.findIndex(fn);
+            }
+            return (index !== -1) ? array[index] : undefined;
         } else {
-            return calc.apply(null, array);
+            if(calc) {
+                return calc.apply(null, array);
+            } else {
+                index = array.findIndex(fc.identity());
+                return (index !== -1) ? array[index] : undefined;
+            }
         }
     }
 
