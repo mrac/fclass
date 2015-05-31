@@ -290,6 +290,27 @@ describe('fc .', function () {
     });
 
 
+    describe('method()()', function () {
+
+        it('should invoke an object method', function () {
+            var obj = {a: 10, b: 0, '': 100};
+
+            expect(fc.method('toFixed')(456.332)).toEqual('456');
+            expect(fc.method('toFixed', 2)(456.332)).toEqual('456.33');
+
+            var arr = [{a: 10, b: 5}, [1,2,3], 108, true, 'text'];
+
+            // used with map()
+            expect(arr.map(fc.method('toString'))).toEqual(['[object Object]', '1,2,3', '108', 'true', 'text']);
+
+            // used with filter()
+            expect(arr.filter(fc.method('hasOwnProperty', 'length'))).toEqual([[1,2,3], 'text']);
+
+        });
+
+    });
+
+
     describe('add()()', function () {
 
         it('should add numbers or concatenate strings', function () {

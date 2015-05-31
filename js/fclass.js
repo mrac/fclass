@@ -106,6 +106,16 @@ var fc;
         };
     }
     fc.predicate = predicate;
+    function method(methodName) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return function (e) {
+            return e[methodName].apply(e, args);
+        };
+    }
+    fc.method = method;
     function add(negative) {
         return function (a, b) {
             return negative ? -(a + b) : a + b;

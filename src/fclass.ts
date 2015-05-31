@@ -113,6 +113,13 @@ module fc {
     }
 
 
+    export function method(methodName:string, ...args:any[]):Function1d {
+        return function (e) {
+            return e[methodName].apply(e, args);
+        };
+    }
+
+
     export function add(negative?:boolean):Function2d {
         return function (a, b) {
             return negative ? -(a + b) : a + b;
