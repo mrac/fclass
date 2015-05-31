@@ -11,6 +11,21 @@ describe('fc .', function () {
             expect(fc.identity()({a: 10})).toEqual({a: 10});
         });
 
+        it('should test if item is equal to provided value', function () {
+            expect(fc.identity(4)(4)).toEqual(true);
+            expect(fc.identity('a')('a')).toEqual(true);
+            expect(fc.identity(true)(true)).toEqual(true);
+            expect(fc.identity(null)(null)).toEqual(true);
+            var obj = {a: 10};
+            expect(fc.identity(obj)(obj)).toEqual(true);
+
+            expect(fc.identity(3)(4)).toEqual(false);
+            expect(fc.identity('x')('a')).toEqual(false);
+            expect(fc.identity(false)(true)).toEqual(false);
+            expect(fc.identity(undefined)(null)).toEqual(false);
+            expect(fc.identity({a: 10})({a: 10})).toEqual(false);
+        });
+
     });
 
 
@@ -18,6 +33,11 @@ describe('fc .', function () {
 
         it('should return the index', function () {
             expect(fc.index()({a: 1}, 4)).toEqual(4);
+        });
+
+        it('should test if the index is equal to provided number', function () {
+            expect(fc.index(4)({a: 1}, 4)).toEqual(true);
+            expect(fc.index(1)({a: 1}, 4)).toEqual(false);
         });
 
     });
@@ -293,7 +313,6 @@ describe('fc .', function () {
     describe('method()()', function () {
 
         it('should invoke an object method', function () {
-            var obj = {a: 10, b: 0, '': 100};
 
             expect(fc.method('toFixed')(456.332)).toEqual('456');
             expect(fc.method('toFixed', 2)(456.332)).toEqual('456.33');

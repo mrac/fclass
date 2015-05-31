@@ -1,23 +1,37 @@
 /// <reference path="es6.ts" />
 var fc;
 (function (fc) {
-    function identity() {
-        return function (e) {
-            return e;
-        };
+    function identity(equalTo) {
+        if (arguments.length >= 1) {
+            return function (e) {
+                return e === equalTo;
+            };
+        }
+        else {
+            return function (e) {
+                return e;
+            };
+        }
     }
     fc.identity = identity;
-    function index() {
-        return function (e, i) {
-            return i;
-        };
+    function index(equalTo) {
+        if (arguments.length >= 1) {
+            return function (e, i) {
+                return i === equalTo;
+            };
+        }
+        else {
+            return function (e, i) {
+                return i;
+            };
+        }
     }
     fc.index = index;
-    function key(key, value) {
+    function key(key, equalTo) {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? key : null;
+                    return e[key] === equalTo ? key : null;
                 };
             }
             else {
@@ -27,12 +41,12 @@ var fc;
             }
         }
         else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? key : null;
                 };
@@ -40,11 +54,11 @@ var fc;
         }
     }
     fc.key = key;
-    function value(key, value) {
+    function value(key, equalTo) {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? e[key] : null;
+                    return e[key] === equalTo ? e[key] : null;
                 };
             }
             else {
@@ -54,12 +68,12 @@ var fc;
             }
         }
         else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? e[key] : null;
                 };
@@ -67,11 +81,11 @@ var fc;
         }
     }
     fc.value = value;
-    function object(key, value) {
+    function object(key, equalTo) {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? e : null;
+                    return e[key] === equalTo ? e : null;
                 };
             }
             else {
@@ -81,12 +95,12 @@ var fc;
             }
         }
         else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key;
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? e : null;
                 };

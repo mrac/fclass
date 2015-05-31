@@ -9,25 +9,37 @@ module fc {
     type FunctionI = (...args:any[]) => any;
 
 
-    export function identity():Function1d {
-        return function (e) {
-            return e;
-        };
+    export function identity(equalTo?:any):Function1d {
+        if (arguments.length >= 1) {
+            return function (e) {
+                return e === equalTo;
+            };
+        } else {
+            return function (e) {
+                return e;
+            };
+        }
     }
 
 
-    export function index():Function1d {
-        return function (e, i) {
-            return i;
-        };
+    export function index(equalTo?:number):Function1d {
+        if (arguments.length >= 1) {
+            return function (e, i) {
+                return i === equalTo;
+            };
+        } else {
+            return function (e, i) {
+                return i;
+            };
+        }
     }
 
 
-    export function key(key:string, value?:any):Function1d {
+    export function key(key:string, equalTo?:any):Function1d {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? key : null;
+                    return e[key] === equalTo ? key : null;
                 };
             } else {
                 return function (e) {
@@ -35,12 +47,12 @@ module fc {
                 };
             }
         } else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? key : null;
                 };
@@ -49,11 +61,11 @@ module fc {
     }
 
 
-    export function value(key:string, value?:any):Function1d {
+    export function value(key:string, equalTo?:any):Function1d {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? e[key] : null;
+                    return e[key] === equalTo ? e[key] : null;
                 };
             } else {
                 return function (e) {
@@ -61,12 +73,12 @@ module fc {
                 };
             }
         } else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key = "";
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? e[key] : null;
                 };
@@ -75,11 +87,11 @@ module fc {
     }
 
 
-    export function object(key:string, value?:any):Function1d {
+    export function object(key:string, equalTo?:any):Function1d {
         if (typeof key === 'string') {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
-                    return e[key] === value ? e : null;
+                    return e[key] === equalTo ? e : null;
                 };
             } else {
                 return function (e) {
@@ -87,12 +99,12 @@ module fc {
                 };
             }
         } else {
-            if (typeof value !== 'undefined') {
+            if (typeof equalTo !== 'undefined') {
                 return function (e) {
                     var key;
                     var found = Object.keys(e).some(function (k) {
                         key = k;
-                        return e[k] === value;
+                        return e[k] === equalTo;
                     });
                     return found ? e : null;
                 };
