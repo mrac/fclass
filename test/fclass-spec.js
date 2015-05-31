@@ -772,7 +772,7 @@ describe('fc .', function () {
             // Math.max on object properties
             var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
             expect(fc.calc(arr, Math.max, fc.value('a'))).toEqual({a: 10, b: 0});
-
+            
         });
 
     });

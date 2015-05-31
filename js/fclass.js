@@ -191,6 +191,20 @@ var fc;
         }
     }
     fc.callp = callp;
+    function func(dimension, fn) {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fc.call.apply(fc, [dimension, fn].concat(args));
+        };
+    }
+    fc.func = func;
+    function funcp(dimension, fn) {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fc.callp.apply(fc, [dimension, fn].concat(args));
+        };
+    }
+    fc.funcp = funcp;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var obj = {};

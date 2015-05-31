@@ -94,6 +94,8 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#compare" class="tsd-kind-icon">compare</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#comparestring" class="tsd-kind-icon">compare<wbr>String</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#equal" class="tsd-kind-icon">equal</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#func" class="tsd-kind-icon">func</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#funcp" class="tsd-kind-icon">funcp</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#identity" class="tsd-kind-icon">identity</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#index" class="tsd-kind-icon">index</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_fclass_.fc.html#key" class="tsd-kind-icon">key</a></li>
@@ -253,7 +255,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L221">fclass.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L237">fclass.ts:237</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -279,7 +281,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L298">fclass.ts:298</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L314">fclass.ts:314</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -302,7 +304,7 @@
 					<a name="call" class="tsd-anchor"></a>
 					<h3>call</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">call<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></li>
+						<li class="tsd-signature tsd-kind-icon">call<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -317,13 +319,18 @@
 									<h5>dimension: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -331,7 +338,7 @@
 					<a name="callp" class="tsd-anchor"></a>
 					<h3>callp</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">callp<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></li>
+						<li class="tsd-signature tsd-kind-icon">callp<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -346,13 +353,18 @@
 									<h5>dimension: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -366,7 +378,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L249">fclass.ts:249</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L265">fclass.ts:265</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -435,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L281">fclass.ts:281</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L297">fclass.ts:297</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -445,6 +457,58 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="func" class="tsd-anchor"></a>
+					<h3>func</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">func<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L192">fclass.ts:192</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dimension: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="funcp" class="tsd-anchor"></a>
+					<h3>funcp</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">funcp<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L200">fclass.ts:200</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dimension: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>fn: <a href="_fclass_.fc.html#function2d" class="tsd-signature-type">Function2d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#function1d" class="tsd-signature-type">Function1d</a><span class="tsd-signature-symbol"> | </span><a href="_fclass_.fc.html#functioni" class="tsd-signature-type">FunctionI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -544,7 +608,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L192">fclass.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L208">fclass.ts:208</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -679,6 +743,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_fclass_.fc.html#equal" class="tsd-kind-icon">equal</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_fclass_.fc.html#func" class="tsd-kind-icon">func</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_fclass_.fc.html#funcp" class="tsd-kind-icon">funcp</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_fclass_.fc.html#identity" class="tsd-kind-icon">identity</a>

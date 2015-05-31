@@ -155,9 +155,9 @@ module fc {
     }
 
 
-    export function call(dimension:number, fn:Function, ...args:any[]):Function2d {
+    export function call(dimension:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
         if (dimension === 0) {
-            return function() {
+            return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
             };
         } else if (dimension === 1) {
@@ -172,9 +172,9 @@ module fc {
     }
 
 
-    export function callp(dimension:number, fn:Function, ...args:any[]):Function2d {
+    export function callp(dimension:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
         if (dimension === 0) {
-            return function() {
+            return function () {
                 return fn.apply(arguments, args);
             };
         } else if (dimension === 1) {
@@ -186,6 +186,22 @@ module fc {
                 return fn.apply(a, [b].concat(args));
             };
         }
+    }
+
+
+    export function func(dimension:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fc.call.apply(fc, [dimension, fn].concat(args));
+        };
+    }
+
+
+    export function funcp(dimension:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fc.callp.apply(fc, [dimension, fn].concat(args));
+        };
     }
 
 
