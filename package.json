@@ -1,6 +1,6 @@
 {
   "name": "fclass",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "JavaScript utility library",
   "main": "js/fclass.js",
   "scripts": {
