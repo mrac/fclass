@@ -152,29 +152,20 @@ var fc;
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        if (dimension === 1) {
-            if (args.length) {
-                return function (a) {
-                    return fn.apply(null, [a].concat(args));
-                };
-            }
-            else {
-                return function (a) {
-                    return fn.call(null, a);
-                };
-            }
+        if (dimension === 0) {
+            return function () {
+                return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
+            };
+        }
+        else if (dimension === 1) {
+            return function (a) {
+                return fn.apply(null, [a].concat(args));
+            };
         }
         else if (dimension === 2) {
-            if (args.length) {
-                return function (a, b) {
-                    return fn.apply(null, [a, b].concat(args));
-                };
-            }
-            else {
-                return function (a, b) {
-                    return fn.call(null, a, b);
-                };
-            }
+            return function (a, b) {
+                return fn.apply(null, [a, b].concat(args));
+            };
         }
     }
     fc.call = call;
@@ -183,30 +174,20 @@ var fc;
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        var params = Array.prototype.slice.call(arguments, 2);
-        if (dimension === 1) {
-            if (params.length) {
-                return function (a) {
-                    return fn.apply(a, params);
-                };
-            }
-            else {
-                return function (a) {
-                    return fn.call(a);
-                };
-            }
+        if (dimension === 0) {
+            return function () {
+                return fn.apply(arguments, args);
+            };
+        }
+        else if (dimension === 1) {
+            return function (a) {
+                return fn.apply(a, args);
+            };
         }
         else if (dimension === 2) {
-            if (params.length) {
-                return function (a, b) {
-                    return fn.apply(a, [b].concat(params));
-                };
-            }
-            else {
-                return function (a, b) {
-                    return fn.call(a, b);
-                };
-            }
+            return function (a, b) {
+                return fn.apply(a, [b].concat(args));
+            };
         }
     }
     fc.callp = callp;

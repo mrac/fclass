@@ -391,24 +391,46 @@ describe('fc .', function () {
 
         it('should run functions as 2-argument functions', function () {
 
+            var max2;
+
             // only 2 first arguments are taken into account
-            expect(fc.call(2, Math.max)(1, 2, 3, 4)).toEqual(2);
+            max2 = fc.call(2, Math.max);
+            expect(max2(1, 2, 3, 4)).toEqual(2);
 
             // only 2 first arguments are taken, together with additional fixed arguments
-            expect(fc.call(2, Math.max, 10)(1, 2, 3, 4)).toEqual(10);
+            max2 = fc.call(2, Math.max, 10);
+            expect(max2(1, 2, 3, 4)).toEqual(10);
 
-            // Math.max
-            expect([1, 4, 10, 12, 3].reduce(fc.call(2, Math.max))).toEqual(12);
+            // working with reduce()
+            max2 = fc.call(2, Math.max);
+            expect([1, 4, 10, 12, 3].reduce(max2)).toEqual(12);
 
         });
 
         it('should run functions as 1-argument functions', function () {
 
-            // only first argument is taken into account (extra fixed argument provided)
-            expect(fc.call(1, Math.pow, 10)(2, 4)).toEqual(1024);
+            var pow1;
 
-            // Math.pow (extra fixed argument provided)
-            expect([1, 2, 3, 4, 5, 6].map(fc.call(1, Math.pow, 2))).toEqual([1, 4, 9, 16, 25, 36]);
+            // only first argument is taken into account (extra fixed argument provided)
+            pow1 = fc.call(1, Math.pow, 10);
+            expect(pow1(2, 4)).toEqual(1024);
+
+            // working with map()
+            pow1 = fc.call(1, Math.pow, 2);
+            expect([1, 2, 3, 4, 5, 6].map(pow1)).toEqual([1, 4, 9, 16, 25, 36]);
+        });
+
+        it('should run array-argument functions as functions with infinite number of arguments', function () {
+
+            var fn;
+
+            // instead of an array argument, here multiple arguments for items are used
+            fn = fc.call(0, JSON.stringify);
+            expect(fn('a', 'b', 'c')).toEqual('["a","b","c"]');
+
+            // instead of an array argument, here multiple arguments for items are used, with extra fixed argument
+            fn = fc.call(0, JSON.stringify, 'd');
+            expect(fn('a', 'b', 'c')).toEqual('["a","b","c","d"]');
         });
 
     });
@@ -418,40 +440,62 @@ describe('fc .', function () {
 
         it('should run prototype methods as 2-argument functions', function () {
 
+            var concat2, replace2, localeCompare2;
+
             // only 2 first arguments are taken into account
-            expect(fc.callp(2, String.prototype.concat)('a', 'b', 'c', 'd')).toEqual('ab');
+            concat2 = fc.callp(2, String.prototype.concat);
+            expect(concat2('a', 'b', 'ignored', 'ignored')).toEqual('ab');
 
             // only 2 first arguments are taken, together with additional fixed arguments
-            expect(fc.callp(2, String.prototype.replace, 'pl')('say', 's', 'ignored', 'ignored')).toEqual('play');
+            replace2 = fc.callp(2, String.prototype.replace, 'pl');
+            expect(replace2('say', 's', 'ignored', 'ignored')).toEqual('play');
 
-            // String.prototype.localCompare
-            expect(['a', 'd', 'b', 'c'].sort(fc.callp(2, String.prototype.localeCompare))).toEqual(['a', 'b', 'c', 'd']);
+            // working with sort()
+            localeCompare2 = fc.callp(2, String.prototype.localeCompare);
+            expect(['a', 'd', 'b', 'c'].sort(localeCompare2)).toEqual(['a', 'b', 'c', 'd']);
 
-            // Array.prototype.concat
-            expect([[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(fc.callp(2, Array.prototype.concat))).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            // working with reduce()
+            concat2 = fc.callp(2, Array.prototype.concat);
+            expect([[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(concat2)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
         });
 
         it('should run prototype methods as 1-argument functions', function () {
 
-            var arr;
+            var arr, join1, sort1;
 
             // only first argument is taken into account
-            expect(fc.callp(1, Array.prototype.join)(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a,b,c');
+            join1 = fc.callp(1, Array.prototype.join);
+            expect(join1(['a', 'b', 'c'], ['ignored', 'ignored', 'ignored'])).toEqual('a,b,c');
 
             // only first argument is taken into account, together with additional fixed arguments
-            expect(fc.callp(1, Array.prototype.join, '-')(['a', 'b', 'c'], ['x', 'y', 'z'])).toEqual('a-b-c');
+            join1 = fc.callp(1, Array.prototype.join, '-');
+            expect(join1(['a', 'b', 'c'], ['ignored', 'ignored', 'ignored'])).toEqual('a-b-c');
 
-            // Array.prototype.sort
+            // working with forEach()
+            sort1 = fc.callp(1, Array.prototype.sort, fc.compare(true));
             arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
-            arr.forEach(fc.callp(1, Array.prototype.sort, fc.compare(true)));
+            arr.forEach(sort1);
             expect(arr).toEqual([[78, 12, 7], [300, 31, 1], [28, 6, 3]]);
 
-            // Array.prototype.join
+            // working with map()
+            join1 = fc.callp(1, Array.prototype.join, '-');
             arr = [['2015', '01', '30'], ['2014', '06', '17'], ['2008', '12', '21']];
-            expect(arr.map(fc.callp(1, Array.prototype.join, '-'))).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
+            expect(arr.map(join1)).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
         });
 
+        it('should run array prototype methods as functions with infinite number of arguments', function () {
+
+            var join;
+
+            // instead of array items in the context, here multiple arguments are used
+            join = fc.callp(0, Array.prototype.join);
+            expect(join('a', 'b', 'c')).toEqual('a,b,c');
+
+            // instead of array items in the context, here multiple arguments are used, with extra fixed argument
+            join = fc.callp(0, Array.prototype.join, '-');
+            expect(join('a', 'b', 'c')).toEqual('a-b-c');
+        });
     });
 
 
