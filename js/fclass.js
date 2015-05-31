@@ -1,4 +1,4 @@
-/// <reference path="es6.ts" />
+/// <reference path="es6.d.ts" />
 var fc;
 (function (fc) {
     function identity(equalTo) {
