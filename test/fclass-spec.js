@@ -1,4 +1,4 @@
-describe('fc .', function () {
+describe('fc', function () {
 
 
     describe('identity()()', function () {
