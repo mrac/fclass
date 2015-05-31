@@ -313,10 +313,19 @@ module fc {
     }
 
 
+    export function combine(fn2:Function2d, fn1:Function1d):Function2d {
+        return function (a, b) {
+            var ac = fn1(a);
+            var bc = fn1(b);
+            return fn2(ac, bc);
+        };
+    }
+
+
     export function findValue(array:any[], calc?:FunctionI, fn?:Function1d):any {
         var values, found, index;
         if (fn) {
-            if(calc) {
+            if (calc) {
                 values = array.map(fn);
                 found = calc.apply(null, values);
                 index = values.indexOf(found);
@@ -325,7 +334,7 @@ module fc {
             }
             return (index !== -1) ? array[index] : undefined;
         } else {
-            if(calc) {
+            if (calc) {
                 return calc.apply(null, array);
             } else {
                 index = array.findIndex(fc.identity());

@@ -758,7 +758,26 @@ describe('fc .', function () {
     });
 
 
-    describe('findValue()()', function () {
+    describe('combine()', function () {
+
+        it('should combine function-2d with function-1d', function () {
+
+            var compareA = fc.combine(fc.compare(), fc.value('a'));
+            expect(compareA({a: 1, b: 'a'}, {a: -3, b: 'b'})).toEqual(1);
+            expect(compareA({a: -4, b: 'a'}, {a: -3, b: 'b'})).toEqual(-1);
+            expect(compareA({a: -3, b: 'a'}, {a: -3, b: 'b'})).toEqual(0);
+
+            // used with sort()
+            var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {a: 7, b: 0}];
+            arr.sort(compareA);
+            expect(arr).toEqual([{a: 2, b: -10}, {a: 7, b: 0}, {a: 10, b: 4}]);
+
+        });
+
+    });
+
+
+    describe('findValue()', function () {
 
         it('should return maximum of 2 values', function () {
 

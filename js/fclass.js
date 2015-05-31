@@ -318,6 +318,14 @@ var fc;
         }
     }
     fc.equal = equal;
+    function combine(fn2, fn1) {
+        return function (a, b) {
+            var ac = fn1(a);
+            var bc = fn1(b);
+            return fn2(ac, bc);
+        };
+    }
+    fc.combine = combine;
     function findValue(array, calc, fn) {
         var values, found, index;
         if (fn) {
