@@ -40,6 +40,19 @@ var fc;
         }
     }
     fc.index = index;
+    function index2(equalTo) {
+        if (arguments.length >= 1) {
+            return function (a, b, i) {
+                return i === equalTo;
+            };
+        }
+        else {
+            return function (a, b, i) {
+                return i;
+            };
+        }
+    }
+    fc.index2 = index2;
     function key(key, equalTo) {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
@@ -400,17 +413,23 @@ var fc;
     function arrayToObject(array, keyFn, reduceFn, reduceInitialValue) {
         var obj = {};
         var argsLen = arguments.length;
+        var indeces = {};
         array.forEach(function (e, i, arr) {
             var key = keyFn ? keyFn(e, i, arr) : i;
             if (key || (key === 0) || (key === '')) {
                 if (reduceFn) {
                     if (key in obj) {
-                        obj[key] = reduceFn(obj[key], e);
+                        obj[key] = reduceFn(obj[key], e, indeces[key], array);
+                        indeces[key]++;
                     }
                     else {
                         if (argsLen >= 4) {
-                            obj[key] = reduceFn(reduceInitialValue, e);
+                            obj[key] = reduceFn(reduceInitialValue, e, 0, array);
                         }
+                        else {
+                            obj[key] = e;
+                        }
+                        indeces[key] = 1;
                     }
                 }
                 else {
