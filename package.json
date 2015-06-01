@@ -4,6 +4,7 @@
   "description": "JavaScript utility library",
   "main": "js/fclass.js",
   "scripts": {
+    "postinstall": "bower install",
     "start": "gulp",
     "test": "gulp test"
   },
@@ -17,12 +18,13 @@
     "library"
   ],
   "author": "Michal Raczkowski",
-  "license": "",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/zalando/fclass/issues"
   },
   "homepage": "https://github.com/zalando/fclass",
   "devDependencies": {
+    "bower": "^1.4.1",
     "gulp": "^3.8.11",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typedoc": "^1.1.0",
