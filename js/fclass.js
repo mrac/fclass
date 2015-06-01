@@ -173,7 +173,7 @@ var fc;
         };
     }
     fc.predicate = predicate;
-    function method(methodName) {
+    function invoke(methodName) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -182,7 +182,7 @@ var fc;
             return e[methodName].apply(e, args);
         };
     }
-    fc.method = method;
+    fc.invoke = invoke;
     function add(negative) {
         return function (a, b) {
             return negative ? -(a + b) : a + b;
@@ -225,64 +225,64 @@ var fc;
         }
     }
     fc.compare = compare;
-    function call(dimension, fn) {
+    function partial(arity, fn) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        if (dimension === 0) {
+        if (arity === 0) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
             };
         }
-        else if (dimension === 1) {
+        else if (arity === 1) {
             return function (a) {
                 return fn.apply(null, [a].concat(args));
             };
         }
-        else if (dimension === 2) {
+        else if (arity === 2) {
             return function (a, b) {
                 return fn.apply(null, [a, b].concat(args));
             };
         }
     }
-    fc.call = call;
-    function callp(dimension, fn) {
+    fc.partial = partial;
+    function partialP(arity, fn) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        if (dimension === 0) {
+        if (arity === 0) {
             return function () {
                 return fn.apply(arguments, args);
             };
         }
-        else if (dimension === 1) {
+        else if (arity === 1) {
             return function (a) {
                 return fn.apply(a, args);
             };
         }
-        else if (dimension === 2) {
+        else if (arity === 2) {
             return function (a, b) {
                 return fn.apply(a, [b].concat(args));
             };
         }
     }
-    fc.callp = callp;
-    function func(dimension, fn) {
+    fc.partialP = partialP;
+    function curry(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.call.apply(fc, [dimension, fn].concat(args));
+            return fc.partial.apply(fc, [arity, fn].concat(args));
         };
     }
-    fc.func = func;
-    function funcp(dimension, fn) {
+    fc.curry = curry;
+    function curryP(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.callp.apply(fc, [dimension, fn].concat(args));
+            return fc.partialP.apply(fc, [arity, fn].concat(args));
         };
     }
-    fc.funcp = funcp;
+    fc.curryP = curryP;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var obj = {};
@@ -395,24 +395,24 @@ var fc;
         }
     }
     fc.equal = equal;
-    function combine12(fn1, fn2) {
+    function compose12(fn1, fn2) {
         return function (a, b) {
             return fn2(fn1(a), fn1(b));
         };
     }
-    fc.combine12 = combine12;
-    function combine11(fn1, fn2) {
+    fc.compose12 = compose12;
+    function compose11(fn1, fn2) {
         return function (a) {
             return fn2(fn1(a));
         };
     }
-    fc.combine11 = combine11;
-    function combine21(fn1, fn2) {
+    fc.compose11 = compose11;
+    function compose21(fn1, fn2) {
         return function (a, b) {
             return fn2(fn1(a, b));
         };
     }
-    fc.combine21 = combine21;
+    fc.compose21 = compose21;
     function findValue(array, calc, fn) {
         var values, found, index;
         if (fn) {

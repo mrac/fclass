@@ -342,20 +342,20 @@ describe('fc', function () {
     });
 
 
-    describe('method()()', function () {
+    describe('invoke()()', function () {
 
         it('should invoke an object method', function () {
 
-            expect(fc.method('toFixed')(456.332)).toEqual('456');
-            expect(fc.method('toFixed', 2)(456.332)).toEqual('456.33');
+            expect(fc.invoke('toFixed')(456.332)).toEqual('456');
+            expect(fc.invoke('toFixed', 2)(456.332)).toEqual('456.33');
 
             var arr = [{a: 10, b: 5}, [1, 2, 3], 108, true, 'text'];
 
             // used with map()
-            expect(arr.map(fc.method('toString'))).toEqual(['[object Object]', '1,2,3', '108', 'true', 'text']);
+            expect(arr.map(fc.invoke('toString'))).toEqual(['[object Object]', '1,2,3', '108', 'true', 'text']);
 
             // used with filter()
-            expect(arr.filter(fc.method('hasOwnProperty', 'length'))).toEqual([[1, 2, 3], 'text']);
+            expect(arr.filter(fc.invoke('hasOwnProperty', 'length'))).toEqual([[1, 2, 3], 'text']);
 
         });
 
@@ -459,22 +459,22 @@ describe('fc', function () {
     });
 
 
-    describe('call()()', function () {
+    describe('partial()()', function () {
 
         it('should run functions as 2-argument functions', function () {
 
             var max2;
 
             // only 2 first arguments are taken into account
-            max2 = fc.call(2, Math.max);
+            max2 = fc.partial(2, Math.max);
             expect(max2(1, 2, 3, 4)).toEqual(2);
 
             // only 2 first arguments are taken, together with additional fixed arguments
-            max2 = fc.call(2, Math.max, 10);
+            max2 = fc.partial(2, Math.max, 10);
             expect(max2(1, 2, 3, 4)).toEqual(10);
 
             // working with reduce()
-            max2 = fc.call(2, Math.max);
+            max2 = fc.partial(2, Math.max);
             expect([1, 4, 10, 12, 3].reduce(max2)).toEqual(12);
 
         });
@@ -484,11 +484,11 @@ describe('fc', function () {
             var pow1;
 
             // only first argument is taken into account (extra fixed argument provided)
-            pow1 = fc.call(1, Math.pow, 10);
+            pow1 = fc.partial(1, Math.pow, 10);
             expect(pow1(2, 4)).toEqual(1024);
 
             // working with map()
-            pow1 = fc.call(1, Math.pow, 2);
+            pow1 = fc.partial(1, Math.pow, 2);
             expect([1, 2, 3, 4, 5, 6].map(pow1)).toEqual([1, 4, 9, 16, 25, 36]);
         });
 
@@ -497,37 +497,37 @@ describe('fc', function () {
             var fn;
 
             // instead of an array argument, here multiple arguments for items are used
-            fn = fc.call(0, JSON.stringify);
+            fn = fc.partial(0, JSON.stringify);
             expect(fn('a', 'b', 'c')).toEqual('["a","b","c"]');
 
             // instead of an array argument, here multiple arguments for items are used, with extra fixed argument
-            fn = fc.call(0, JSON.stringify, 'd');
+            fn = fc.partial(0, JSON.stringify, 'd');
             expect(fn('a', 'b', 'c')).toEqual('["a","b","c","d"]');
         });
 
     });
 
 
-    describe('callp()()', function () {
+    describe('partialP()()', function () {
 
         it('should run prototype methods as 2-argument functions', function () {
 
             var concat2, replace2, localeCompare2;
 
             // only 2 first arguments are taken into account
-            concat2 = fc.callp(2, String.prototype.concat);
+            concat2 = fc.partialP(2, String.prototype.concat);
             expect(concat2('a', 'b', 'ignored', 'ignored')).toEqual('ab');
 
             // only 2 first arguments are taken, together with additional fixed arguments
-            replace2 = fc.callp(2, String.prototype.replace, 'pl');
+            replace2 = fc.partialP(2, String.prototype.replace, 'pl');
             expect(replace2('say', 's', 'ignored', 'ignored')).toEqual('play');
 
             // working with sort()
-            localeCompare2 = fc.callp(2, String.prototype.localeCompare);
+            localeCompare2 = fc.partialP(2, String.prototype.localeCompare);
             expect(['a', 'd', 'b', 'c'].sort(localeCompare2)).toEqual(['a', 'b', 'c', 'd']);
 
             // working with reduce()
-            concat2 = fc.callp(2, Array.prototype.concat);
+            concat2 = fc.partialP(2, Array.prototype.concat);
             expect([[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce(concat2)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
         });
@@ -537,21 +537,21 @@ describe('fc', function () {
             var arr, join1, sort1;
 
             // only first argument is taken into account
-            join1 = fc.callp(1, Array.prototype.join);
+            join1 = fc.partialP(1, Array.prototype.join);
             expect(join1(['a', 'b', 'c'], ['ignored', 'ignored', 'ignored'])).toEqual('a,b,c');
 
             // only first argument is taken into account, together with additional fixed arguments
-            join1 = fc.callp(1, Array.prototype.join, '-');
+            join1 = fc.partialP(1, Array.prototype.join, '-');
             expect(join1(['a', 'b', 'c'], ['ignored', 'ignored', 'ignored'])).toEqual('a-b-c');
 
             // working with forEach()
-            sort1 = fc.callp(1, Array.prototype.sort, fc.compare(true));
+            sort1 = fc.partialP(1, Array.prototype.sort, fc.compare(true));
             arr = [[78, 7, 12], [1, 31, 300], [3, 6, 28]];
             arr.forEach(sort1);
             expect(arr).toEqual([[78, 12, 7], [300, 31, 1], [28, 6, 3]]);
 
             // working with map()
-            join1 = fc.callp(1, Array.prototype.join, '-');
+            join1 = fc.partialP(1, Array.prototype.join, '-');
             arr = [['2015', '01', '30'], ['2014', '06', '17'], ['2008', '12', '21']];
             expect(arr.map(join1)).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
         });
@@ -561,11 +561,11 @@ describe('fc', function () {
             var join;
 
             // instead of array items in the context, here multiple arguments are used
-            join = fc.callp(0, Array.prototype.join);
+            join = fc.partialP(0, Array.prototype.join);
             expect(join('a', 'b', 'c')).toEqual('a,b,c');
 
             // instead of array items in the context, here multiple arguments are used, with extra fixed argument
-            join = fc.callp(0, Array.prototype.join, '-');
+            join = fc.partialP(0, Array.prototype.join, '-');
             expect(join('a', 'b', 'c')).toEqual('a-b-c');
         });
     });
@@ -830,11 +830,11 @@ describe('fc', function () {
     });
 
 
-    describe('combine12()', function () {
+    describe('compose12()', function () {
 
-        it('should combine function-1d with function-2d', function () {
+        it('should compose function-1d with function-2d', function () {
 
-            var compareA = fc.combine12(fc.value('a'), fc.compare());
+            var compareA = fc.compose12(fc.value('a'), fc.compare());
             expect(compareA({a: 1, b: 'a'}, {a: -3, b: 'b'})).toEqual(1);
             expect(compareA({a: -4, b: 'a'}, {a: -3, b: 'b'})).toEqual(-1);
             expect(compareA({a: -3, b: 'a'}, {a: -3, b: 'b'})).toEqual(0);
@@ -849,11 +849,11 @@ describe('fc', function () {
     });
 
 
-    describe('combine11()', function () {
+    describe('compose11()', function () {
 
-        it('should combine function-1d with function-1d', function () {
+        it('should compose function-1d with function-1d', function () {
 
-            var notA = fc.combine11(fc.value('a'), fc.not());
+            var notA = fc.compose11(fc.value('a'), fc.not());
             expect(notA({a: 1, b: 'a'})).toEqual(false);
             expect(notA({x: 1, y: 5})).toEqual(true);
 
@@ -866,11 +866,11 @@ describe('fc', function () {
     });
 
 
-    describe('combine21()', function () {
+    describe('compose21()', function () {
 
-        it('should combine function-2d with function-1d', function () {
+        it('should compose function-2d with function-1d', function () {
 
-            var sum100 = fc.combine21(fc.add(), fc.identity(100));
+            var sum100 = fc.compose21(fc.add(), fc.identity(100));
             expect(sum100(50, 50)).toEqual(true);
             expect(sum100(50, 40)).toEqual(false);
 
@@ -890,7 +890,7 @@ describe('fc', function () {
             expect(fc.findValue([0, '', null, 1, 'a'])).toEqual(1);
 
             // default behavior is the same as using [].find() and identity:
-            find = fc.callp(0, Array.prototype.find);
+            find = fc.partialP(0, Array.prototype.find);
             identity = fc.identity();
             expect(fc.findValue([0, '', null]), find, identity).toEqual(undefined);
             expect(fc.findValue([0, '', null, 1, 'a']), find, identity).toEqual(1);
@@ -902,7 +902,7 @@ describe('fc', function () {
             // using Math.max as finding function
             expect(fc.findValue([2, 10, -4, 2], Math.max)).toEqual(10);
             // is much better than using reduce():
-            expect([2, 10, -4, 2].reduce(fc.call(2, Math.max))).toEqual(10);
+            expect([2, 10, -4, 2].reduce(fc.partial(2, Math.max))).toEqual(10);
 
             // using Math.max on object properties
             var arr = [{a: 2, b: 0}, {a: 10, b: 0}, {a: -4, b: 10}, {a: 2, b: -1}];
@@ -928,7 +928,7 @@ describe('fc', function () {
             expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor)).toEqual({1: 1.1, 3: 3.99});
 
             // we can achieve grouping by passing reduce-function
-            var concat = fc.callp(2, [].concat);
+            var concat = fc.partialP(2, [].concat);
             expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor, concat, [])).toEqual({1: [1.1], 3: [Math.PI, 3.99]});
             expect(fc.arrayToObject(['one', 'two', 'three'], fc.value('length'), concat, [])).toEqual({3: ['one', 'two'], 5: ['three']});
 

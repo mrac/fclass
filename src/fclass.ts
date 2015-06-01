@@ -181,7 +181,7 @@ module fc {
     }
 
 
-    export function method(methodName:string, ...args:any[]):Function1d {
+    export function invoke(methodName:string, ...args:any[]):Function1d {
         return function (e) {
             return e[methodName].apply(e, args);
         };
@@ -232,16 +232,16 @@ module fc {
     }
 
 
-    export function call(dimension:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
-        if (dimension === 0) {
+    export function partial(arity:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
+        if (arity === 0) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
             };
-        } else if (dimension === 1) {
+        } else if (arity === 1) {
             return function (a) {
                 return fn.apply(null, [a].concat(args));
             };
-        } else if (dimension === 2) {
+        } else if (arity === 2) {
             return function (a, b) {
                 return fn.apply(null, [a, b].concat(args));
             };
@@ -249,16 +249,16 @@ module fc {
     }
 
 
-    export function callp(dimension:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
-        if (dimension === 0) {
+    export function partialP(arity:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
+        if (arity === 0) {
             return function () {
                 return fn.apply(arguments, args);
             };
-        } else if (dimension === 1) {
+        } else if (arity === 1) {
             return function (a) {
                 return fn.apply(a, args);
             };
-        } else if (dimension === 2) {
+        } else if (arity === 2) {
             return function (a, b) {
                 return fn.apply(a, [b].concat(args));
             };
@@ -266,18 +266,18 @@ module fc {
     }
 
 
-    export function func(dimension:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+    export function curry(arity:number, fn:Function2d|Function1d|FunctionI|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.call.apply(fc, [dimension, fn].concat(args));
+            return fc.partial.apply(fc, [arity, fn].concat(args));
         };
     }
 
 
-    export function funcp(dimension:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+    export function curryP(arity:number, fn:Function2d|Function1d|FunctionI|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.callp.apply(fc, [dimension, fn].concat(args));
+            return fc.partialP.apply(fc, [arity, fn].concat(args));
         };
     }
 
@@ -388,21 +388,21 @@ module fc {
     }
 
 
-    export function combine12(fn1:Function1d, fn2:Function2d):Function2d {
+    export function compose12(fn1:Function1d, fn2:Function2d):Function2d {
         return function (a, b) {
             return fn2(fn1(a), fn1(b));
         };
     }
 
 
-    export function combine11(fn1:Function1d, fn2:Function1d):Function1d {
+    export function compose11(fn1:Function1d, fn2:Function1d):Function1d {
         return function (a) {
             return fn2(fn1(a));
         };
     }
 
 
-    export function combine21(fn1:Function2d, fn2:Function1d):Function2d {
+    export function compose21(fn1:Function2d, fn2:Function1d):Function2d {
         return function (a, b) {
             return fn2(fn1(a, b));
         };
