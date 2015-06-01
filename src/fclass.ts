@@ -232,6 +232,13 @@ module fc {
     }
 
 
+    export function flip(fn:Function2):Function2 {
+        return function (a, b, index, arr) {
+            return fn(b, a, index, arr);
+        };
+    }
+
+
     export function partial(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
         if (arity === null) {
             return function () {

@@ -225,6 +225,12 @@ var fc;
         }
     }
     fc.compare = compare;
+    function flip(fn) {
+        return function (a, b, index, arr) {
+            return fn(b, a, index, arr);
+        };
+    }
+    fc.flip = flip;
     function partial(arity, fn) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {

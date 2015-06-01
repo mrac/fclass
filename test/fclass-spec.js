@@ -459,6 +459,26 @@ describe('fc', function () {
     });
 
 
+    describe('flip()()', function () {
+
+        it('should run 2-argument functions with reversed order of arguments', function () {
+
+            var exp = fc.flip(Math.pow);
+            expect(exp(2,4)).toEqual(Math.pow(4,2));
+
+            // working with sort()
+            var cmp = fc.flip(fc.compare());
+            expect([1, 4, 10, 12, 3].sort(cmp)).toEqual([12, 10, 4, 3, 1]);
+
+            // working with reduce()
+            var revSub = fc.flip(fc.subtract());
+            expect([1, 2, 3, 4].reduce(revSub)).toEqual(2);
+
+        });
+
+    });
+
+
     describe('partial()()', function () {
 
         it('should run functions as 2-argument functions', function () {
