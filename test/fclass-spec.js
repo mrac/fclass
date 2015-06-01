@@ -492,16 +492,33 @@ describe('fc', function () {
             expect([1, 2, 3, 4, 5, 6].map(pow1)).toEqual([1, 4, 9, 16, 25, 36]);
         });
 
-        it('should run array-argument functions as functions with infinite number of arguments', function () {
+        it('should run functions as 0-argument functions', function () {
+
+            var char;
+
+            // none of the arguments are taken into account
+            char = fc.partial(0, String.fromCharCode);
+            expect(char(65, 66, 67)).toEqual("");
+
+            // none of the arguments are taken into account (only extra fixed arguments)
+            char = fc.partial(0, String.fromCharCode, 70, 67, 33);
+            expect(char(65, 66, 67)).toEqual("FC!");
+
+            // working with map()
+            var pow = fc.partial(0, Math.sqrt, 16);
+            expect([1, 2, 3, 4, 5, 6].map(pow)).toEqual([4, 4, 4, 4, 4, 4]);
+        });
+
+        it('should run array-argument functions as functions with variable number of arguments', function () {
 
             var fn;
 
             // instead of an array argument, here multiple arguments for items are used
-            fn = fc.partial(0, JSON.stringify);
+            fn = fc.partial(null, JSON.stringify);
             expect(fn('a', 'b', 'c')).toEqual('["a","b","c"]');
 
             // instead of an array argument, here multiple arguments for items are used, with extra fixed argument
-            fn = fc.partial(0, JSON.stringify, 'd');
+            fn = fc.partial(null, JSON.stringify, 'd');
             expect(fn('a', 'b', 'c')).toEqual('["a","b","c","d"]');
         });
 
@@ -556,16 +573,16 @@ describe('fc', function () {
             expect(arr.map(join1)).toEqual(['2015-01-30', '2014-06-17', '2008-12-21']);
         });
 
-        it('should run array prototype methods as functions with infinite number of arguments', function () {
+        it('should run array prototype methods as functions with variable number of arguments', function () {
 
             var join;
 
             // instead of array items in the context, here multiple arguments are used
-            join = fc.partialP(0, Array.prototype.join);
+            join = fc.partialP(null, Array.prototype.join);
             expect(join('a', 'b', 'c')).toEqual('a,b,c');
 
             // instead of array items in the context, here multiple arguments are used, with extra fixed argument
-            join = fc.partialP(0, Array.prototype.join, '-');
+            join = fc.partialP(null, Array.prototype.join, '-');
             expect(join('a', 'b', 'c')).toEqual('a-b-c');
         });
     });
@@ -890,7 +907,7 @@ describe('fc', function () {
             expect(fc.findValue([0, '', null, 1, 'a'])).toEqual(1);
 
             // default behavior is the same as using [].find() and identity:
-            find = fc.partialP(0, Array.prototype.find);
+            find = fc.partialP(null, Array.prototype.find);
             identity = fc.identity();
             expect(fc.findValue([0, '', null]), find, identity).toEqual(undefined);
             expect(fc.findValue([0, '', null, 1, 'a']), find, identity).toEqual(1);

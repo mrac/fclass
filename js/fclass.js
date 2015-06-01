@@ -230,9 +230,14 @@ var fc;
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        if (arity === 0) {
+        if (arity === null) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
+            };
+        }
+        else if (arity === 0) {
+            return function () {
+                return fn.apply(null, args);
             };
         }
         else if (arity === 1) {
@@ -252,7 +257,7 @@ var fc;
         for (var _i = 2; _i < arguments.length; _i++) {
             args[_i - 2] = arguments[_i];
         }
-        if (arity === 0) {
+        if (arity === null) {
             return function () {
                 return fn.apply(arguments, args);
             };

@@ -233,9 +233,13 @@ module fc {
 
 
     export function partial(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
-        if (arity === 0) {
+        if (arity === null) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
+            };
+        } else if (arity === 0) {
+            return function () {
+                return fn.apply(null, args);
             };
         } else if (arity === 1) {
             return function (a) {
@@ -250,7 +254,7 @@ module fc {
 
 
     export function partialP(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
-        if (arity === 0) {
+        if (arity === null) {
             return function () {
                 return fn.apply(arguments, args);
             };
@@ -438,12 +442,12 @@ module fc {
         array.forEach(function (e, i, arr) {
             var key = keyFn ? keyFn(e, i, arr) : i;
             if (key || (key === 0) || (key === '')) {
-                if(reduceFn) {
-                    if(key in obj) {
+                if (reduceFn) {
+                    if (key in obj) {
                         obj[key] = reduceFn(obj[key], e, indeces[key], array);
                         indeces[key]++;
                     } else {
-                        if(argsLen >= 4) {
+                        if (argsLen >= 4) {
                             obj[key] = reduceFn(reduceInitialValue, e, 0, array);
                         } else {
                             obj[key] = e;
