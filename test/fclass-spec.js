@@ -464,7 +464,7 @@ describe('fc', function () {
         it('should run 2-argument functions with reversed order of arguments', function () {
 
             var exp = fc.flip(Math.pow);
-            expect(exp(2,4)).toEqual(Math.pow(4,2));
+            expect(exp(2, 4)).toEqual(Math.pow(4, 2));
 
             // working with sort()
             var cmp = fc.flip(fc.compare());
@@ -954,20 +954,37 @@ describe('fc', function () {
 
         it('should convert array to object', function () {
 
+            var keyFn, obj;
             var arr = ['one', 'two', 'three'];
 
             expect(fc.arrayToObject(arr)).toEqual({0: 'one', 1: 'two', 2: 'three'});
-            expect(fc.arrayToObject(arr, function(e) { return e; })).toEqual({'one': 'one', 'two': 'two', 'three': 'three'});
-            expect(fc.arrayToObject(arr, function(e, i) { return i; })).toEqual({0: 'one', 1: 'two', 2: 'three'});
-            expect(fc.arrayToObject(arr, function(e, i) { return 'v' + i; })).toEqual({'v0': 'one', 'v1': 'two', 'v2': 'three'});
+
+            keyFn = function (e) {
+                return e;
+            };
+            expect(fc.arrayToObject(arr, keyFn)).toEqual({'one': 'one', 'two': 'two', 'three': 'three'});
+
+            keyFn = function (e, i) {
+                return i;
+            };
+            expect(fc.arrayToObject(arr, keyFn)).toEqual({0: 'one', 1: 'two', 2: 'three'});
+
+            keyFn = function (e, i) {
+                return 'v' + i;
+            };
+            expect(fc.arrayToObject(arr, keyFn)).toEqual({'v0': 'one', 'v1': 'two', 'v2': 'three'});
 
             // by default properties will be overwritten
             expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor)).toEqual({1: 1.1, 3: 3.99});
 
             // we can achieve grouping by passing reduce-function
             var concat = fc.partialP(2, [].concat);
-            expect(fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor, concat, [])).toEqual({1: [1.1], 3: [Math.PI, 3.99]});
-            expect(fc.arrayToObject(['one', 'two', 'three'], fc.value('length'), concat, [])).toEqual({3: ['one', 'two'], 5: ['three']});
+
+            obj = fc.arrayToObject([1.1, Math.PI, 3.99], Math.floor, concat, []);
+            expect(obj).toEqual({1: [1.1], 3: [Math.PI, 3.99]});
+
+            obj = fc.arrayToObject(['one', 'two', 'three'], fc.value('length'), concat, []);
+            expect(obj).toEqual({3: ['one', 'two'], 5: ['three']});
 
         });
 
