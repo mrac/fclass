@@ -32,14 +32,14 @@
 
 module fc {
 
-    type Function1d = (element:any, index?:number, array?:Array<any>) => any;
+    type Function1 = (element:any, index?:number, array?:Array<any>) => any;
 
-    type Function2d = (a:any, b:any, index?:number, array?:Array<any>) => any;
+    type Function2 = (a:any, b:any, index?:number, array?:Array<any>) => any;
 
-    type FunctionI = (...args:any[]) => any;
+    type FunctionV = (...args:any[]) => any;
 
 
-    export function identity(equalTo?:any):Function1d {
+    export function identity(equalTo?:any):Function1 {
         if (arguments.length >= 1) {
             return function (e) {
                 return e === equalTo;
@@ -52,7 +52,7 @@ module fc {
     }
 
 
-    export function not(equalTo?:any):Function1d {
+    export function not(equalTo?:any):Function1 {
         if (arguments.length >= 1) {
             return function (e) {
                 return (!e) === equalTo;
@@ -65,7 +65,7 @@ module fc {
     }
 
 
-    export function index(equalTo?:number):Function1d {
+    export function index(equalTo?:number):Function1 {
         if (arguments.length >= 1) {
             return function (e, i) {
                 return i === equalTo;
@@ -78,7 +78,7 @@ module fc {
     }
 
 
-    export function index2(equalTo?:number):Function2d {
+    export function index2(equalTo?:number):Function2 {
         if (arguments.length >= 1) {
             return function (a, b, i) {
                 return i === equalTo;
@@ -91,7 +91,7 @@ module fc {
     }
 
 
-    export function key(key:any, equalTo?:any):Function1d {
+    export function key(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
@@ -117,7 +117,7 @@ module fc {
     }
 
 
-    export function value(key:any, equalTo?:any):Function1d {
+    export function value(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
@@ -143,7 +143,7 @@ module fc {
     }
 
 
-    export function object(key:any, equalTo?:any):Function1d {
+    export function object(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
                 return function (e) {
@@ -169,7 +169,7 @@ module fc {
     }
 
 
-    export function predicate(obj:Object):Function1d {
+    export function predicate(obj:Object):Function1 {
         return function (e) {
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
@@ -181,28 +181,28 @@ module fc {
     }
 
 
-    export function invoke(methodName:string, ...args:any[]):Function1d {
+    export function invoke(methodName:string, ...args:any[]):Function1 {
         return function (e) {
             return e[methodName].apply(e, args);
         };
     }
 
 
-    export function add(negative?:boolean):Function2d {
+    export function add(negative?:boolean):Function2 {
         return function (a, b) {
             return negative ? -(a + b) : a + b;
         };
     }
 
 
-    export function subtract(negative?:boolean):Function2d {
+    export function subtract(negative?:boolean):Function2 {
         return function (a, b) {
             return negative ? b - a : a - b;
         };
     }
 
 
-    export function compareString(negative?:boolean):Function2d {
+    export function compareString(negative?:boolean):Function2 {
         if (negative) {
             return function (a, b) {
                 a += "";
@@ -219,7 +219,7 @@ module fc {
     }
 
 
-    export function compare(negative?:boolean):Function2d {
+    export function compare(negative?:boolean):Function2 {
         if (negative) {
             return function (a, b) {
                 return a > b ? -1 : (a < b ? 1 : 0);
@@ -232,7 +232,7 @@ module fc {
     }
 
 
-    export function partial(arity:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
+    export function partial(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
         if (arity === 0) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
@@ -249,7 +249,7 @@ module fc {
     }
 
 
-    export function partialP(arity:number, fn:Function2d|Function1d|FunctionI|Function, ...args:any[]):Function2d|Function1d|FunctionI {
+    export function partialP(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
         if (arity === 0) {
             return function () {
                 return fn.apply(arguments, args);
@@ -266,7 +266,7 @@ module fc {
     }
 
 
-    export function curry(arity:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+    export function curry(arity:number, fn:Function2|Function1|FunctionV|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
             return fc.partial.apply(fc, [arity, fn].concat(args));
@@ -274,7 +274,7 @@ module fc {
     }
 
 
-    export function curryP(arity:number, fn:Function2d|Function1d|FunctionI|Function):Function {
+    export function curryP(arity:number, fn:Function2|Function1|FunctionV|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
             return fc.partialP.apply(fc, [arity, fn].concat(args));
@@ -282,7 +282,7 @@ module fc {
     }
 
 
-    export function objectCalc(fn:Function2d, merge?:any):Function2d {
+    export function objectCalc(fn:Function2, merge?:any):Function2 {
         return function (a, b) {
             var obj = {};
 
@@ -311,7 +311,7 @@ module fc {
     }
 
 
-    export function arrayCalc(fn:Function2d, merge?:boolean):Function2d {
+    export function arrayCalc(fn:Function2, merge?:boolean):Function2 {
         return function (a, b) {
             var long, short;
             var shortLen = a.length > b.length ? b.length : a.length;
@@ -339,7 +339,7 @@ module fc {
     }
 
 
-    export function clone(deep?:boolean):Function1d {
+    export function clone(deep?:boolean):Function1 {
         if (deep) {
             return function (source) {
                 if (source && (typeof source === 'object')) {
@@ -371,7 +371,7 @@ module fc {
     }
 
 
-    export function equal(deep?:boolean):Function2d {
+    export function equal(deep?:boolean):Function2 {
         if (deep) {
             return function (a, b) {
                 if (a && b && (typeof a === 'object') && (typeof b === 'object')) {
@@ -388,28 +388,28 @@ module fc {
     }
 
 
-    export function compose12(fn1:Function1d, fn2:Function2d):Function2d {
+    export function compose12(fn1:Function1, fn2:Function2):Function2 {
         return function (a, b) {
             return fn2(fn1(a), fn1(b));
         };
     }
 
 
-    export function compose11(fn1:Function1d, fn2:Function1d):Function1d {
+    export function compose11(fn1:Function1, fn2:Function1):Function1 {
         return function (a) {
             return fn2(fn1(a));
         };
     }
 
 
-    export function compose21(fn1:Function2d, fn2:Function1d):Function2d {
+    export function compose21(fn1:Function2, fn2:Function1):Function2 {
         return function (a, b) {
             return fn2(fn1(a, b));
         };
     }
 
 
-    export function findValue(array:any[], calc?:FunctionI, fn?:Function1d):any {
+    export function findValue(array:any[], calc?:FunctionV, fn?:Function1):any {
         var values, found, index;
         if (fn) {
             if (calc) {
@@ -431,7 +431,7 @@ module fc {
     }
 
 
-    export function arrayToObject(array:any[], keyFn?:Function1d, reduceFn?:Function2d, reduceInitialValue?:any):Object {
+    export function arrayToObject(array:any[], keyFn?:Function1, reduceFn?:Function2, reduceInitialValue?:any):Object {
         var obj = {};
         var argsLen = arguments.length;
         var indeces = {};

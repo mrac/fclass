@@ -832,7 +832,7 @@ describe('fc', function () {
 
     describe('compose12()', function () {
 
-        it('should compose function-1d with function-2d', function () {
+        it('should compose 1-argument function with 2-argument function', function () {
 
             var compareA = fc.compose12(fc.value('a'), fc.compare());
             expect(compareA({a: 1, b: 'a'}, {a: -3, b: 'b'})).toEqual(1);
@@ -851,7 +851,7 @@ describe('fc', function () {
 
     describe('compose11()', function () {
 
-        it('should compose function-1d with function-1d', function () {
+        it('should compose 1-argument function with 2-argument function', function () {
 
             var notA = fc.compose11(fc.value('a'), fc.not());
             expect(notA({a: 1, b: 'a'})).toEqual(false);
@@ -868,7 +868,7 @@ describe('fc', function () {
 
     describe('compose21()', function () {
 
-        it('should compose function-2d with function-1d', function () {
+        it('should compose 2-argument function with 1-argument function', function () {
 
             var sum100 = fc.compose21(fc.add(), fc.identity(100));
             expect(sum100(50, 50)).toEqual(true);
