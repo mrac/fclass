@@ -36,10 +36,31 @@
  */
 module fc {
 
+
+    /**
+     * Unary function used in the following JavaScript methods:
+     * - Array.prototype.forEach
+     * - Array.prototype.map
+     * - Array.prototype.filter
+     * - Array.prototype.some
+     * - Array.prototype.every
+     * - Array.prototype.find
+     * - Array.prototype.findIndex
+     */
     type Function1 = (element:any, index?:number, array?:Array<any>) => any;
 
-    type Function2 = (a:any, b:any, index?:number, array?:Array<any>) => any;
 
+    /**
+     * Binary function used in the following JavaScript methods:
+     * - Array.prototype.reduce
+     * - Array.prototype.reduceRight
+     */
+    type Function2 = (result:any, element:any, index?:number, array?:Array<any>) => any;
+    
+
+    /**
+     * A function of variant arity.
+     */
     type FunctionV = (...args:any[]) => any;
 
 
