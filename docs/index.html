@@ -989,6 +989,12 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<a href="index.html#_fclass_.fc.equal" class="tsd-kind-icon">equal</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.every" class="tsd-kind-icon">every</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.filter" class="tsd-kind-icon">filter</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.findvalue" class="tsd-kind-icon">find<wbr>Value</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
@@ -1032,6 +1038,9 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.partialp" class="tsd-kind-icon">partialP</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.some" class="tsd-kind-icon">some</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.subtract" class="tsd-kind-icon">subtract</a>
@@ -1762,6 +1771,74 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</ul>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.every" class="tsd-anchor"></a>
+						<h3>every</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">every<span class="tsd-signature-symbol">(</span>object<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L657">fclass.ts:657</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>&#39;Every&#39; iterator for array items or object properties.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>object: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									</li>
+									<li>
+										<h5>predicate: <span class="tsd-signature-type">Function</span></h5>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.filter" class="tsd-anchor"></a>
+						<h3>filter</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">(</span>object<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L626">fclass.ts:626</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Filter array items or object properties.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>object: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									</li>
+									<li>
+										<h5>predicate: <span class="tsd-signature-type">Function</span></h5>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 						<a name="_fclass_.fc.findvalue" class="tsd-anchor"></a>
 						<h3>find<wbr>Value</h3>
 						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -2020,7 +2097,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 								</aside>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>Map object properties.</p>
+										<p>Map array items or object properties.</p>
 									</div>
 								</div>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2237,6 +2314,40 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 									<span class="tsd-signature-symbol"> | </span>
 									<a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a>
 								</h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.some" class="tsd-anchor"></a>
+						<h3>some</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">some<span class="tsd-signature-symbol">(</span>object<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L645">fclass.ts:645</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>&#39;Some&#39; iterator for array items or object properties.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>object: <span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									</li>
+									<li>
+										<h5>predicate: <span class="tsd-signature-type">Function</span></h5>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 							</li>
 						</ul>
 					</section>

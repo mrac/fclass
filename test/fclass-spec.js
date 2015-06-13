@@ -1089,4 +1089,124 @@ describe('fc', function () {
         });
 
     });
+
+
+    describe('filter()', function () {
+
+        it('should filter array items', function () {
+            var fn = function (e, i, a) {
+                return (e === 1) || (i === 1) || (a[i + 1] === 4);
+            };
+
+            var arr = [1, 2, 3, 4];
+            var expected = [1, 2, 3];
+
+            expect(fc.filter(arr, fn)).toEqual(expected);
+
+        });
+
+
+        it('should filter object properties', function () {
+            var fn = function (v, k, o) {
+                return (v === 1) || (k === 'two') || (o['_' + k] === 4);
+            };
+
+            var obj = {one: 1, two: 2, three: 3, _three: 4};
+            var expected = {one: 1, two: 2, three: 3};
+
+            expect(fc.filter(obj, fn)).toEqual(expected);
+
+        });
+
+    });
+
+
+    describe('some()', function () {
+
+        it('should test if a predicate occurs on any of array items', function () {
+
+            expect(fc.some([1, 2, 3], function (e) {
+                return e === 3;
+            })).toEqual(true);
+
+            expect(fc.some([1, 2, 3], function (e) {
+                return e === 4;
+            })).toEqual(false);
+
+            expect(fc.some([1, 2, 3], function (e, i) {
+                return i === 2;
+            })).toEqual(true);
+
+            expect(fc.some([1, 2, 3], function (e, i) {
+                return i === 4;
+            })).toEqual(false);
+
+        });
+
+
+        it('should test if a predicate occurs on any of object properties', function () {
+
+            expect(fc.some({one: 1, two: 2}, function (v) {
+                return v === 2;
+            })).toEqual(true);
+
+            expect(fc.some({one: 1, two: 2}, function (v) {
+                return v === 4;
+            })).toEqual(false);
+
+            expect(fc.some({one: 1, two: 2}, function (v, k) {
+                return k === 'two';
+            })).toEqual(true);
+
+            expect(fc.some({one: 1, two: 2}, function (v, k) {
+                return k === 'three';
+            })).toEqual(false);
+        });
+
+    });
+
+
+    describe('every()', function () {
+
+        it('should test if a predicate occurs on all of array items', function () {
+
+            expect(fc.every([1, 2, 3], function (e) {
+                return e < 4;
+            })).toEqual(true);
+
+            expect(fc.every([1, 2, 3], function (e) {
+                return e < 3;
+            })).toEqual(false);
+
+            expect(fc.every([1, 2, 3], function (e, i) {
+                return i < 3;
+            })).toEqual(true);
+
+            expect(fc.every([1, 2, 3], function (e, i) {
+                return i < 2;
+            })).toEqual(false);
+
+        });
+
+
+        it('should test if a predicate occurs on all of object properties', function () {
+
+            expect(fc.every({one: 1, two: 2}, function (v) {
+                return v < 3;
+            })).toEqual(true);
+
+            expect(fc.every({one: 1, two: 2}, function (v) {
+                return v < 2;
+            })).toEqual(false);
+
+            expect(fc.every({one: 1, two: 2}, function (v, k) {
+                return k.length === 3;
+            })).toEqual(true);
+
+            expect(fc.every({one: 1, two: 2}, function (v, k) {
+                return k.length === 2;
+            })).toEqual(false);
+        });
+
+    });
 });

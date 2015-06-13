@@ -604,18 +604,61 @@ module fc {
 
 
     /**
-     * Map object properties.
+     * Map array items or object properties.
      */
     export function map(object:Object|any[], predicate:Function, context?:any):any {
-        var wrappers, keys, newKeys, newObject;
+        var newObject;
         if (Array.isArray(object)) {
             return Array.prototype.map.call(object, predicate, context);
         } else {
             newObject = {};
             Object.keys(object).forEach(function (key) {
-                newObject[key] = predicate(object[key], key, object);
+                newObject[key] = predicate.call(context, object[key], key, object);
             });
             return newObject;
+        }
+    }
+
+
+    /**
+     * Filter array items or object properties.
+     */
+    export function filter(object:Object|any[], predicate:Function, context?:any):any {
+        var newObject;
+        if (Array.isArray(object)) {
+            return Array.prototype.filter.call(object, predicate, context);
+        } else {
+            newObject = {};
+            Object.keys(object).forEach(function (key) {
+                if(predicate.call(context, object[key], key, object)) {
+                    newObject[key] = object[key];
+                }
+            });
+            return newObject;
+        }
+    }
+
+
+    /**
+     * 'Some' iterator for array items or object properties.
+     */
+    export function some(object:Object|any[], predicate:Function, context?:any):any {
+        if (Array.isArray(object)) {
+            return Array.prototype.some.call(object, predicate, context);
+        } else {
+            return fc.objectIterator(Array.prototype.some)(object, predicate, context);
+        }
+    }
+
+
+    /**
+     * 'Every' iterator for array items or object properties.
+     */
+    export function every(object:Object|any[], predicate:Function, context?:any):any {
+        if (Array.isArray(object)) {
+            return Array.prototype.every.call(object, predicate, context);
+        } else {
+            return fc.objectIterator(Array.prototype.every)(object, predicate, context);
         }
     }
 

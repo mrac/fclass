@@ -579,22 +579,65 @@ var fc;
     }
     fc.objectIterator = objectIterator;
     /**
-     * Map object properties.
+     * Map array items or object properties.
      */
     function map(object, predicate, context) {
-        var wrappers, keys, newKeys, newObject;
+        var newObject;
         if (Array.isArray(object)) {
             return Array.prototype.map.call(object, predicate, context);
         }
         else {
             newObject = {};
             Object.keys(object).forEach(function (key) {
-                newObject[key] = predicate(object[key], key, object);
+                newObject[key] = predicate.call(context, object[key], key, object);
             });
             return newObject;
         }
     }
     fc.map = map;
+    /**
+     * Filter array items or object properties.
+     */
+    function filter(object, predicate, context) {
+        var newObject;
+        if (Array.isArray(object)) {
+            return Array.prototype.filter.call(object, predicate, context);
+        }
+        else {
+            newObject = {};
+            Object.keys(object).forEach(function (key) {
+                if (predicate.call(context, object[key], key, object)) {
+                    newObject[key] = object[key];
+                }
+            });
+            return newObject;
+        }
+    }
+    fc.filter = filter;
+    /**
+     * 'Some' iterator for array items or object properties.
+     */
+    function some(object, predicate, context) {
+        if (Array.isArray(object)) {
+            return Array.prototype.some.call(object, predicate, context);
+        }
+        else {
+            return fc.objectIterator(Array.prototype.some)(object, predicate, context);
+        }
+    }
+    fc.some = some;
+    /**
+     * 'Every' iterator for array items or object properties.
+     */
+    function every(object, predicate, context) {
+        if (Array.isArray(object)) {
+            return Array.prototype.every.call(object, predicate, context);
+        }
+        else {
+            return fc.objectIterator(Array.prototype.every)(object, predicate, context);
+        }
+    }
+    fc.every = every;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map
