@@ -47,7 +47,7 @@ module fc {
      * - Array.prototype.find
      * - Array.prototype.findIndex
      */
-    type Function1 = (element:any, index?:number, array?:Array<any>) => any;
+    type Function1 = (element:any, index?:number|string, array?:Array<any>|Object) => any;
 
 
     /**
@@ -55,7 +55,7 @@ module fc {
      * - Array.prototype.reduce
      * - Array.prototype.reduceRight
      */
-    type Function2 = (result:any, element:any, index?:number, array?:Array<any>) => any;
+    type Function2 = (result:any, element:any, index?:number|string, array?:Array<any>|Object) => any;
 
 
     /**
@@ -67,13 +67,19 @@ module fc {
     /**
      * Array iterator function.
      */
-    type ArrayIterator = (predicate:Function1, thisArg?:any) => any;
+    type ArrayIterator = (predicate:Function1, context?:any[]) => any;
+
+
+    /**
+     * Iterator function.
+     */
+    type Iterator = (object:any[]|Object, predicate:Function1, context?:any[]|Object) => any;
 
 
     /**
      * Array reducer function.
      */
-    type ArrayReducer = (predicate:Function2, initial?:any, thisArg?:any) => any;
+    type Reducer = (predicate:Function2, initial?:any, context?:any[]|Object) => any;
 
 
     /**
@@ -590,7 +596,7 @@ module fc {
      * @param arrayIterator     Array iterator
      * @returns                 Object iterator
      */
-    export function objectIterator(arrayIterator:ArrayIterator):Function {
+    export function objectIterator(arrayIterator:ArrayIterator):Iterator {
         return function (object:Object, predicate:Function, context?:any) {
             var keys = Object.keys(object);
             var values = keys.map(function (key) {
@@ -606,7 +612,7 @@ module fc {
     /**
      * Map array items or object properties.
      */
-    export function map(object:Object|any[], predicate:Function, context?:any):any {
+    export function map(object:Object|any[], predicate:Function1, context?:any):any {
         var newObject;
         if (Array.isArray(object)) {
             return Array.prototype.map.call(object, predicate, context);
@@ -623,14 +629,14 @@ module fc {
     /**
      * Filter array items or object properties.
      */
-    export function filter(object:Object|any[], predicate:Function, context?:any):any {
+    export function filter(object:Object|any[], predicate:Function1, context?:any):any {
         var newObject;
         if (Array.isArray(object)) {
             return Array.prototype.filter.call(object, predicate, context);
         } else {
             newObject = {};
             Object.keys(object).forEach(function (key) {
-                if(predicate.call(context, object[key], key, object)) {
+                if (predicate.call(context, object[key], key, object)) {
                     newObject[key] = object[key];
                 }
             });
@@ -642,7 +648,7 @@ module fc {
     /**
      * 'Some' iterator for array items or object properties.
      */
-    export function some(object:Object|any[], predicate:Function, context?:any):any {
+    export function some(object:Object|any[], predicate:Function1, context?:any):any {
         if (Array.isArray(object)) {
             return Array.prototype.some.call(object, predicate, context);
         } else {
@@ -654,12 +660,13 @@ module fc {
     /**
      * 'Every' iterator for array items or object properties.
      */
-    export function every(object:Object|any[], predicate:Function, context?:any):any {
+    export function every(object:Object|any[], predicate:Function1, context?:any):any {
         if (Array.isArray(object)) {
             return Array.prototype.every.call(object, predicate, context);
         } else {
             return fc.objectIterator(Array.prototype.every)(object, predicate, context);
         }
     }
+
 
 }
