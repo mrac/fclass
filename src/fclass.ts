@@ -562,6 +562,15 @@ module fc {
     }
 
 
+    /**
+     * Convert an array to an object.
+     *
+     * @param array                 Array
+     * @param keyFn                 Key-name function
+     * @param reduceFn              Reduce function
+     * @param reduceInitialValue    Reduce initial value
+     * @returns                     Object
+     */
     export function arrayToObject(array:any[], keyFn?:Function1, reduceFn?:Function2, reduceInitialValue?:any):Object {
         var obj = {};
         var argsLen = arguments.length;

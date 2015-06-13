@@ -530,6 +530,15 @@ var fc;
         }
     }
     fc.findValue = findValue;
+    /**
+     * Convert an array to an object.
+     *
+     * @param array                 Array
+     * @param keyFn                 Key-name function
+     * @param reduceFn              Reduce function
+     * @param reduceInitialValue    Reduce initial value
+     * @returns                     Object
+     */
     function arrayToObject(array, keyFn, reduceFn, reduceInitialValue) {
         var obj = {};
         var argsLen = arguments.length;
