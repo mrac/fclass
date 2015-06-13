@@ -46,6 +46,7 @@ gulp.task("typedoc", function () {
             target: "es5",
             out: "docs/",
             name: "fclass",
+            theme: "minimal",
             includeDeclarations: true
         }));
 });

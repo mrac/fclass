@@ -1,5 +1,5 @@
 /// <reference path="es6.d.ts" />
-/**
+/*
  * fclass
  *
  * JavaScript utility library that gives support for manipulating
@@ -26,8 +26,24 @@
  * limitations under the License.
  *
  */
+/**
+ * Main module containing all fclass methods.
+ *
+ * @preferred
+ */
 var fc;
 (function (fc) {
+    /**
+     * Returns the identity function
+     *
+     * `x => x`
+     *
+     * or comparison function
+     *
+     * `x => x === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     function identity(equalTo) {
         if (arguments.length >= 1) {
             return function (e) {
@@ -41,6 +57,17 @@ var fc;
         }
     }
     fc.identity = identity;
+    /**
+     * Returns the negating function
+     *
+     * `x => !x`
+     *
+     * or comparison function
+     *
+     * `x => !x === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     function not(equalTo) {
         if (arguments.length >= 1) {
             return function (e) {
@@ -54,6 +81,17 @@ var fc;
         }
     }
     fc.not = not;
+    /**
+     * Returns the unary function returning the index
+     *
+     * `x => index`
+     *
+     * or comparison function
+     *
+     * `(x, index) => index === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     function index(equalTo) {
         if (arguments.length >= 1) {
             return function (e, i) {
@@ -67,6 +105,17 @@ var fc;
         }
     }
     fc.index = index;
+    /**
+     * Returns the binary function returning the index
+     *
+     * `(x, y) => index`
+     *
+     * or comparison function
+     *
+     * `(x, y) => index === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     function index2(equalTo) {
         if (arguments.length >= 1) {
             return function (a, b, i) {
@@ -80,6 +129,17 @@ var fc;
         }
     }
     fc.index2 = index2;
+    /**
+     * Returns a function returning the key name of the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     function key(key, equalTo) {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
@@ -107,6 +167,17 @@ var fc;
         }
     }
     fc.key = key;
+    /**
+     * Returns a function returning the property value of the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     function value(key, equalTo) {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
@@ -134,6 +205,17 @@ var fc;
         }
     }
     fc.value = value;
+    /**
+     * Returns a function returning the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     function object(key, equalTo) {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {

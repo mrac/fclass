@@ -1,7 +1,6 @@
 /// <reference path="es6.d.ts" />
 
-
-/**
+/*
  * fclass
  *
  * JavaScript utility library that gives support for manipulating
@@ -30,6 +29,11 @@
  */
 
 
+/**
+ * Main module containing all fclass methods.
+ *
+ * @preferred
+ */
 module fc {
 
     type Function1 = (element:any, index?:number, array?:Array<any>) => any;
@@ -39,6 +43,17 @@ module fc {
     type FunctionV = (...args:any[]) => any;
 
 
+    /**
+     * Returns the identity function
+     *
+     * `x => x`
+     *
+     * or comparison function
+     *
+     * `x => x === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     export function identity(equalTo?:any):Function1 {
         if (arguments.length >= 1) {
             return function (e) {
@@ -52,6 +67,17 @@ module fc {
     }
 
 
+    /**
+     * Returns the negating function
+     *
+     * `x => !x`
+     *
+     * or comparison function
+     *
+     * `x => !x === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     export function not(equalTo?:any):Function1 {
         if (arguments.length >= 1) {
             return function (e) {
@@ -65,6 +91,17 @@ module fc {
     }
 
 
+    /**
+     * Returns the unary function returning the index
+     *
+     * `x => index`
+     *
+     * or comparison function
+     *
+     * `(x, index) => index === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     export function index(equalTo?:number):Function1 {
         if (arguments.length >= 1) {
             return function (e, i) {
@@ -78,6 +115,17 @@ module fc {
     }
 
 
+    /**
+     * Returns the binary function returning the index
+     *
+     * `(x, y) => index`
+     *
+     * or comparison function
+     *
+     * `(x, y) => index === equalTo`
+     *
+     * @param equalTo   If provided, compares and returns the comparison result
+     */
     export function index2(equalTo?:number):Function2 {
         if (arguments.length >= 1) {
             return function (a, b, i) {
@@ -91,6 +139,17 @@ module fc {
     }
 
 
+    /**
+     * Returns a function returning the key name of the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     export function key(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
@@ -117,6 +176,17 @@ module fc {
     }
 
 
+    /**
+     * Returns a function returning the property value of the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     export function value(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
@@ -143,6 +213,17 @@ module fc {
     }
 
 
+    /**
+     * Returns a function returning the object
+     * if the provided property exists,
+     * or if the property value is equal to the provided value,
+     * or if any property value is equal to the provided value.
+     *
+     * Otherwise a function will return null.
+     *
+     * @param key       The property name
+     * @param equalTo   If provided, compares the object value instead of checking for existence
+     */
     export function object(key:any, equalTo?:any):Function1 {
         if (typeof key === 'string' || typeof key === 'number') {
             if (typeof equalTo !== 'undefined') {
