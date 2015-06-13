@@ -938,6 +938,12 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 					<a href="index.html#_fclass_.fc" class="tsd-kind-icon">fc</a>
 					<ul>
 						<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+							<a href="index.html#_fclass_.fc.arrayiterator" class="tsd-kind-icon">Array<wbr>Iterator</a>
+						</li>
+						<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+							<a href="index.html#_fclass_.fc.arrayreducer" class="tsd-kind-icon">Array<wbr>Reducer</a>
+						</li>
+						<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
 							<a href="index.html#_fclass_.fc.function1" class="tsd-kind-icon">Function1</a>
 						</li>
 						<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
@@ -1014,6 +1020,9 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.objectcalc" class="tsd-kind-icon">object<wbr>Calc</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.objectiterator" class="tsd-kind-icon">object<wbr>Iterator</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.partial" class="tsd-kind-icon">partial</a>
@@ -1230,6 +1239,87 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</div>
 					</div>
 					<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a name="_fclass_.fc.arrayiterator" class="tsd-anchor"></a>
+						<h3>Array<wbr>Iterator</h3>
+						<div class="tsd-signature tsd-kind-icon">Array<wbr>Iterator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L70">fclass.ts:70</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Array iterator function.</p>
+							</div>
+						</div>
+						<div class="tsd-type-declaration">
+							<h4>Type declaration</h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-siganture">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a>, thisArg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>predicate: <a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a></h5>
+												</li>
+												<li>
+													<h5><span class="tsd-flag ts-flagOptional">Optional</span> thisArg: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a name="_fclass_.fc.arrayreducer" class="tsd-anchor"></a>
+						<h3>Array<wbr>Reducer</h3>
+						<div class="tsd-signature tsd-kind-icon">Array<wbr>Reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L76">fclass.ts:76</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Array reducer function.</p>
+							</div>
+						</div>
+						<div class="tsd-type-declaration">
+							<h4>Type declaration</h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-siganture">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a>, initial<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, thisArg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>predicate: <a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a></h5>
+												</li>
+												<li>
+													<h5><span class="tsd-flag ts-flagOptional">Optional</span> initial: <span class="tsd-signature-type">any</span></h5>
+												</li>
+												<li>
+													<h5><span class="tsd-flag ts-flagOptional">Optional</span> thisArg: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
 						<a name="_fclass_.fc.function1" class="tsd-anchor"></a>
 						<h3>Function1</h3>
 						<div class="tsd-signature tsd-kind-icon">Function1<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
@@ -1303,17 +1393,17 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-siganture">
 									<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, array<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, array<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 									</ul>
 									<ul class="tsd-descriptions">
 										<li class="tsd-description">
 											<h4 class="tsd-parameters-title">Parameters</h4>
 											<ul class="tsd-parameters">
 												<li>
-													<h5>a: <span class="tsd-signature-type">any</span></h5>
+													<h5>result: <span class="tsd-signature-type">any</span></h5>
 												</li>
 												<li>
-													<h5>b: <span class="tsd-signature-type">any</span></h5>
+													<h5>element: <span class="tsd-signature-type">any</span></h5>
 												</li>
 												<li>
 													<h5><span class="tsd-flag ts-flagOptional">Optional</span> index: <span class="tsd-signature-type">number</span></h5>
@@ -1375,7 +1465,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L293">fclass.ts:293</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L305">fclass.ts:305</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1398,7 +1488,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L427">fclass.ts:427</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L439">fclass.ts:439</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1424,7 +1514,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L547">fclass.ts:547</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L559">fclass.ts:559</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1456,7 +1546,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L455">fclass.ts:455</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L467">fclass.ts:467</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1479,7 +1569,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L324">fclass.ts:324</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L336">fclass.ts:336</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1502,7 +1592,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L307">fclass.ts:307</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L319">fclass.ts:319</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1525,7 +1615,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L511">fclass.ts:511</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L523">fclass.ts:523</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1551,7 +1641,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L504">fclass.ts:504</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L516">fclass.ts:516</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1577,7 +1667,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L518">fclass.ts:518</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L530">fclass.ts:530</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1603,7 +1693,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L382">fclass.ts:382</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L394">fclass.ts:394</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1629,7 +1719,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L390">fclass.ts:390</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L402">fclass.ts:402</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1655,7 +1745,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L487">fclass.ts:487</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L499">fclass.ts:499</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1678,7 +1768,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L525">fclass.ts:525</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L537">fclass.ts:537</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1707,7 +1797,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L337">fclass.ts:337</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L349">fclass.ts:349</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1730,7 +1820,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L274">fclass.ts:274</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L286">fclass.ts:286</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1753,7 +1843,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L78">fclass.ts:78</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L90">fclass.ts:90</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1787,7 +1877,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L126">fclass.ts:126</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L138">fclass.ts:138</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1821,7 +1911,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L150">fclass.ts:150</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L162">fclass.ts:162</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1855,7 +1945,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L286">fclass.ts:286</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L298">fclass.ts:298</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1881,7 +1971,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L174">fclass.ts:174</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L186">fclass.ts:186</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1922,7 +2012,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L102">fclass.ts:102</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L114">fclass.ts:114</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1956,7 +2046,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L248">fclass.ts:248</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L260">fclass.ts:260</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1997,7 +2087,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L398">fclass.ts:398</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L410">fclass.ts:410</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2014,6 +2104,38 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</ul>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.objectiterator" class="tsd-anchor"></a>
+						<h3>object<wbr>Iterator</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">object<wbr>Iterator<span class="tsd-signature-symbol">(</span>arrayIterator<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.arrayiterator" class="tsd-signature-type">ArrayIterator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L593">fclass.ts:593</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Converts an array iterator function into an object iterator function.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>arrayIterator: <a href="index.html#_fclass_.fc.arrayiterator" class="tsd-signature-type">ArrayIterator</a></h5>
+										<div class="tsd-comment tsd-typography">
+											<p>Array iterator</p>
+										</div>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
+								<p>Object iterator</p>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 						<a name="_fclass_.fc.partial" class="tsd-anchor"></a>
 						<h3>partial</h3>
 						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -2023,7 +2145,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L344">fclass.ts:344</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L356">fclass.ts:356</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2057,7 +2179,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L365">fclass.ts:365</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L377">fclass.ts:377</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2091,7 +2213,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L300">fclass.ts:300</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L312">fclass.ts:312</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2114,7 +2236,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L211">fclass.ts:211</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L223">fclass.ts:223</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">

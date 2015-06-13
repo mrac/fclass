@@ -56,12 +56,24 @@ module fc {
      * - Array.prototype.reduceRight
      */
     type Function2 = (result:any, element:any, index?:number, array?:Array<any>) => any;
-    
+
 
     /**
      * A function of variant arity.
      */
     type FunctionV = (...args:any[]) => any;
+
+
+    /**
+     * Array iterator function.
+     */
+    type ArrayIterator = (predicate:Function1, thisArg?:any) => any;
+
+
+    /**
+     * Array reducer function.
+     */
+    type ArrayReducer = (predicate:Function2, initial?:any, thisArg?:any) => any;
 
 
     /**
@@ -571,5 +583,23 @@ module fc {
         return obj;
     }
 
+
+    /**
+     * Converts an array iterator function into an object iterator function.
+     *
+     * @param arrayIterator     Array iterator
+     * @returns                 Object iterator
+     */
+    export function objectIterator(arrayIterator:ArrayIterator):Function {
+        return function (object:Object, predicate:Function, context?:any) {
+            var keys = Object.keys(object);
+            var values = keys.map(function (key) {
+                return object[key];
+            });
+            return arrayIterator.call(values, function (val, i) {
+                return predicate.call(context, val, keys[i], object);
+            });
+        };
+    }
 
 }

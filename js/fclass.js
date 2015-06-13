@@ -560,6 +560,24 @@ var fc;
         return obj;
     }
     fc.arrayToObject = arrayToObject;
+    /**
+     * Converts an array iterator function into an object iterator function.
+     *
+     * @param arrayIterator     Array iterator
+     * @returns                 Object iterator
+     */
+    function objectIterator(arrayIterator) {
+        return function (object, predicate, context) {
+            var keys = Object.keys(object);
+            var values = keys.map(function (key) {
+                return object[key];
+            });
+            return arrayIterator.call(values, function (val, i) {
+                return predicate.call(context, val, keys[i], object);
+            });
+        };
+    }
+    fc.objectIterator = objectIterator;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map

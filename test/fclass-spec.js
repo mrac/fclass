@@ -1025,4 +1025,35 @@ describe('fc', function () {
     });
 
 
+    fdescribe('objectIterator()', function () {
+
+        it('should convert array map to object map', function () {
+            var map, result, obj;
+
+            obj = {one: 1, two: 2, three: 3};
+
+            map = fc.objectIterator([].map);
+            result = map(obj, function (v, k, o) {
+                return v + ',' + k + ',' + Object.keys(o).length;
+            });
+            expect(result).toEqual(['1,one,3', '2,two,3', '3,three,3']);
+
+        });
+
+
+        it('should convert array filter to object filter', function () {
+            var filter, result, obj;
+
+            obj = {one: 1, two: 2, three: 3};
+
+            filter = fc.objectIterator([].filter);
+            result = filter(obj, function (v, k) {
+                return (k === 'two') || (v === 3);
+            });
+            expect(result).toEqual([2, 3]);
+
+        });
+
+    });
+
 });
