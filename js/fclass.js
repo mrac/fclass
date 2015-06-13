@@ -161,7 +161,7 @@ var fc;
         }
     }
     fc.object = object;
-    function predicate(obj) {
+    function has(obj) {
         return function (e) {
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
@@ -172,7 +172,7 @@ var fc;
             return e;
         };
     }
-    fc.predicate = predicate;
+    fc.has = has;
     function invoke(methodName) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
@@ -407,20 +407,20 @@ var fc;
     }
     fc.equal = equal;
     function compose12(fn1, fn2) {
-        return function (a, b) {
-            return fn2(fn1(a), fn1(b));
+        return function (a, b, index, array) {
+            return fn2(fn1(a, index, array), fn1(b, index, array), index, array);
         };
     }
     fc.compose12 = compose12;
     function compose11(fn1, fn2) {
-        return function (a) {
-            return fn2(fn1(a));
+        return function (element, index, array) {
+            return fn2(fn1(element, index, array), index, array);
         };
     }
     fc.compose11 = compose11;
     function compose21(fn1, fn2) {
-        return function (a, b) {
-            return fn2(fn1(a, b));
+        return function (a, b, index, array) {
+            return fn2(fn1(a, b, index, array), index, array);
         };
     }
     fc.compose21 = compose21;

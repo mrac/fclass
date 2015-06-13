@@ -314,28 +314,28 @@ describe('fc', function () {
     });
 
 
-    describe('predicate()()', function () {
+    describe('has()()', function () {
 
-        it('should access object by predicate object', function () {
+        it('should access object by indicating if it has given key-value pairs', function () {
             var obj = {a: 10, b: 0, '': 100};
 
-            expect(fc.predicate({a: 10})(obj)).toEqual({a: 10, b: 0, '': 100});
-            expect(fc.predicate({b: 0})(obj)).toEqual({a: 10, b: 0, '': 100});
-            expect(fc.predicate({'': 100})(obj)).toEqual({a: 10, b: 0, '': 100});
-            expect(fc.predicate({a: 0})(obj)).toEqual(null);
-            expect(fc.predicate({b: 10})(obj)).toEqual(null);
-            expect(fc.predicate({w: 1})(obj)).toEqual(null);
+            expect(fc.has({a: 10})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(fc.has({b: 0})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(fc.has({'': 100})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(fc.has({a: 0})(obj)).toEqual(null);
+            expect(fc.has({b: 10})(obj)).toEqual(null);
+            expect(fc.has({w: 1})(obj)).toEqual(null);
 
             var arr = [{a: 10, b: 5}, {a: 7, b: 0}, {a: 10, b: 7}, {w: 10, '': 3}, {'': 0}];
 
-            // map() will map objects by a predicate
-            expect(arr.map(fc.predicate({a: 10}))).toEqual([{a: 10, b: 5}, null, {a: 10, b: 7}, null, null]);
-            // filter() will filter objects by a predicate
-            expect(arr.filter(fc.predicate({a: 10}))).toEqual([{a: 10, b: 5}, {a: 10, b: 7}]);
-            // find() will find object by existing keys-value pairs
-            expect(arr.find(fc.predicate({a: 10}))).toEqual({a: 10, b: 5});
-            // findIndex() will find index by existing keys-value pairs
-            expect(arr.findIndex(fc.predicate({a: 10}))).toEqual(0);
+            // map() will map objects by containing key-value pairs
+            expect(arr.map(fc.has({a: 10}))).toEqual([{a: 10, b: 5}, null, {a: 10, b: 7}, null, null]);
+            // filter() will filter objects by containing key-value pairs
+            expect(arr.filter(fc.has({a: 10}))).toEqual([{a: 10, b: 5}, {a: 10, b: 7}]);
+            // find() will find object by containing keys-value pairs
+            expect(arr.find(fc.has({a: 10}))).toEqual({a: 10, b: 5});
+            // findIndex() will find index by containing keys-value pairs
+            expect(arr.findIndex(fc.has({a: 10}))).toEqual(0);
 
         });
 
@@ -871,16 +871,28 @@ describe('fc', function () {
 
         it('should compose 1-argument function with 2-argument function', function () {
 
+            var arr;
+
             var compareA = fc.compose12(fc.value('a'), fc.compare());
             expect(compareA({a: 1, b: 'a'}, {a: -3, b: 'b'})).toEqual(1);
             expect(compareA({a: -4, b: 'a'}, {a: -3, b: 'b'})).toEqual(-1);
             expect(compareA({a: -3, b: 'a'}, {a: -3, b: 'b'})).toEqual(0);
 
             // used with sort()
-            var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {a: 7, b: 0}];
+            arr = [{a: 10, b: 4}, {a: 2, b: -10}, {a: 7, b: 0}];
             arr.sort(compareA);
             expect(arr).toEqual([{a: 2, b: -10}, {a: 7, b: 0}, {a: 10, b: 4}]);
 
+            // used with reduce() including index and array arguments
+            arr = [10, 20, 30];
+            var commas = function (a, b, index, array) {
+                return a + ',' + b + ',' + index + ',' + array;
+            };
+            var brackets = function (element, index, array) {
+                return "(" + element + "," + index + "," + array + ")";
+            };
+            var expected = "((10,1,10,20,30),(20,1,10,20,30),1,10,20,30,2,10,20,30),(30,2,10,20,30),2,10,20,30";
+            expect(arr.reduce(fc.compose12(brackets, commas))).toEqual(expected);
         });
 
     });
@@ -898,6 +910,13 @@ describe('fc', function () {
             var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {x: 7, y: 0}];
             expect(arr.map(notA)).toEqual([false, false, true]);
 
+            // used with map() including index and array arguments
+            var tellAll = function (element, index, array) {
+                return [element, index, array];
+            };
+            var expected = [[[10, 0, [10, 20, 30]], 0, [10, 20, 30]], [[20, 1, [10, 20, 30]], 1, [10, 20, 30]], [[30, 2, [10, 20, 30]], 2, [10, 20, 30]]];
+            expect([10, 20, 30].map(fc.compose11(tellAll, tellAll))).toEqual(expected);
+
         });
 
     });
@@ -907,9 +926,24 @@ describe('fc', function () {
 
         it('should compose 2-argument function with 1-argument function', function () {
 
-            var sum100 = fc.compose21(fc.add(), fc.identity(100));
-            expect(sum100(50, 50)).toEqual(true);
-            expect(sum100(50, 40)).toEqual(false);
+            // compose a+b-70
+            var sum100 = fc.compose21(fc.add(), fc.partial(1, fc.subtract(), 70));
+            expect(sum100(50, 50)).toEqual(30);
+            expect(sum100(10, 20)).toEqual(-40);
+
+            // used with reduce()
+            var arr = [10, 20, 30, 40];
+            expect(arr.reduce(sum100)).toEqual(-110);
+
+            // used with reduce() including index and array arguments
+            var commas = function (a, b, index, array) {
+                return a + ',' + b + ',' + index + ',' + array;
+            };
+            var brackets = function (element, index, array) {
+                return "(" + element + "," + index + "," + array + ")";
+            };
+            var expected = "((10,20,1,10,20,30,1,10,20,30),30,2,10,20,30,2,10,20,30)";
+            expect([10, 20, 30].reduce(fc.compose21(commas, brackets))).toEqual(expected);
 
         });
 

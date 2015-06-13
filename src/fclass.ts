@@ -169,7 +169,7 @@ module fc {
     }
 
 
-    export function predicate(obj:Object):Function1 {
+    export function has(obj:Object):Function1 {
         return function (e) {
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
@@ -400,22 +400,22 @@ module fc {
 
 
     export function compose12(fn1:Function1, fn2:Function2):Function2 {
-        return function (a, b) {
-            return fn2(fn1(a), fn1(b));
+        return function (a, b, index, array) {
+            return fn2(fn1(a, index, array), fn1(b, index, array), index, array);
         };
     }
 
 
     export function compose11(fn1:Function1, fn2:Function1):Function1 {
-        return function (a) {
-            return fn2(fn1(a));
+        return function (element, index, array) {
+            return fn2(fn1(element, index, array), index, array);
         };
     }
 
 
     export function compose21(fn1:Function2, fn2:Function1):Function2 {
-        return function (a, b) {
-            return fn2(fn1(a, b));
+        return function (a, b, index, array) {
+            return fn2(fn1(a, b, index, array), index, array);
         };
     }
 
