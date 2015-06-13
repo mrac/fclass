@@ -359,7 +359,7 @@ module fc {
     }
 
 
-    export function partial(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
+    export function partial(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function {
         if (arity === null) {
             return function () {
                 return fn.call(null, Array.prototype.slice.call(arguments).concat(args));
@@ -380,7 +380,7 @@ module fc {
     }
 
 
-    export function partialP(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function2|Function1|FunctionV {
+    export function partialP(arity:number, fn:Function2|Function1|FunctionV|Function, ...args:any[]):Function {
         if (arity === null) {
             return function () {
                 return fn.apply(arguments, args);
@@ -565,21 +565,21 @@ module fc {
     export function arrayToObject(array:any[], keyFn?:Function1, reduceFn?:Function2, reduceInitialValue?:any):Object {
         var obj = {};
         var argsLen = arguments.length;
-        var indeces = {};
+        var indices = {};
         array.forEach(function (e, i, arr) {
             var key = keyFn ? keyFn(e, i, arr) : i;
             if (key || (key === 0) || (key === '')) {
                 if (reduceFn) {
                     if (key in obj) {
-                        obj[key] = reduceFn(obj[key], e, indeces[key], array);
-                        indeces[key]++;
+                        obj[key] = reduceFn(obj[key], e, indices[key], array);
+                        indices[key]++;
                     } else {
                         if (argsLen >= 4) {
                             obj[key] = reduceFn(reduceInitialValue, e, 0, array);
                         } else {
                             obj[key] = e;
                         }
-                        indeces[key] = 1;
+                        indices[key] = 1;
                     }
                 } else {
                     obj[key] = e;
@@ -587,6 +587,32 @@ module fc {
             }
         });
         return obj;
+    }
+
+
+    /**
+     * Convert an object to an array.
+     *
+     * @param object            Object
+     * @param sortPredicateFn   Predicate function for sorting
+     * @param sortFn            Sort function
+     * @returns                 Array
+     */
+    export function objectToArray(object:Object, sortPredicateFn?:Function1, sortFn?:Function2):any[] {
+        var wrappers = Object.keys(object).map(function (key) {
+            return {
+                key: key,
+                value: object[key]
+            };
+        });
+
+        var sorted = fc.sort(wrappers, function (wrapper) {
+            return sortPredicateFn ? sortPredicateFn(wrapper.value, wrapper.key) : wrapper.key;
+        }, sortFn);
+
+        return sorted.map(function (wrapper) {
+            return wrapper.value;
+        });
     }
 
 
@@ -666,6 +692,39 @@ module fc {
         } else {
             return fc.objectIterator(Array.prototype.every)(object, predicate, context);
         }
+    }
+
+
+    /**
+     * Sort an array by a predicate function.
+     */
+    export function sort(array:any[], predicateFn?:Function1, sortFn?:Function):any {
+        var wrappers = array.map(function (e, i, a) {
+            return {
+                element: e,
+                index: i,
+                pre: predicateFn ? predicateFn(e, i, a) : e
+            };
+        });
+        wrappers.sort(function (a, b) {
+            var res;
+            var ap = a.pre;
+            var bp = b.pre;
+            if (sortFn) {
+                res = sortFn(ap, bp);
+            } else if (ap < bp) {
+                res = -1;
+            } else if (ap > bp) {
+                res = 1;
+            }
+            if (!res) {
+                res = a.index - b.index;
+            }
+            return res;
+        });
+        return wrappers.map(function (wrapper) {
+            return wrapper.element;
+        });
     }
 
 

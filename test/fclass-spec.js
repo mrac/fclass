@@ -1025,6 +1025,28 @@ describe('fc', function () {
     });
 
 
+    describe('objectToArray()', function () {
+
+        it('convert object to array', function () {
+            // by default it should order by key names
+            expect(fc.objectToArray({one: 1, two: 2, four: 4, three: 3})).toEqual([4, 1, 3, 2]);
+            expect(fc.objectToArray({"10": "a", "1": "b", "3": "c"})).toEqual(["b", "a", "c"]);
+            expect(fc.objectToArray({10: "a", 1: "b", 3: "c"})).toEqual(["b", "a", "c"]);
+        });
+
+        it('convert object to array with custom sort function', function () {
+            expect(fc.objectToArray({10: "a", 1: "b", 3: "c"}, null, fc.subtract())).toEqual(["b", "c", "a"]);
+        });
+
+        it('convert object to array with custom predicate function', function () {
+            // order by values
+            var arr = fc.objectToArray({one: 1, two: 2, four: 4, three: 3}, fc.identity(), fc.subtract());
+            expect(arr).toEqual([1, 2, 3, 4]);
+        });
+
+    });
+
+
     describe('objectIterator()()', function () {
 
         it('should convert array map to object map', function () {
@@ -1209,4 +1231,45 @@ describe('fc', function () {
         });
 
     });
+
+
+    describe('sort()', function () {
+
+        it('should sort array items', function () {
+
+            var array = [1, 7, 4];
+            var expected = [1, 4, 7];
+
+            expect(fc.sort(array)).toEqual(expected);
+            expect(array).toEqual([1, 7, 4]);
+            expect(fc.sort(array) !== array).toEqual(true);
+
+        });
+
+
+        it('should sort array items by a predicate function', function () {
+
+            var array = [{a: 1, b: 2}, {a: 7, b: 0}, {a: 3, b: 4}];
+            var expected = [{a: 1, b: 2}, {a: 3, b: 4}, {a: 7, b: 0}];
+
+            expect(fc.sort(array, fc.value('a'))).toEqual(expected);
+
+        });
+
+
+        it('should sort array items by a predicate function, provided custom sort function', function () {
+
+            var array = [{a: 'a', b: 2}, {a: 'c', b: 0}, {a: 'b', b: 4}];
+            var expected = [{a: 'a', b: 2}, {a: 'b', b: 4}, {a: 'c', b: 0}];
+
+            var localeCompare = fc.partialP(2, String.prototype.localeCompare);
+
+            expect(fc.sort(array, fc.value('a'), localeCompare)).toEqual(expected);
+
+        });
+
+    });
+
+
 });
+

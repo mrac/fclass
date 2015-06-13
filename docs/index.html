@@ -1037,6 +1037,9 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<a href="index.html#_fclass_.fc.objectiterator" class="tsd-kind-icon">object<wbr>Iterator</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.objecttoarray" class="tsd-kind-icon">object<wbr>ToArray</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.partial" class="tsd-kind-icon">partial</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
@@ -1044,6 +1047,9 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.some" class="tsd-kind-icon">some</a>
+						</li>
+						<li class=" tsd-kind-function tsd-parent-kind-module">
+							<a href="index.html#_fclass_.fc.sort" class="tsd-kind-icon">sort</a>
 						</li>
 						<li class=" tsd-kind-function tsd-parent-kind-module">
 							<a href="index.html#_fclass_.fc.subtract" class="tsd-kind-icon">subtract</a>
@@ -1825,7 +1831,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L663">fclass.ts:663</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L689">fclass.ts:689</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1859,7 +1865,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L632">fclass.ts:632</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L658">fclass.ts:658</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2137,7 +2143,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L615">fclass.ts:615</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L641">fclass.ts:641</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2272,7 +2278,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L599">fclass.ts:599</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L625">fclass.ts:625</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2295,10 +2301,54 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						</ul>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.objecttoarray" class="tsd-anchor"></a>
+						<h3>object<wbr>ToArray</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">object<wbr>ToArray<span class="tsd-signature-symbol">(</span>object<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, sortPredicateFn<span class="tsd-signature-symbol">?: </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a>, sortFn<span class="tsd-signature-symbol">?: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L601">fclass.ts:601</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Convert an object to an array.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>object: <span class="tsd-signature-type">Object</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<p>Object</p>
+										</div>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> sortPredicateFn: <a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a></h5>
+										<div class="tsd-comment tsd-typography">
+											<p>Predicate function for sorting</p>
+										</div>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> sortFn: <a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a></h5>
+										<div class="tsd-comment tsd-typography">
+											<p>Sort function</p>
+										</div>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
+								<p>Array</p>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 						<a name="_fclass_.fc.partial" class="tsd-anchor"></a>
 						<h3>partial</h3>
 						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-							<li class="tsd-signature tsd-kind-icon">partial<span class="tsd-signature-symbol">(</span>arity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a></li>
+							<li class="tsd-signature tsd-kind-icon">partial<span class="tsd-signature-symbol">(</span>arity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
 						</ul>
 						<ul class="tsd-descriptions">
 							<li class="tsd-description">
@@ -2319,12 +2369,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 										<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 								</ul>
-								<h4 class="tsd-returns-title">Returns <a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a>
-									<span class="tsd-signature-symbol"> | </span>
-									<a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a>
-									<span class="tsd-signature-symbol"> | </span>
-									<a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a>
-								</h4>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
 							</li>
 						</ul>
 					</section>
@@ -2332,7 +2377,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 						<a name="_fclass_.fc.partialp" class="tsd-anchor"></a>
 						<h3>partialP</h3>
 						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-							<li class="tsd-signature tsd-kind-icon">partialP<span class="tsd-signature-symbol">(</span>arity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a></li>
+							<li class="tsd-signature tsd-kind-icon">partialP<span class="tsd-signature-symbol">(</span>arity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fn<span class="tsd-signature-symbol">: </span><a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a><span class="tsd-signature-symbol"> | </span><a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Function</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></li>
 						</ul>
 						<ul class="tsd-descriptions">
 							<li class="tsd-description">
@@ -2353,12 +2398,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 										<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									</li>
 								</ul>
-								<h4 class="tsd-returns-title">Returns <a href="index.html#_fclass_.fc.function2" class="tsd-signature-type">Function2</a>
-									<span class="tsd-signature-symbol"> | </span>
-									<a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a>
-									<span class="tsd-signature-symbol"> | </span>
-									<a href="index.html#_fclass_.fc.functionv" class="tsd-signature-type">FunctionV</a>
-								</h4>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
 							</li>
 						</ul>
 					</section>
@@ -2372,7 +2412,7 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L651">fclass.ts:651</a></li>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L677">fclass.ts:677</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2390,6 +2430,40 @@ input[type=checkbox]:checked + .tsd-widget:before { background-position: -160px 
 									</li>
 									<li>
 										<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+						<a name="_fclass_.fc.sort" class="tsd-anchor"></a>
+						<h3>sort</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+							<li class="tsd-signature tsd-kind-icon">sort<span class="tsd-signature-symbol">(</span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span>, predicateFn<span class="tsd-signature-symbol">?: </span><a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a>, sortFn<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/zalando/fclass/blob/master/src/fclass.ts#L701">fclass.ts:701</a></li>
+									</ul>
+								</aside>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Sort an array by a predicate function.</p>
+									</div>
+								</div>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>array: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> predicateFn: <a href="index.html#_fclass_.fc.function1" class="tsd-signature-type">Function1</a></h5>
+									</li>
+									<li>
+										<h5><span class="tsd-flag ts-flagOptional">Optional</span> sortFn: <span class="tsd-signature-type">Function</span></h5>
 									</li>
 								</ul>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>

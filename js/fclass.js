@@ -533,14 +533,14 @@ var fc;
     function arrayToObject(array, keyFn, reduceFn, reduceInitialValue) {
         var obj = {};
         var argsLen = arguments.length;
-        var indeces = {};
+        var indices = {};
         array.forEach(function (e, i, arr) {
             var key = keyFn ? keyFn(e, i, arr) : i;
             if (key || (key === 0) || (key === '')) {
                 if (reduceFn) {
                     if (key in obj) {
-                        obj[key] = reduceFn(obj[key], e, indeces[key], array);
-                        indeces[key]++;
+                        obj[key] = reduceFn(obj[key], e, indices[key], array);
+                        indices[key]++;
                     }
                     else {
                         if (argsLen >= 4) {
@@ -549,7 +549,7 @@ var fc;
                         else {
                             obj[key] = e;
                         }
-                        indeces[key] = 1;
+                        indices[key] = 1;
                     }
                 }
                 else {
@@ -560,6 +560,29 @@ var fc;
         return obj;
     }
     fc.arrayToObject = arrayToObject;
+    /**
+     * Convert an object to an array.
+     *
+     * @param object            Object
+     * @param sortPredicateFn   Predicate function for sorting
+     * @param sortFn            Sort function
+     * @returns                 Array
+     */
+    function objectToArray(object, sortPredicateFn, sortFn) {
+        var wrappers = Object.keys(object).map(function (key) {
+            return {
+                key: key,
+                value: object[key]
+            };
+        });
+        var sorted = fc.sort(wrappers, function (wrapper) {
+            return sortPredicateFn ? sortPredicateFn(wrapper.value, wrapper.key) : wrapper.key;
+        }, sortFn);
+        return sorted.map(function (wrapper) {
+            return wrapper.value;
+        });
+    }
+    fc.objectToArray = objectToArray;
     /**
      * Converts an array iterator function into an object iterator function.
      *
@@ -638,6 +661,40 @@ var fc;
         }
     }
     fc.every = every;
+    /**
+     * Sort an array by a predicate function.
+     */
+    function sort(array, predicateFn, sortFn) {
+        var wrappers = array.map(function (e, i, a) {
+            return {
+                element: e,
+                index: i,
+                pre: predicateFn ? predicateFn(e, i, a) : e
+            };
+        });
+        wrappers.sort(function (a, b) {
+            var res;
+            var ap = a.pre;
+            var bp = b.pre;
+            if (sortFn) {
+                res = sortFn(ap, bp);
+            }
+            else if (ap < bp) {
+                res = -1;
+            }
+            else if (ap > bp) {
+                res = 1;
+            }
+            if (!res) {
+                res = a.index - b.index;
+            }
+            return res;
+        });
+        return wrappers.map(function (wrapper) {
+            return wrapper.element;
+        });
+    }
+    fc.sort = sort;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map
