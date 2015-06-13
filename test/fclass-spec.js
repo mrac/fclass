@@ -1025,7 +1025,7 @@ describe('fc', function () {
     });
 
 
-    fdescribe('objectIterator()', function () {
+    describe('objectIterator()()', function () {
 
         it('should convert array map to object map', function () {
             var map, result, obj;
@@ -1056,4 +1056,37 @@ describe('fc', function () {
 
     });
 
+
+    describe('map()', function () {
+
+        it('should map array items', function () {
+            var fn = function (e, i, a) {
+                return e + ',' + i + ',' + JSON.stringify(a);
+            };
+
+            var arr = [1, 2, 3];
+            var expected = ['1,0,[1,2,3]', '2,1,[1,2,3]', '3,2,[1,2,3]'];
+
+            expect(fc.map(arr, fn)).toEqual(expected);
+
+        });
+
+
+        it('should map object properties', function () {
+            var fn = function (v, k, o) {
+                return v + ',' + k + ',' + JSON.stringify(o);
+            };
+
+            var obj = {one: 1, two: 2, three: 3};
+            var expected = {
+                one: '1,one,{"one":1,"two":2,"three":3}',
+                two: '2,two,{"one":1,"two":2,"three":3}',
+                three: '3,three,{"one":1,"two":2,"three":3}'
+            };
+
+            expect(fc.map(obj, fn)).toEqual(expected);
+
+        });
+
+    });
 });

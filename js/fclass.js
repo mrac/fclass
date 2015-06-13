@@ -578,6 +578,23 @@ var fc;
         };
     }
     fc.objectIterator = objectIterator;
+    /**
+     * Map object properties.
+     */
+    function map(object, predicate, context) {
+        var wrappers, keys, newKeys, newObject;
+        if (Array.isArray(object)) {
+            return Array.prototype.map.call(object, predicate, context);
+        }
+        else {
+            newObject = {};
+            Object.keys(object).forEach(function (key) {
+                newObject[key] = predicate(object[key], key, object);
+            });
+            return newObject;
+        }
+    }
+    fc.map = map;
 })(fc || (fc = {}));
 
 //# sourceMappingURL=fclass.js.map

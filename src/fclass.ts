@@ -602,4 +602,21 @@ module fc {
         };
     }
 
+
+    /**
+     * Map object properties.
+     */
+    export function map(object:Object|any[], predicate:Function, context?:any):any {
+        var wrappers, keys, newKeys, newObject;
+        if (Array.isArray(object)) {
+            return Array.prototype.map.call(object, predicate, context);
+        } else {
+            newObject = {};
+            Object.keys(object).forEach(function (key) {
+                newObject[key] = predicate(object[key], key, object);
+            });
+            return newObject;
+        }
+    }
+
 }
