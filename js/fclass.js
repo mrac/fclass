@@ -506,6 +506,33 @@ var fc;
         };
     }
     fc.compose21 = compose21;
+    /**
+     * Returns a function that calculates two unary-function results.
+     *
+     * @param fn    Calculation
+     * @returns     Function calculation
+     */
+    function functions(fn) {
+        return function (fn1, fn2) {
+            return function (element, index, array) {
+                return fn(fn1(element, index, array), fn2(element, index, array));
+            };
+        };
+    }
+    fc.functions = functions;
+    /**
+     * Combines two unary-function results with 'and' operator.
+     *
+     * @param fn1   Unary function 1
+     * @param fn2   Unary function 2
+     * @returns     Unary function which is the combination of the two functions
+     */
+    function andFunctions(fn1, fn2) {
+        return functions(function (a, b) {
+            return a && b;
+        })(fn1, fn2);
+    }
+    fc.andFunctions = andFunctions;
     function findValue(array, calc, fn) {
         var values, found, index;
         if (fn) {

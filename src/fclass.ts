@@ -540,6 +540,35 @@ module fc {
     }
 
 
+    /**
+     * Returns a function that calculates two unary-function results.
+     *
+     * @param fn    Calculation
+     * @returns     Function calculation
+     */
+    export function functions(fn:Function2):Function2 {
+        return function (fn1:Function1, fn2:Function1):Function1 {
+            return function (element, index, array) {
+                return fn(fn1(element, index, array), fn2(element, index, array));
+            };
+        };
+    }
+
+
+    /**
+     * Combines two unary-function results with 'and' operator.
+     *
+     * @param fn1   Unary function 1
+     * @param fn2   Unary function 2
+     * @returns     Unary function which is the combination of the two functions
+     */
+    export function andFunctions(fn1:Function1, fn2:Function1):Function1 {
+        return functions(function (a, b) {
+            return a && b;
+        })(fn1, fn2);
+    }
+
+
     export function findValue(array:any[], calc?:FunctionV, fn?:Function1):any {
         var values, found, index;
         if (fn) {

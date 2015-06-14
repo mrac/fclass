@@ -950,6 +950,46 @@ describe('fc', function () {
     });
 
 
+    describe('functions()', function () {
+
+        it('should combine 1-argument function with 1-argument function by a custom 2-argument function', function () {
+
+            var addFunctions = fc.functions(function (a, b) {
+                return a + b;
+            });
+
+            var aPlusB = addFunctions(fc.value('a'), fc.value('b'));
+
+            expect(aPlusB({a: 1, b: 7})).toEqual(8);
+
+            // used with map()
+            var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {a: 7, b: 0}];
+            expect(arr.map(aPlusB)).toEqual([14, -8, 7]);
+
+        });
+
+    });
+
+
+    describe('andFunctions()', function () {
+
+        it('should combine two unary-function results with AND operator', function () {
+
+            var aAndB = fc.andFunctions(fc.key('a'), fc.key('b'));
+
+            expect(!!aAndB({a: 1, b: 7})).toEqual(true);
+            expect(!!aAndB({x: 1, b: 7})).toEqual(false);
+            expect(!!aAndB({a: 1, y: 7})).toEqual(false);
+
+            // used with filter()
+            var arr = [{a: 10, b: 4}, {a: 2, b: -10}, {x: 7, b: 0}, {a: -3, y: 20}];
+            expect(arr.filter(aAndB)).toEqual([{a: 10, b: 4}, {a: 2, b: -10}]);
+
+        });
+
+    });
+
+
     describe('findValue()', function () {
 
         it('should return maximum of 2 values', function () {
