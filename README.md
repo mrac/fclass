@@ -17,7 +17,8 @@ To build/test run:
 ===
 #### Documentation
 
-http://zalando.github.io/fclass
+* Overview: https://github.com/zalando/fclass/doc/README.md
+* API Docs: http://zalando.github.io/fclass
 
 ===
 #### Polyfills

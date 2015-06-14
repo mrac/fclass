@@ -5,10 +5,10 @@ describe('FC', function () {
 
         it('functionality as a first-class function with FC.has()', function () {
 
-            var mathClasses = {
+            var maths = {
                 allStudents: students,
-                predicate: function (x) {
-                    return x;
+                predicate: function () {
+                    return true;
                 },
                 getStudents: function () {
                     return this.allStudents.filter(this.predicate);
@@ -16,21 +16,21 @@ describe('FC', function () {
             };
 
             // by default the predicate includes all students
-            expect(mathClasses.getStudents()).toEqual(students);
+            expect(maths.getStudents()).toEqual(students);
 
             // set the predicate to match specific properties
-            mathClasses.predicate = FC.has({interest: 'math', age: 17});
+            maths.predicate = FC.has({interest: 'math', age: 17});
 
-            expect(mathClasses.getStudents()).toEqual([
+            expect(maths.getStudents()).toEqual([
                 {interest: 'math', age: 17, name: "Brendan"}
             ]);
 
             // change the predicate to a custom function
-            mathClasses.predicate = function (x) {
+            maths.predicate = function (x) {
                 return x.age > 22;
             };
 
-            expect(mathClasses.getStudents()).toEqual([
+            expect(maths.getStudents()).toEqual([
                 {interest: 'cars', age: 28, name: "Peter"},
                 {interest: 'programming', age: 26, name: "Dustin"},
                 {interest: 'math', age: 51, name: "John"},
@@ -43,12 +43,12 @@ describe('FC', function () {
         });
 
 
-        it('processing can be build from various parts', function () {
+        it('processing can be optimized with FC.addFunctions()', function () {
 
-            var mathClasses = {
+            var maths = {
                 allStudents: students,
-                predicates: [function (x) {
-                    return x;
+                predicates: [function () {
+                    return true;
                 }],
                 getStudents: function () {
                     return this.allStudents.filter(this.predicates.reduce(FC.andFunctions));
@@ -56,23 +56,76 @@ describe('FC', function () {
             };
 
             // by default the predicate includes all students
-            expect(mathClasses.getStudents()).toEqual(students);
+            expect(maths.getStudents()).toEqual(students);
 
             // add the predicate to match specific properties
-            mathClasses.predicates.push(FC.has({interest: 'math'}));
+            maths.predicates.push(FC.has({interest: 'math'}));
 
             // add another custom predicate
-            mathClasses.predicates.push(function (x) {
+            maths.predicates.push(function (x) {
                 return x.age > 22;
             });
 
-            expect(mathClasses.getStudents()).toEqual([
+            expect(maths.getStudents()).toEqual([
                 {interest: 'math', age: 51, name: "John"},
                 {interest: 'math', age: 34, name: "Jeremy"},
                 {interest: 'math', age: 26, name: "Dean"}
             ]);
 
         });
+
+
+        it('functionality can be extended with FC.compose()', function () {
+
+            var alphabet = {
+                firstHalf: function (name) {
+                    var firstLetter = name[0].toLowerCase();
+                    return firstLetter >= 'a' && firstLetter <= 'm';
+                }
+            };
+
+            var maths = {
+                allStudents: students,
+                predicate: function () {
+                    return true;
+                },
+                getStudents: function () {
+                    return this.allStudents.filter(this.predicate);
+                }
+            };
+
+            // by default the predicate includes all students
+            expect(maths.getStudents()).toEqual(students);
+
+            // add the predicate to match a specific name
+            maths.predicate = FC.value('name', 'John');
+            // or
+            maths.predicate = FC.compose(FC.value('name'), FC.identity('John'));
+
+            expect(maths.getStudents()).toEqual([
+                {interest: 'math', age: 51, name: "John"}
+            ]);
+
+            // change the predicate to match the first half of the alphabet
+            maths.predicate = FC.compose(FC.value('name'), alphabet.firstHalf);
+
+            expect(maths.getStudents()).toEqual([
+                {interest: 'math', age: 22, name: "Jeff"},
+                {interest: 'math', age: 17, name: "Brendan"},
+                {interest: 'programming', age: 18, name: "David"},
+                {interest: 'math', age: 14, name: "Douglas"},
+                {interest: 'programming', age: 26, name: "Dustin"},
+                {interest: 'math', age: 51, name: "John"},
+                {interest: 'math', age: 34, name: "Jeremy"},
+                {interest: 'programming', age: 33, name: "Brad"},
+                {interest: 'math', age: 22, name: "Julie"},
+                {interest: 'cars', age: 14, name: "Dmitry"},
+                {interest: 'math', age: 26, name: "Dean"},
+                {interest: 'programming', age: 45, name: "Lukas"}
+            ]);
+
+        });
+
 
     });
 

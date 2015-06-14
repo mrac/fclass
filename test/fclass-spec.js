@@ -898,11 +898,11 @@ describe('FC', function () {
     });
 
 
-    describe('compose11()', function () {
+    describe('compose()', function () {
 
         it('should compose 1-argument function with 2-argument function', function () {
 
-            var notA = FC.compose11(FC.value('a'), FC.not());
+            var notA = FC.compose(FC.value('a'), FC.not());
             expect(notA({a: 1, b: 'a'})).toEqual(false);
             expect(notA({x: 1, y: 5})).toEqual(true);
 
@@ -915,7 +915,7 @@ describe('FC', function () {
                 return [element, index, array];
             };
             var expected = [[[10, 0, [10, 20, 30]], 0, [10, 20, 30]], [[20, 1, [10, 20, 30]], 1, [10, 20, 30]], [[30, 2, [10, 20, 30]], 2, [10, 20, 30]]];
-            expect([10, 20, 30].map(FC.compose11(tellAll, tellAll))).toEqual(expected);
+            expect([10, 20, 30].map(FC.compose(tellAll, tellAll))).toEqual(expected);
 
         });
 

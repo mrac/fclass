@@ -494,12 +494,12 @@ var FC;
         };
     }
     FC.compose12 = compose12;
-    function compose11(fn1, fn2) {
+    function compose(fn1, fn2) {
         return function (element, index, array) {
             return fn2(fn1(element, index, array), index, array);
         };
     }
-    FC.compose11 = compose11;
+    FC.compose = compose;
     function compose21(fn1, fn2) {
         return function (a, b, index, array) {
             return fn2(fn1(a, b, index, array), index, array);

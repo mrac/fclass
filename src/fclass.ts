@@ -526,7 +526,7 @@ module FC {
     }
 
 
-    export function compose11(fn1:Function1, fn2:Function1):Function1 {
+    export function compose(fn1:Function1, fn2:Function1):Function1 {
         return function (element, index, array) {
             return fn2(fn1(element, index, array), index, array);
         };
