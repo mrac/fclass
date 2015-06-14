@@ -339,6 +339,39 @@ describe('FC', function () {
 
         });
 
+
+        it('should access object by indicating if it has given key-function(value) pairs', function () {
+            var obj = {a: 10, b: 0, '': 100};
+
+            expect(FC.has({a: FC.identity(10)})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(FC.has({b: FC.identity(0)})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(FC.has({'': FC.identity(100)})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(FC.has({a: FC.identity(0)})(obj)).toEqual(null);
+            expect(FC.has({b: FC.identity(10)})(obj)).toEqual(null);
+            expect(FC.has({w: FC.identity(1)})(obj)).toEqual(null);
+
+            var greaterThan5 = function (x) {
+                return x > 5;
+            };
+
+            expect(FC.has({a: greaterThan5})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(FC.has({b: greaterThan5})(obj)).toEqual(null);
+            expect(FC.has({'': greaterThan5})(obj)).toEqual({a: 10, b: 0, '': 100});
+            expect(FC.has({w: greaterThan5})(obj)).toEqual(null);
+
+
+            var arr = [{a: 4, b: 6}, {a: 7, b: 0}, {a: 10, b: 7}, {w: 10, '': 3}, {'': 0}];
+
+            // map() will map objects by containing key-value pairs
+            expect(arr.map(FC.has({a: 10, b: greaterThan5}))).toEqual([null, null, {a: 10, b: 7}, null, null]);
+            // filter() will filter objects by containing key-value pairs
+            expect(arr.filter(FC.has({a: 10, b: greaterThan5}))).toEqual([{a: 10, b: 7}]);
+            // find() will find object by containing keys-value pairs
+            expect(arr.find(FC.has({a: 10, b: greaterThan5}))).toEqual({a: 10, b: 7});
+            // findIndex() will find index by containing keys-value pairs
+            expect(arr.findIndex(FC.has({a: 10, b: greaterThan5}))).toEqual(2);
+
+        });
     });
 
 

@@ -291,9 +291,15 @@ module FC {
 
     export function has(obj:Object):Function1 {
         return function (e) {
+            var comparison;
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    if (e && (e[key] !== obj[key])) return null;
+                    if (typeof obj[key] === 'function') {
+                        comparison = obj[key](e[key], key, e);
+                    } else {
+                        comparison = e[key] === obj[key];
+                    }
+                    if (e && !comparison) return null;
                 }
             }
             return e;
