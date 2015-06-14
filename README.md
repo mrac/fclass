@@ -21,6 +21,11 @@ To build/test run:
 * API Docs: http://zalando.github.io/fclass
 
 ===
+#### Playground
+
+Play around with FClass in Plunker: http://plnkr.co/edit/ceyyw4sr96D3tBaXbT5P?p=preview
+
+===
 #### Polyfills
 
 For legacy JavaScript engines *es5-shim* and *json3* are used to support ECMAScript 5 and JSON.
