@@ -43,7 +43,7 @@ describe('FC', function () {
         });
 
 
-        it('processing can be optimized with FC.addFunctions()', function () {
+        it('processing can be optimized with FC.andFunctions()', function () {
 
             var maths = {
                 allStudents: students,
@@ -122,6 +122,34 @@ describe('FC', function () {
                 {interest: 'cars', age: 14, name: "Dmitry"},
                 {interest: 'math', age: 26, name: "Dean"},
                 {interest: 'programming', age: 45, name: "Lukas"}
+            ]);
+
+        });
+
+
+        it('custom functions can be easily built', function () {
+
+            var stringStartsWith = function (text, searchString) {
+                return text.indexOf(searchString, 0) === 0;
+            };
+
+            var startsWith = FC.curry(1, stringStartsWith);
+
+            var getName = FC.value("name");
+            var comparison = FC.identity("John");
+
+            expect(students.filter(FC.compose(getName, comparison))).toEqual([
+                {interest: 'math', age: 51, name: "John"}
+            ]);
+
+            // change comparison method to custom function
+            comparison = startsWith("J");
+
+            expect(students.filter(FC.compose(getName, comparison))).toEqual([
+                {interest: 'math', age: 22, name: "Jeff"},
+                {interest: 'math', age: 51, name: "John"},
+                {interest: 'math', age: 34, name: "Jeremy"},
+                {interest: 'math', age: 22, name: "Julie"}
             ]);
 
         });

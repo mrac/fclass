@@ -80,17 +80,32 @@ We can compose functionality from different methods, rather then concurrently ap
 
 **3) functionality can be extended**
 
-Different parts of processing can be decaupled. We don't have to duplicate functionality where it is used in a slightly different way.
+Different parts of processing can be decoupled. We don't have to duplicate functionality where it is used in a slightly different way.
 It gives us a lot more flexibility - during development and in run-time.
 
     var getName = FC.value("name");
-    var comparison = alphabet.equalTo("John");
+    var comparison = FC.identity("John");
         
 	var selectedStudents = students.filter(FC.compose(getName, comparison);
 	
-	// change comparison method
-	comparison = alphabet.startsWith("J");
+	comparison = startsWith("J");
 	
 	// re-apply the same filtering 
 	selectedStudents = students.filter(FC.compose(getName, comparison));
 	
+
+**4) custom functions can be easily constructed**
+
+All that is needed can be built on the fly, or packaged in custom libraries.
+
+    // the startsWith() method from the above example can be built
+    
+    var stringStartsWith = function (text, searchString) {
+        return text.indexOf(searchString, 0) === 0;
+    };
+    
+    var startsWith = FC.curry(1, stringStartsWith);
+    
+    ["John", "Jeff", "Douglas"].filter(startsWith("J"));
+    
+
