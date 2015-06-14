@@ -106,6 +106,17 @@ var FC;
     }
     FC.index = index;
     /**
+     * Returns the unary function returning the function indicating if index is one of the provided numbers.
+     *
+     * @param includedIn        Array of indices
+     */
+    function indices(includedIn) {
+        return function (e, i) {
+            return includedIn.indexOf(i) !== -1;
+        };
+    }
+    FC.indices = indices;
+    /**
      * Returns the binary function returning the index
      *
      * `(x, y) => index`
@@ -372,14 +383,14 @@ var FC;
     function curry(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return FC.partial.apply(FC, [arity, fn].concat(args));
+            return partial.apply(FC, [arity, fn].concat(args));
         };
     }
     FC.curry = curry;
     function curryP(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return FC.partialP.apply(FC, [arity, fn].concat(args));
+            return partialP.apply(FC, [arity, fn].concat(args));
         };
     }
     FC.curryP = curryP;
@@ -558,7 +569,7 @@ var FC;
                 return calc.apply(null, array);
             }
             else {
-                index = array.findIndex(FC.identity());
+                index = array.findIndex(identity());
                 return (index !== -1) ? array[index] : undefined;
             }
         }
@@ -618,7 +629,7 @@ var FC;
                 value: object[key]
             };
         });
-        var sorted = FC.sort(wrappers, function (wrapper) {
+        var sorted = sort(wrappers, function (wrapper) {
             return sortPredicateFn ? sortPredicateFn(wrapper.value, wrapper.key) : wrapper.key;
         }, sortFn);
         return sorted.map(function (wrapper) {
@@ -688,7 +699,7 @@ var FC;
             return Array.prototype.some.call(object, predicate, context);
         }
         else {
-            return FC.objectIterator(Array.prototype.some)(object, predicate, context);
+            return objectIterator(Array.prototype.some)(object, predicate, context);
         }
     }
     FC.some = some;
@@ -700,7 +711,7 @@ var FC;
             return Array.prototype.every.call(object, predicate, context);
         }
         else {
-            return FC.objectIterator(Array.prototype.every)(object, predicate, context);
+            return objectIterator(Array.prototype.every)(object, predicate, context);
         }
     }
     FC.every = every;
@@ -738,6 +749,22 @@ var FC;
         });
     }
     FC.sort = sort;
+    // ---------------------------------- private functions -----------------------------------
+    function extendFunction(fn) {
+        /** @methodOf FC.filter */
+        var curry = function () {
+            var self = this;
+            var args = Array.prototype.slice.call(arguments);
+            return function (x) {
+                return self.apply(this, [x].concat(args));
+            };
+        };
+        Object.defineProperty(fn, 'curry', { value: curry });
+    }
+    extendFunction(map);
+    extendFunction(filter);
+    extendFunction(some);
+    extendFunction(every);
 })(FC || (FC = {}));
 
 //# sourceMappingURL=fclass.js.map

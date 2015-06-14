@@ -62,11 +62,32 @@ describe('FC', function () {
 
         it('should return the index', function () {
             expect(FC.index()({a: 1}, 4)).toEqual(4);
+
+            // with map
+            expect(['one', 'two', 'three'].map(FC.index())).toEqual([0, 1, 2]);
         });
 
         it('should test if the index is equal to provided number', function () {
             expect(FC.index(4)({a: 1}, 4)).toEqual(true);
             expect(FC.index(1)({a: 1}, 4)).toEqual(false);
+
+            // with filter
+            expect(['one', 'two', 'three'].filter(FC.index(0))).toEqual(['one']);
+        });
+
+    });
+
+
+    describe('indices()()', function () {
+
+        it('should test if the index is included in the provided array', function () {
+            expect(FC.indices([0, 1, 2])({a: 1}, 0)).toEqual(true);
+            expect(FC.indices([0, 1, 2])({a: 1}, 1)).toEqual(true);
+            expect(FC.indices([0, 1, 2])({a: 1}, 2)).toEqual(true);
+            expect(FC.indices([0, 1, 2])({a: 1}, 3)).toEqual(false);
+
+            // with filter
+            expect(['one', 'two', 'three'].filter(FC.indices([0, 2]))).toEqual(['one', 'three']);
         });
 
     });
