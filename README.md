@@ -17,7 +17,7 @@ To build/test run:
 ===
 #### Documentation
 
-* Overview: https://github.com/zalando/fclass/doc/README.md
+* Overview: https://github.com/zalando/fclass/blob/master/doc/README.md
 * API Docs: http://zalando.github.io/fclass
 
 ===
