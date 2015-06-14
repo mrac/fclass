@@ -1,6 +1,6 @@
 /// <reference path="es6.d.ts" />
 /*
- * fclass
+ * FClass
  *
  * JavaScript utility library that gives support for manipulating
  * JSON data structures by leveraging the functional approach
@@ -27,12 +27,12 @@
  *
  */
 /**
- * Main module containing all fclass methods.
+ * Main module containing all FClass methods.
  *
  * @preferred
  */
-var fc;
-(function (fc) {
+var FC;
+(function (FC) {
     /**
      * Returns the identity function
      *
@@ -56,7 +56,7 @@ var fc;
             };
         }
     }
-    fc.identity = identity;
+    FC.identity = identity;
     /**
      * Returns the negating function
      *
@@ -80,7 +80,7 @@ var fc;
             };
         }
     }
-    fc.not = not;
+    FC.not = not;
     /**
      * Returns the unary function returning the index
      *
@@ -104,7 +104,7 @@ var fc;
             };
         }
     }
-    fc.index = index;
+    FC.index = index;
     /**
      * Returns the binary function returning the index
      *
@@ -128,7 +128,7 @@ var fc;
             };
         }
     }
-    fc.index2 = index2;
+    FC.index2 = index2;
     /**
      * Returns a function returning the key name of the object
      * if the provided property exists,
@@ -166,7 +166,7 @@ var fc;
             }
         }
     }
-    fc.key = key;
+    FC.key = key;
     /**
      * Returns a function returning the property value of the object
      * if the provided property exists,
@@ -204,7 +204,7 @@ var fc;
             }
         }
     }
-    fc.value = value;
+    FC.value = value;
     /**
      * Returns a function returning the object
      * if the provided property exists,
@@ -242,7 +242,7 @@ var fc;
             }
         }
     }
-    fc.object = object;
+    FC.object = object;
     function has(obj) {
         return function (e) {
             for (var key in obj) {
@@ -254,7 +254,7 @@ var fc;
             return e;
         };
     }
-    fc.has = has;
+    FC.has = has;
     function invoke(methodName) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
@@ -264,19 +264,19 @@ var fc;
             return e[methodName].apply(e, args);
         };
     }
-    fc.invoke = invoke;
+    FC.invoke = invoke;
     function add(negative) {
         return function (a, b) {
             return negative ? -(a + b) : a + b;
         };
     }
-    fc.add = add;
+    FC.add = add;
     function subtract(negative) {
         return function (a, b) {
             return negative ? b - a : a - b;
         };
     }
-    fc.subtract = subtract;
+    FC.subtract = subtract;
     function compareString(negative) {
         if (negative) {
             return function (a, b) {
@@ -293,7 +293,7 @@ var fc;
             };
         }
     }
-    fc.compareString = compareString;
+    FC.compareString = compareString;
     function compare(negative) {
         if (negative) {
             return function (a, b) {
@@ -306,13 +306,13 @@ var fc;
             };
         }
     }
-    fc.compare = compare;
+    FC.compare = compare;
     function flip(fn) {
         return function (a, b, index, arr) {
             return fn(b, a, index, arr);
         };
     }
-    fc.flip = flip;
+    FC.flip = flip;
     function partial(arity, fn) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
@@ -339,7 +339,7 @@ var fc;
             };
         }
     }
-    fc.partial = partial;
+    FC.partial = partial;
     function partialP(arity, fn) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
@@ -361,21 +361,21 @@ var fc;
             };
         }
     }
-    fc.partialP = partialP;
+    FC.partialP = partialP;
     function curry(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.partial.apply(fc, [arity, fn].concat(args));
+            return FC.partial.apply(FC, [arity, fn].concat(args));
         };
     }
-    fc.curry = curry;
+    FC.curry = curry;
     function curryP(arity, fn) {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.partialP.apply(fc, [arity, fn].concat(args));
+            return FC.partialP.apply(FC, [arity, fn].concat(args));
         };
     }
-    fc.curryP = curryP;
+    FC.curryP = curryP;
     function objectCalc(fn, merge) {
         return function (a, b) {
             var obj = {};
@@ -404,7 +404,7 @@ var fc;
             return obj;
         };
     }
-    fc.objectCalc = objectCalc;
+    FC.objectCalc = objectCalc;
     function arrayCalc(fn, merge) {
         return function (a, b) {
             var long, short;
@@ -434,7 +434,7 @@ var fc;
             }
         };
     }
-    fc.arrayCalc = arrayCalc;
+    FC.arrayCalc = arrayCalc;
     function clone(deep) {
         if (deep) {
             return function (source) {
@@ -469,7 +469,7 @@ var fc;
             };
         }
     }
-    fc.clone = clone;
+    FC.clone = clone;
     function equal(deep) {
         if (deep) {
             return function (a, b) {
@@ -487,25 +487,25 @@ var fc;
             };
         }
     }
-    fc.equal = equal;
+    FC.equal = equal;
     function compose12(fn1, fn2) {
         return function (a, b, index, array) {
             return fn2(fn1(a, index, array), fn1(b, index, array), index, array);
         };
     }
-    fc.compose12 = compose12;
+    FC.compose12 = compose12;
     function compose11(fn1, fn2) {
         return function (element, index, array) {
             return fn2(fn1(element, index, array), index, array);
         };
     }
-    fc.compose11 = compose11;
+    FC.compose11 = compose11;
     function compose21(fn1, fn2) {
         return function (a, b, index, array) {
             return fn2(fn1(a, b, index, array), index, array);
         };
     }
-    fc.compose21 = compose21;
+    FC.compose21 = compose21;
     /**
      * Returns a function that calculates two unary-function results.
      *
@@ -519,7 +519,7 @@ var fc;
             };
         };
     }
-    fc.functions = functions;
+    FC.functions = functions;
     /**
      * Combines two unary-function results with 'and' operator.
      *
@@ -532,7 +532,7 @@ var fc;
             return a && b;
         })(fn1, fn2);
     }
-    fc.andFunctions = andFunctions;
+    FC.andFunctions = andFunctions;
     function findValue(array, calc, fn) {
         var values, found, index;
         if (fn) {
@@ -551,12 +551,12 @@ var fc;
                 return calc.apply(null, array);
             }
             else {
-                index = array.findIndex(fc.identity());
+                index = array.findIndex(FC.identity());
                 return (index !== -1) ? array[index] : undefined;
             }
         }
     }
-    fc.findValue = findValue;
+    FC.findValue = findValue;
     /**
      * Convert an array to an object.
      *
@@ -595,7 +595,7 @@ var fc;
         });
         return obj;
     }
-    fc.arrayToObject = arrayToObject;
+    FC.arrayToObject = arrayToObject;
     /**
      * Convert an object to an array.
      *
@@ -611,14 +611,14 @@ var fc;
                 value: object[key]
             };
         });
-        var sorted = fc.sort(wrappers, function (wrapper) {
+        var sorted = FC.sort(wrappers, function (wrapper) {
             return sortPredicateFn ? sortPredicateFn(wrapper.value, wrapper.key) : wrapper.key;
         }, sortFn);
         return sorted.map(function (wrapper) {
             return wrapper.value;
         });
     }
-    fc.objectToArray = objectToArray;
+    FC.objectToArray = objectToArray;
     /**
      * Converts an array iterator function into an object iterator function.
      *
@@ -636,7 +636,7 @@ var fc;
             });
         };
     }
-    fc.objectIterator = objectIterator;
+    FC.objectIterator = objectIterator;
     /**
      * Map array items or object properties.
      */
@@ -653,7 +653,7 @@ var fc;
             return newObject;
         }
     }
-    fc.map = map;
+    FC.map = map;
     /**
      * Filter array items or object properties.
      */
@@ -672,7 +672,7 @@ var fc;
             return newObject;
         }
     }
-    fc.filter = filter;
+    FC.filter = filter;
     /**
      * 'Some' iterator for array items or object properties.
      */
@@ -681,10 +681,10 @@ var fc;
             return Array.prototype.some.call(object, predicate, context);
         }
         else {
-            return fc.objectIterator(Array.prototype.some)(object, predicate, context);
+            return FC.objectIterator(Array.prototype.some)(object, predicate, context);
         }
     }
-    fc.some = some;
+    FC.some = some;
     /**
      * 'Every' iterator for array items or object properties.
      */
@@ -693,10 +693,10 @@ var fc;
             return Array.prototype.every.call(object, predicate, context);
         }
         else {
-            return fc.objectIterator(Array.prototype.every)(object, predicate, context);
+            return FC.objectIterator(Array.prototype.every)(object, predicate, context);
         }
     }
-    fc.every = every;
+    FC.every = every;
     /**
      * Sort an array by a predicate function.
      */
@@ -730,7 +730,7 @@ var fc;
             return wrapper.element;
         });
     }
-    fc.sort = sort;
-})(fc || (fc = {}));
+    FC.sort = sort;
+})(FC || (FC = {}));
 
 //# sourceMappingURL=fclass.js.map

@@ -1,9 +1,9 @@
-describe('fc', function () {
+describe('FC', function () {
 
 
     describe('Objects as array items', function () {
 
-        it('functionality as a first-class function with fc.has()', function () {
+        it('functionality as a first-class function with FC.has()', function () {
 
             var mathClasses = {
                 allStudents: students,
@@ -19,7 +19,7 @@ describe('fc', function () {
             expect(mathClasses.getStudents()).toEqual(students);
 
             // set the predicate to match specific properties
-            mathClasses.predicate = fc.has({interest: 'math', age: 17});
+            mathClasses.predicate = FC.has({interest: 'math', age: 17});
 
             expect(mathClasses.getStudents()).toEqual([
                 {interest: 'math', age: 17, name: "Brendan"}
@@ -51,7 +51,7 @@ describe('fc', function () {
                     return x;
                 }],
                 getStudents: function () {
-                    return this.allStudents.filter(this.predicates.reduce(fc.andFunctions));
+                    return this.allStudents.filter(this.predicates.reduce(FC.andFunctions));
                 }
             };
 
@@ -59,7 +59,7 @@ describe('fc', function () {
             expect(mathClasses.getStudents()).toEqual(students);
 
             // add the predicate to match specific properties
-            mathClasses.predicates.push(fc.has({interest: 'math'}));
+            mathClasses.predicates.push(FC.has({interest: 'math'}));
 
             // add another custom predicate
             mathClasses.predicates.push(function (x) {

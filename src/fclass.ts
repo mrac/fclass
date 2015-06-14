@@ -1,7 +1,7 @@
 /// <reference path="es6.d.ts" />
 
 /*
- * fclass
+ * FClass
  *
  * JavaScript utility library that gives support for manipulating
  * JSON data structures by leveraging the functional approach
@@ -30,11 +30,11 @@
 
 
 /**
- * Main module containing all fclass methods.
+ * Main module containing all FClass methods.
  *
  * @preferred
  */
-module fc {
+module FC {
 
 
     /**
@@ -400,7 +400,7 @@ module fc {
     export function curry(arity:number, fn:Function2|Function1|FunctionV|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.partial.apply(fc, [arity, fn].concat(args));
+            return FC.partial.apply(FC, [arity, fn].concat(args));
         };
     }
 
@@ -408,7 +408,7 @@ module fc {
     export function curryP(arity:number, fn:Function2|Function1|FunctionV|Function):Function {
         return function () {
             var args = Array.prototype.slice.call(arguments);
-            return fc.partialP.apply(fc, [arity, fn].concat(args));
+            return FC.partialP.apply(FC, [arity, fn].concat(args));
         };
     }
 
@@ -584,7 +584,7 @@ module fc {
             if (calc) {
                 return calc.apply(null, array);
             } else {
-                index = array.findIndex(fc.identity());
+                index = array.findIndex(FC.identity());
                 return (index !== -1) ? array[index] : undefined;
             }
         }
@@ -644,7 +644,7 @@ module fc {
             };
         });
 
-        var sorted = fc.sort(wrappers, function (wrapper) {
+        var sorted = FC.sort(wrappers, function (wrapper) {
             return sortPredicateFn ? sortPredicateFn(wrapper.value, wrapper.key) : wrapper.key;
         }, sortFn);
 
@@ -716,7 +716,7 @@ module fc {
         if (Array.isArray(object)) {
             return Array.prototype.some.call(object, predicate, context);
         } else {
-            return fc.objectIterator(Array.prototype.some)(object, predicate, context);
+            return FC.objectIterator(Array.prototype.some)(object, predicate, context);
         }
     }
 
@@ -728,7 +728,7 @@ module fc {
         if (Array.isArray(object)) {
             return Array.prototype.every.call(object, predicate, context);
         } else {
-            return fc.objectIterator(Array.prototype.every)(object, predicate, context);
+            return FC.objectIterator(Array.prototype.every)(object, predicate, context);
         }
     }
 
