@@ -17,8 +17,8 @@ To build/test run:
 ===
 #### Documentation
 
-* Overview: https://github.com/zalando/fclass/blob/master/doc/README.md
-* API Docs: http://zalando.github.io/fclass
+* Overview: https://github.com/mrac/fclass/blob/master/doc/README.md
+* API Docs: http://mrac.github.io/fclass
 
 ===
 #### Playground
@@ -43,8 +43,6 @@ https://github.com/es-shims/Array.prototype.find
 ===
 #### License
 
-
-Copyright © 2015 Zalando SE
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
