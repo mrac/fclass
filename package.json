@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalando/fclass.git"
+    "url": "https://github.com/mrac/fclass.git"
   },
   "keywords": [
     "JavaScript",
@@ -20,9 +20,9 @@
   "author": "Michal Raczkowski",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/zalando/fclass/issues"
+    "url": "https://github.com/mrac/fclass/issues"
   },
-  "homepage": "https://github.com/zalando/fclass",
+  "homepage": "https://github.com/mrac/fclass",
   "devDependencies": {
     "bower": "^1.4.1",
     "gulp": "^3.8.11",
