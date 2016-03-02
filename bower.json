@@ -1,9 +1,9 @@
 {
   "name": "fclass",
   "version": "0.0.4",
-  "homepage": "https://github.com/zalando/fclass",
+  "homepage": "https://github.com/mrac/fclass",
   "authors": [
-    "Michal Raczkowski <michal.raczkowski@zalando.de>"
+    "Michal Raczkowski <michal.raczkowski@gmail.com>"
   ],
   "description": "JavaScript utility library",
   "main": "js/fclass.js",
